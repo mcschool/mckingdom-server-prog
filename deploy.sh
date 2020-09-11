@@ -1,0 +1,1 @@
+mvn install && cp target/prog-1.0-SNAPSHOT.jar ../spigot/plugins/prog-1.0-SNAPSHOT.jar
