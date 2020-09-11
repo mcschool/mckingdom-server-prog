@@ -15,7 +15,7 @@ jobs:
             gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
             gcloud --quiet config set project mckingdom
             gcloud --quiet config set compute/zone asia-northeast1-b
-            gcloud --quiet compute --project "mckingdom" ssh --zone "asia-northeast1-b" "smatosan@programming	" --command "ls"
+            gcloud --quiet compute --project "mckingdom" ssh --zone "asia-northeast1-b" "smatosan@programming" --command "ls"
 
 workflows:
   version: 2
