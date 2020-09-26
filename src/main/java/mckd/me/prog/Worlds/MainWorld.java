@@ -15,7 +15,7 @@ public class MainWorld implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e){
         Player player=e.getPlayer();
-        player.sendMessage("ブロック置いたね");
+
     }
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent e){
