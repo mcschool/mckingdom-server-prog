@@ -15,7 +15,12 @@ public class TestWorld implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         if (e.getPlayer().getWorld().getName() .equals("test")) {
             Player player = e.getPlayer();
-            player.sendMessage("Hello");
+            int count=this.getPlayer(player);
+            player.sendMessage("Hello"+String.valueOf(count));
         }
+    }
+    private int getPlayer(Player player){
+        int playerCount = player.getWorld().getPlayers().size();
+        return playerCount;
     }
 }
