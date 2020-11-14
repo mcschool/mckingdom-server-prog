@@ -1,10 +1,13 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockCanBuildEvent;
 
 public class TestWorld implements Listener {
     public TestWorld(Prog plugin) {
@@ -13,14 +16,23 @@ public class TestWorld implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        if (e.getPlayer().getWorld().getName() .equals("test")) {
+        if (e.getPlayer().getWorld().getName().equals("test")) {
             Player player = e.getPlayer();
-            int count=this.getPlayer(player);
-            player.sendMessage("Hello"+String.valueOf(count));
+            int count = this.getPlayer(player);
+            player.sendMessage("Hello" + String.valueOf(count));
         }
     }
-    private int getPlayer(Player player){
+
+    private int getPlayer(Player player) {
         int playerCount = player.getWorld().getPlayers().size();
         return playerCount;
     }
+@EventHandler
+public void sendMessage(BlockBreakEvent e){
+    Player player = e.getPlayer();
+    World world =e.getPlayer().getWorld();
+    Location loc1 = player.getLocation();
+    Location loc2 = new Location(world, loc1.getX(),loc1.getY()+10,loc1.getZ());
+    player.teleport(loc2);
+}
 }
