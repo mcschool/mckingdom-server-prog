@@ -22,17 +22,16 @@ public class TestWorld implements Listener {
             player.sendMessage("Hello" + String.valueOf(count));
         }
     }
-
+    @EventHandler
+    public void sendMessage(BlockBreakEvent e){
+        Player player = e.getPlayer();
+        World world =e.getPlayer().getWorld();
+        Location loc1 = player.getLocation();
+        Location loc2 = new Location(world, loc1.getX(),loc1.getY()+10,loc1.getZ());
+        player.teleport(loc2);
+    }
     private int getPlayer(Player player) {
         int playerCount = player.getWorld().getPlayers().size();
         return playerCount;
     }
-@EventHandler
-public void sendMessage(BlockBreakEvent e){
-    Player player = e.getPlayer();
-    World world =e.getPlayer().getWorld();
-    Location loc1 = player.getLocation();
-    Location loc2 = new Location(world, loc1.getX(),loc1.getY()+10,loc1.getZ());
-    player.teleport(loc2);
-}
 }
