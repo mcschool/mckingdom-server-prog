@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -70,6 +71,20 @@ public class TntWorld implements Listener {
     public void onBlockExplode(BlockExplodeEvent e) {
         if (e.getBlock().getWorld().getName().equals("tnt")) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e){
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        if(e.getPlayer().getWorld().getName().equals("tnt")){
+         Location location = e.getPlayer().getLocation().clone().subtract(0,-1,0);
+         Block block = location.getBlock();
+        if (block.getType() == Material.TNT){
+            player.sendMessage(block.getType().name());
+            world.getBlockAt(location).setType(Material.AIR);
+            }
         }
     }
 }
