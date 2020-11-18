@@ -28,13 +28,14 @@ public class TntWorld implements Listener {
         }
     }
     @EventHandler
-    public void breakBlock(BlockBreakEvent e){
-        if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+    public void breakBlock(BlockBreakEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-            if (block.getType() == Material.GLASS){
+            if (block.getType() == Material.GRASS) {
+                player.sendTitle("GameStart","ゲームスタート",20,20,20);
                 player.sendMessage("ブロックを壊したよ");
-            }else{
+            } else {
                 player.sendMessage("はずれ");
             }
         }
