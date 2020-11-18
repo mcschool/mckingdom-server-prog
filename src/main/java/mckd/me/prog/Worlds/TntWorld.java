@@ -75,16 +75,26 @@ public class TntWorld implements Listener {
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e){
+    public void onPlayerMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
-        if(e.getPlayer().getWorld().getName().equals("tnt")){
-            Location location = e.getPlayer().getLocation().clone().subtract(0,+1,0);
+        if (e.getPlayer().getWorld().getName().equals("tnt")) {
+            Location location = e.getPlayer().getLocation().clone().subtract(0, +1, 0);
             Block block = location.getBlock();
-            if (block.getType() == Material.TNT){
+            if (block.getType() == Material.TNT) {
                 player.sendMessage(block.getType().name());
                 world.getBlockAt(location).setType(Material.AIR);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        if (block.getType() == Material.TNT) {
+                            player.sendMessage(block.getType().name());
+                            world.getBlockAt(location).setType(Material.AIR);
+                        }
+                    }
+                }.runTaskLater(this.plugin,20);
             }
         }
     }
 }
+
