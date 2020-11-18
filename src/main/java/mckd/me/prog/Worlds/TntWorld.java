@@ -40,7 +40,7 @@ public class TntWorld implements Listener {
             Block block = e.getBlock();
             if (block.getType() == Material.GRASS) {
                 player.sendTitle("GameStart","ゲームスタート",20,20,20);
-                player.sendMessage("ブロックを壊したよ");
+                player.sendMessage("移動するよ");
                 this.startGame();
             } else {
                 player.sendMessage("はずれ");
