@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 
 public class TntWorld implements Listener {
-    public String worldName = "Tnt";
+    public String worldName = "tnt";
     public Location startPlace ;
     public TntWorld(Prog plugin){
         plugin.getServer().getPluginManager().registerEvents(this,plugin);
@@ -18,8 +18,8 @@ public class TntWorld implements Listener {
     }
     //待合所にテレポート
     @EventHandler
-    public void changeWorld(PlayerChangedWorldEvent e){
-        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
+    public void changeWorld(PlayerChangedWorldEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.startPlace);
         }
