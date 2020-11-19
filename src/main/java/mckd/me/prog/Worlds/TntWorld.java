@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -96,5 +97,22 @@ public class TntWorld implements Listener {
             }
         }
     }
+    @EventHandler
+    public void gameOver(PlayerMoveEvent e){
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        if (e.getPlayer().getWorld().getName().equals("tnt")){
+            Location location = e.getPlayer().getLocation().clone().subtract(0,+1,0);
+            Block block = location.getBlock();
+            if (block.getType() == Material.MAGMA){
+                player.sendTitle("GameOver","ゲームオーバー",20,20,20);
+                player.teleport(new Location(Bukkit.getWorld("tnt"),-265,40,1047));
+            }
+        }
+    }
+
+    public void allFloors(){}
+
+    public void gameWin(){}
 }
 
