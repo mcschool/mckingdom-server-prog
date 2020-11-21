@@ -1,6 +1,7 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
+import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,13 +39,13 @@ public class TntWorld implements Listener {
             player.teleport(this.startPlace);
         }
     }
-
+    //ゲームスタート
     @EventHandler
     public void breakBlock(BlockBreakEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-            if (block.getType() == Material.GRASS) {
+            if (block.getType() == Material.SAND) {
                 player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                 player.sendMessage("移動するよ");
                 this.startGame();
@@ -100,7 +101,7 @@ public class TntWorld implements Listener {
         Player player = e.getPlayer();
         World world = player.getWorld();
         if (e.getPlayer().getWorld().getName().equals("tnt")){
-            Location location = e.getPlayer().getLocation().clone().subtract(0,1,0);
+            Location location = e.getPlayer().getLocation().clone().subtract(0,-1,0);
             Block block = location.getBlock();
             if (block.getType() == Material.LAVA){
                 player.sendTitle("GameOver","ゲームオーバー",20,20,20);
