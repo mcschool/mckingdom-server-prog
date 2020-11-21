@@ -106,7 +106,7 @@ public class TntWorld implements Listener {
             if (block.getType() == Material.LAVA){
                 player.sendMessage(block.getType().name());
                 player.sendTitle("GameOver","ゲームオーバー",20,20,20);
-                player.teleport(new Location(Bukkit.getWorld("tnt"),-265,40,1047));
+                player.teleport(new Location(Bukkit.getWorld("tnt"),-265,51,1088));
             }
         }
     }
