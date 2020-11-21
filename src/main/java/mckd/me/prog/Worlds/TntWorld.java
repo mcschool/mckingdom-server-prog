@@ -121,14 +121,13 @@ public class TntWorld implements Listener {
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-        for (int i = 0; i < 50; i++) {
-            for (int j = 0; j < 50; j++) {
-                location.add(i, 0, j);
-                world.getBlockAt(location).setType(Material.AIR);
+        for (int i = 0; i < 5; i++) {
+                location.add(i, 0, 0);
+                world.getBlockAt(location).setType(Material.TNT);
             }
         }
     } // end
-}
+
 
 
 
