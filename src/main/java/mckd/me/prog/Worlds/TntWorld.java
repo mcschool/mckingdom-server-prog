@@ -122,7 +122,7 @@ public class TntWorld implements Listener {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
         for (int i = 0; i < 5; i++) {
-                location.add(i, 0, 0);
+                location.add(1, 0, 0);
                 world.getBlockAt(location).setType(Material.TNT);
             }
         }
