@@ -124,7 +124,7 @@ public class TntWorld implements Listener {
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
                 location.add(i, 0, j);
-                world.getBlockAt(location).setType(Material.TNT);
+                world.getBlockAt(location).setType(Material.AIR);
             }
         }
     } // end
