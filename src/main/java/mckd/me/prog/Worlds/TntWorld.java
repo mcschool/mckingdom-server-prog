@@ -105,6 +105,7 @@ public class TntWorld implements Listener {
             Location location = e.getPlayer().getLocation().clone().subtract(0,+1,0);
             Block block = location.getBlock();
             if (block.getType() == Material.LAVA){
+                player.sendMessage("a");
                 player.sendMessage(block.getType().name());
                 player.sendTitle("GameOver","ゲームオーバー",20,20,20);
                 player.sendMessage("b");
