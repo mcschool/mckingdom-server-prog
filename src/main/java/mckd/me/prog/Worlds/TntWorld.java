@@ -48,11 +48,10 @@ public class TntWorld implements Listener {
                 player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                 player.sendMessage("移動するよ");
                 this.startGame();
-            } else {
-                player.sendMessage("はずれ");
+            }
             }
         }
-    }
+
 
     public void startGame() {
         World world = Bukkit.getWorld("tnt");
@@ -102,13 +101,11 @@ public class TntWorld implements Listener {
         Player player = e.getPlayer();
         World world = player.getWorld();
         if (e.getPlayer().getWorld().getName().equals("tnt")){
-            Location location = e.getPlayer().getLocation().clone().subtract(0,+1,0);
+            Location location = e.getPlayer().getLocation().clone().subtract(0,0,0);
             Block block = location.getBlock();
             if (block.getType() == Material.LAVA){
-                player.sendMessage("a");
                 player.sendMessage(block.getType().name());
                 player.sendTitle("GameOver","ゲームオーバー",20,20,20);
-                player.sendMessage("b");
                 player.teleport(new Location(Bukkit.getWorld("tnt"),-265,40,1047));
             }
         }
