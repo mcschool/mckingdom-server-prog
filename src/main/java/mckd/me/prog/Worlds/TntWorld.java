@@ -120,9 +120,7 @@ public class TntWorld implements Listener {
             }
         }
 //勝利
-        public void gameWin(){
 
-        }
     }
     }
 
