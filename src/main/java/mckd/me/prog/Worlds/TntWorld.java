@@ -127,6 +127,7 @@ public class TntWorld implements Listener {
                 location.add(1, 0, 0);
                 world.getBlockAt(location).setType(Material.TNT);
             }
+            location.add(-5,0,0);
         }
     }
 } // end
