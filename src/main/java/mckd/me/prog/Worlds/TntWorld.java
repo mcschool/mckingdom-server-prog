@@ -39,6 +39,7 @@ public class TntWorld implements Listener {
             player.teleport(this.startPlace);
         }
     }
+
     //ゲームスタート
     @EventHandler
     public void breakBlock(BlockBreakEvent e) {
@@ -50,8 +51,8 @@ public class TntWorld implements Listener {
                 player.sendMessage("移動するよ");
                 this.startGame();
             }
-            }
         }
+    }
 
 
     public void startGame() {
@@ -67,14 +68,16 @@ public class TntWorld implements Listener {
             }.runTaskLater(this.plugin, 20);
         }
     }
-//爆発させない
+
+    //爆発させない
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent e) {
         if (e.getBlock().getWorld().getName().equals("tnt")) {
             e.setCancelled(true);
         }
     }
-//TNT消える
+
+    //TNT消える
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
@@ -92,35 +95,34 @@ public class TntWorld implements Listener {
                             world.getBlockAt(location).setType(Material.AIR);
                         }
                     }
-                }.runTaskLater(this.plugin,20);
+                }.runTaskLater(this.plugin, 20);
             }
         }
     }
+
     //ゲームオーバー
     @EventHandler
-    public void gameOver(PlayerMoveEvent e){
+    public void gameOver(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
-        if (e.getPlayer().getWorld().getName().equals("tnt")){
-            Location location = e.getPlayer().getLocation().clone().subtract(0,0,0);
-            if (location.getY()<3){
-                player.sendTitle("GameOver","ゲームオーバー",20,20,20);
-                player.teleport(new Location(Bukkit.getWorld("tnt"),-265,51,1088));
+        if (e.getPlayer().getWorld().getName().equals("tnt")) {
+            Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
+            if (location.getY() < 3) {
+                player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
+                player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 51, 1088));
             }
         }
     }
-//床作る
-    public void allFloors(){
+
+    //床作る
+    public void allFloors() {
         World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName),-266,40,1049);
-        for (int i=0; i<50; i++){
-            for (int j=0; j<50; j++){
-                location.add(i,40,j);
+        Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
                 world.getBlockAt(location).setType(Material.TNT);
             }
         }
-//勝利
 
-    }
-    }
+
+
+
 
