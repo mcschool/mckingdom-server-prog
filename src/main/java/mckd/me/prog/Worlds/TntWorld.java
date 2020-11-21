@@ -51,7 +51,7 @@ public class TntWorld implements Listener {
                 player.sendMessage("移動するよ");
                 this.startGame();
             }
-            if (block.getType() == Material.STONE){
+            if (block.getType() == Material.STONE) {
                 this.allFloors();
             }
         }
@@ -121,11 +121,14 @@ public class TntWorld implements Listener {
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-        location.add(1,0,0);
-        world.getBlockAt(location).setType(Material.TNT);
-    }
-} // end
-
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 50; j++) {
+                location.add(i, 0, j);
+                world.getBlockAt(location).setType(Material.TNT);
+            }
+        }
+    } // end
+}
 
 
 
