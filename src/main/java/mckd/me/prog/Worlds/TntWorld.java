@@ -104,8 +104,7 @@ public class TntWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals("tnt")){
             Location location = e.getPlayer().getLocation().clone().subtract(0,+1,0);
             Block block = location.getBlock();
-            if (block.getType() == Material.MAGMA_CREAM){
-
+            if (block.getType() == Material.LAVA){
                 player.sendMessage(block.getType().name());
                 player.sendTitle("GameOver","ゲームオーバー",20,20,20);
                 player.sendMessage("b");
