@@ -80,7 +80,7 @@ public class TntWorld implements Listener {
         Player player = e.getPlayer();
         World world = player.getWorld();
         if (e.getPlayer().getWorld().getName().equals("tnt")) {
-            Location location = e.getPlayer().getLocation().clone().subtract(1, 1, 1);
+            Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
             Block block = location.getBlock();
             if (block.getType() == Material.TNT) {
                 world.getBlockAt(location).setType(Material.AIR);
