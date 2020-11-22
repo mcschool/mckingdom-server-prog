@@ -54,8 +54,8 @@ public class TntWorld implements Listener {
                 player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                 player.sendMessage("移動するよ");
                 this.startGame();
-                this.allFloors();
             }
+            this.allFloors();
         }
     }
 
