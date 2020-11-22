@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +16,10 @@ import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Button;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -42,16 +46,14 @@ public class TntWorld implements Listener {
 
     //ゲームスタート
     @EventHandler
-    public void breakBlock(BlockBreakEvent e) {
+    public void breakBlock(PlayerInteractEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
-            Block block = e.getBlock();
-            if (block.getType() == Material.SAND) {
+            ItemStack item = e.getItem();
+            if (item.getType() == Material.WOOD_BUTTON) {
                 player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                 player.sendMessage("移動するよ");
                 this.startGame();
-            }
-            if (block.getType() == Material.STONE) {
                 this.allFloors();
             }
         }
