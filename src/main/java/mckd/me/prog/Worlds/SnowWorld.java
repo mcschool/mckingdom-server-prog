@@ -46,11 +46,9 @@ public class SnowWorld implements Listener {
             Block block = e.getBlock();
             if(block.getType() == Material.STONE){
                 player.sendMessage("test1");
-<<<<<<< HEAD
 
-=======
                 this.random();
->>>>>>> df6fa4fd8df475f8115aa11396e4275ea00ac396
+
             }
         }
     }
