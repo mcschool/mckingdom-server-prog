@@ -120,19 +120,37 @@ public class TntWorld implements Listener {
     //床作る
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
-        int y = 40;
-        for (int n = 0; n < 5; n++) {
-            Location location = new Location(Bukkit.getWorld(this.worldName), -266, y - 10, 1049);
+            Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+            Location location1 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+            Location location2 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+            Location location3 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+            Location location4 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
             for (int i = 0; i < 5; i++) {
-                location.add(0, 0, 1+n);
+                location.add(0, 0, 1);
+                location1.add(0, 0, 1);
+                location2.add(0, 0, 1);
+                location3.add(0, 0, 1);
+                location4.add(0, 0, 1);
                 for (int j = 0; j < 5; j++) {
-                    location.add(1+n, 0, 0);
+                    location.add(1, 0, 0);
+                    location1.add(0, 0, 1);
+                    location2.add(0, 0, 1);
+                    location3.add(0, 0, 1);
+                    location4.add(0, 0, 1);
                     world.getBlockAt(location).setType(Material.TNT);
+                    world.getBlockAt(location1).setType(Material.TNT);
+                    world.getBlockAt(location2).setType(Material.TNT);
+                    world.getBlockAt(location3).setType(Material.TNT);
+                    world.getBlockAt(location4).setType(Material.TNT);
                 }
                 location.add(-5, 0, 0);
+                location1.add(-5, 0, 0);
+                location2.add(-5, 0, 0);
+                location3.add(-5, 0, 0);
+                location4.add(-5, 0, 0);
             }
         }
-    }
+
         //ゲームクリア
     public void gameClear(){}
     } // end
