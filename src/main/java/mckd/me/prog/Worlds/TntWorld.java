@@ -120,24 +120,21 @@ public class TntWorld implements Listener {
     //床作る
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-        Location location1 = new Location(Bukkit.getWorld(this.worldName), -266,30,1049);
-        for (int i = 0; i < 5; i++) {
-            location.add(0,0,1);
-            location1.add(0,0,1);
-            for (int j = 0; j < 5; j++) {
-                location.add(1, 0, 0);
-                location1.add(1,0,0);
-                world.getBlockAt(location).setType(Material.TNT);
-                world.getBlockAt(location1).setType(Material.TNT);
+        int y = 40;
+        for (int n = 0; n < 5; n++) {
+            Location location = new Location(Bukkit.getWorld(this.worldName), -266, y - 10, 1049);
+            for (int i = 0; i < 5; i++) {
+                location.add(0, 0, 1);
+                for (int j = 0; j < 5; j++) {
+                    location.add(1, 0, 0);
+                    world.getBlockAt(location).setType(Material.TNT);
+                }
+                location.add(-5, 0, 0);
             }
-            location.add(-5,0,0);
-            location1.add(-5,0,0);
         }
     }
-    //ゲームクリア
-    public  void gameClear(){}
-
+        //ゲームクリア
+    public void gameClear(){}
     } // end
 
 
