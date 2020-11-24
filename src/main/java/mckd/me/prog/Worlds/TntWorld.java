@@ -58,8 +58,6 @@ public class TntWorld implements Listener {
             this.allFloors();
         }
     }
-
-
     public void startGame() {
         World world = Bukkit.getWorld("tnt");
         List<Player> players = world.getPlayers();
@@ -123,6 +121,7 @@ public class TntWorld implements Listener {
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+        Location location2 = new Location(Bukkit.getWorld(this.worldName), -266, 35, 1049);
         for (int i = 0; i < 5; i++) {
             location.add(0,0,1);
             for (int j = 0; j < 5; j++) {
@@ -132,7 +131,10 @@ public class TntWorld implements Listener {
             location.add(-5,0,0);
         }
     }
-} // end
+    //ゲームクリア
+    public  void gameClear(){}
+
+    } // end
 
 
 
