@@ -66,7 +66,7 @@ public class TntWorld implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 40, 1052));
+                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 41, 1052));
                 }
             }.runTaskLater(this.plugin, 20);
         }
@@ -121,14 +121,17 @@ public class TntWorld implements Listener {
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-        Location location2 = new Location(Bukkit.getWorld(this.worldName), -266, 35, 1049);
+        Location location1 = new Location(Bukkit.getWorld(this.worldName), -266,35,1049);
         for (int i = 0; i < 5; i++) {
             location.add(0,0,1);
+            location1.add(0,0,1);
             for (int j = 0; j < 5; j++) {
                 location.add(1, 0, 0);
+                location1.add(1,0,0);
                 world.getBlockAt(location).setType(Material.TNT);
             }
             location.add(-5,0,0);
+            location1.add(-5,0,0);
         }
     }
     //ゲームクリア
