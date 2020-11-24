@@ -120,11 +120,11 @@ public class TntWorld implements Listener {
     //床作る
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
-            Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+            Location location = new Location(Bukkit.getWorld(this.worldName), -266, 50, 1049);
             Location location1 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-            Location location2 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-            Location location3 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-            Location location4 = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
+            Location location2 = new Location(Bukkit.getWorld(this.worldName), -266, 30, 1049);
+            Location location3 = new Location(Bukkit.getWorld(this.worldName), -266, 20, 1049);
+            Location location4 = new Location(Bukkit.getWorld(this.worldName), -266, 10, 1049);
             for (int i = 0; i < 5; i++) {
                 location.add(0, 0, 1);
                 location1.add(0, 0, 1);
