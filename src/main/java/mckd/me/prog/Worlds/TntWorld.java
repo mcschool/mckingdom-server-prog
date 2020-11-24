@@ -66,7 +66,7 @@ public class TntWorld implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 40, 1047));
+                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 40, 1052));
                 }
             }.runTaskLater(this.plugin, 20);
         }
