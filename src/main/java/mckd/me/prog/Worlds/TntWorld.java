@@ -110,7 +110,7 @@ public class TntWorld implements Listener {
         World world = player.getWorld();
         if (e.getPlayer().getWorld().getName().equals("tnt")) {
             Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
-            if (location.getY() < 3) {
+            if (location.getY() <= 3) {
                 player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
                 player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 51, 1088));
             }
@@ -121,7 +121,7 @@ public class TntWorld implements Listener {
     public void allFloors() {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266, 40, 1049);
-        Location location1 = new Location(Bukkit.getWorld(this.worldName), -266,35,1049);
+        Location location1 = new Location(Bukkit.getWorld(this.worldName), -266,30,1049);
         for (int i = 0; i < 5; i++) {
             location.add(0,0,1);
             location1.add(0,0,1);
@@ -129,6 +129,7 @@ public class TntWorld implements Listener {
                 location.add(1, 0, 0);
                 location1.add(1,0,0);
                 world.getBlockAt(location).setType(Material.TNT);
+                world.getBlockAt(location1).setType(Material.TNT);
             }
             location.add(-5,0,0);
             location1.add(-5,0,0);
