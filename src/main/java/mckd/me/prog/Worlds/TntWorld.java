@@ -133,10 +133,10 @@ public class TntWorld implements Listener {
                 location4.add(0, 0, 1);
                 for (int j = 0; j < 5; j++) {
                     location.add(1, 0, 0);
-                    location1.add(0, 0, 1);
-                    location2.add(0, 0, 1);
-                    location3.add(0, 0, 1);
-                    location4.add(0, 0, 1);
+                    location1.add(1, 0, 0);
+                    location2.add(1, 0, 0);
+                    location3.add(1, 0, 0);
+                    location4.add(1, 0, 0);
                     world.getBlockAt(location).setType(Material.TNT);
                     world.getBlockAt(location1).setType(Material.TNT);
                     world.getBlockAt(location2).setType(Material.TNT);
