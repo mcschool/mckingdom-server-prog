@@ -32,7 +32,7 @@ public class TntWorld implements Listener {
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 51, 1088);
+        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 61, 1088);
     }
 
     //待合所にテレポート
@@ -67,7 +67,7 @@ public class TntWorld implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 41, 1052));
+                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 51, 1052));
                 }
             }.runTaskLater(this.plugin, 20);
         }
@@ -113,7 +113,7 @@ public class TntWorld implements Listener {
             Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
             if (location.getY() <= 3) {
                 player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
-                player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 51, 1088));
+                player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 61, 1088));
             }
         }
     }
