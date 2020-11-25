@@ -57,6 +57,9 @@ public class TntWorld implements Listener {
             }
             this.allFloors(50);
             this.allFloors(40);
+            this.allFloors(30);
+            this.allFloors(20);
+            this.allFloors(10);
         }
     }
     public void startGame() {
