@@ -28,6 +28,7 @@ public class TntWorld implements Listener {
     private Prog plugin;
     public String worldName = "tnt";
     public Location startPlace;
+    public Player winner;
 
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
@@ -117,7 +118,11 @@ public class TntWorld implements Listener {
             if (location.getY() <= 3) {
                 player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
                 player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 52, 1088));
+                this.playerCheck();
             }
+        }
+        if (this.playerCheck()==1){
+            this.gameClear();
         }
     }
 
@@ -136,7 +141,46 @@ public class TntWorld implements Listener {
         }
 
         //ゲームクリア
-    public void gameClear(){}
+    public void gameClear(){
+        World world = Bukkit.getWorld("tnt");
+        List<Player> players = world.getPlayers();
+        for (Player player : players){
+            String winnerName = this.winner.getDisplayName();
+            player.sendTitle("GameWin",winnerName + "勝利しました",20,20,20);
+        }
+    }
+
+    public int playerCheck(){
+        World world = Bukkit.getWorld("tnt");
+        List<Player> players = world.getPlayers();
+        int safePlayerCount = 0;
+        int safePlayerIndex= 0;
+        int i = 0;
+        for (Player player : players){
+            double y= player.getLocation().getY();
+            if (y<=50){
+                safePlayerCount=safePlayerCount+1;
+                safePlayerIndex = i;
+            }
+            i = i + 1;
+        }
+        if (safePlayerCount==1){
+            Player player = players.get(safePlayerIndex);
+            this.winner = player;
+        }
+        return safePlayerCount;
+    }
+    @EventHandler
+    public void onBrakeBlock(BlockBreakEvent e){
+        if (e.getPlayer().getWorld().getName().equals("tnt")){
+            Player player = e.getPlayer();
+            Block block =e.getBlock();
+            if (block.getType() == Material.STONE){
+                int safePlayerCount = this.playerCheck();
+                player.sendMessage(String.valueOf(safePlayerCount) );
+            }
+        }
+    }
     } // end
 
 
