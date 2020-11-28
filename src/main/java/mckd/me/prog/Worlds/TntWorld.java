@@ -177,6 +177,7 @@ public class TntWorld implements Listener {
             if (block.getType() == Material.STONE){
                 int safePlayerCount = this.playerCheck();
                 player.sendMessage(String.valueOf(safePlayerCount) );
+                this.gameClear();
             }
         }
     }
