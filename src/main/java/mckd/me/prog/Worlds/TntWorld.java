@@ -39,6 +39,7 @@ public class TntWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.startPlace);
+            player.setGameMode(GameMode.CREATIVE);
         }
     }
 
@@ -70,7 +71,6 @@ public class TntWorld implements Listener {
                 @Override
                 public void run() {
                     player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 52, 1052));
-                    player.setGameMode(GameMode.CREATIVE);
                 }
             }.runTaskLater(this.plugin, 20);
         }
