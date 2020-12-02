@@ -119,13 +119,13 @@ public class TntWorld implements Listener {
                 if (this.playerCheck()==1){
                     this.gameClear();
                 }
+                if (this.playerCheck()==1){
+                    this.gameClear();
+                }
                 player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
                 player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 52, 1088));
                 this.playerCheck();
             }
-                 if (this.playerCheck()==1){
-                    this.gameClear();
-                }
         }
     }
 
