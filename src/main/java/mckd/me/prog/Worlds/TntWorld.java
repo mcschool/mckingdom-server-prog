@@ -143,7 +143,7 @@ public class TntWorld implements Listener {
     //マグマ作る
     public void damageFloors() {
         World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName), -266,  -3, 1049);
+        Location location = new Location(Bukkit.getWorld(this.worldName), -266,  3, 1049);
         for (int i = 0; i < 5; i++) {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
