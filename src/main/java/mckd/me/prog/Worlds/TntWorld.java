@@ -148,7 +148,7 @@ public class TntWorld implements Listener {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
                 location.add(1, 0, 0);
-                world.getBlockAt(location).setType(Material.STONE;
+                world.getBlockAt(location).setType(Material.STONE);
             }
             location.add(-5, 0, 0);
         }
