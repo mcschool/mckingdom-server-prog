@@ -145,11 +145,11 @@ public class TntWorld implements Listener {
     public void damageFloors() {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -266,  3, 1049);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 20; i++) {
             location.add(0, 0, 1);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 20; j++) {
                 location.add(1, 0, 0);
-                world.getBlockAt(location).setType(Material.STONE);
+                world.getBlockAt(location).setType(Material.LAVA);
             }
             location.add(-5, 0, 0);
         }
