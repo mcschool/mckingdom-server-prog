@@ -39,7 +39,8 @@ public class TntWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.startPlace);
-            player.setGameMode(GameMode.CREATIVE);
+            player.setGameMode(GameMode.SURVIVAL);
+
         }
     }
 
@@ -138,6 +139,20 @@ public class TntWorld implements Listener {
                 location.add(-5, 0, 0);
             }
         }
+
+    //マグマ作る
+    public void damageFloors() {
+        World world = Bukkit.getWorld("tnt");
+        Location location = new Location(Bukkit.getWorld(this.worldName), -266,  -3, 1049);
+        for (int i = 0; i < 5; i++) {
+            location.add(0, 0, 1);
+            for (int j = 0; j < 5; j++) {
+                location.add(1, 0, 0);
+                world.getBlockAt(location).setType(Material.LAVA);
+            }
+            location.add(-5, 0, 0);
+        }
+    }
 
         //ゲームクリア
     public void gameClear(){
