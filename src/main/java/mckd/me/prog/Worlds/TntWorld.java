@@ -152,6 +152,7 @@ public class TntWorld implements Listener {
                 world.getBlockAt(location).setType(Material.GRASS);
             }
             location.add(-20, 0, 0);
+            location.add(0, 0, -20);
         }
     }
 
