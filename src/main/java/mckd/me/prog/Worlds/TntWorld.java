@@ -149,7 +149,7 @@ public class TntWorld implements Listener {
             location.add(0, 0, 1);
             for (int j = 0; j < 20; j++) {
                 location.add(1, 0, 0);
-                world.getBlockAt(location).setType(Material.LAVA);
+                world.getBlockAt(location).setType(Material.GRASS);
             }
             location.add(-5, 0, 0);
         }
@@ -185,6 +185,18 @@ public class TntWorld implements Listener {
         }
         return safePlayerCount;
     }
+    //飛べないようにする
+    public  void notFry() {
+        World world = Bukkit.getWorld("tnt");
+        List<Player> players = world.getPlayers();
+        for (Player player : players) {
+            double y = player.getLocation().getY();
+            if (y+2>y){
+                y=y-2;
+            }
+        }
+    }
+
     @EventHandler
     public void onBrakeBlock(BlockBreakEvent e){
         if (e.getPlayer().getWorld().getName().equals("tnt")){
