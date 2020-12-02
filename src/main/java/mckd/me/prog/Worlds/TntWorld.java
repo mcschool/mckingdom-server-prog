@@ -116,10 +116,14 @@ public class TntWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals("tnt")) {
             Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
             if (location.getY() <= 3) {
+                if (this.playerCheck()==1){
+                    this.gameClear();
+                }
                 player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
                 player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 52, 1088));
+                this.playerCheck();
             }
-                else if (this.playerCheck()==1){
+                 if (this.playerCheck()==1){
                     this.gameClear();
                 }
         }
@@ -155,10 +159,6 @@ public class TntWorld implements Listener {
         int safePlayerCount = 0;
         int safePlayerIndex= 0;
         int i = 0;
-        if (safePlayerCount==1){
-            Player player = players.get(safePlayerIndex);
-            this.winner = player;
-        }
         for (Player player : players){
             double y= player.getLocation().getY();
             if (y<=50){
@@ -166,6 +166,10 @@ public class TntWorld implements Listener {
                 safePlayerIndex = i;
             }
             i = i + 1;
+        }
+        if (safePlayerCount==1){
+            Player player = players.get(safePlayerIndex);
+            this.winner = player;
         }
         return safePlayerCount;
     }
