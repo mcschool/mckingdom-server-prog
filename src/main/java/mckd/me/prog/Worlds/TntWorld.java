@@ -155,6 +155,10 @@ public class TntWorld implements Listener {
         int safePlayerCount = 0;
         int safePlayerIndex= 0;
         int i = 0;
+        if (safePlayerCount==1){
+            Player player = players.get(safePlayerIndex);
+            this.winner = player;
+        }
         for (Player player : players){
             double y= player.getLocation().getY();
             if (y<=50){
@@ -162,10 +166,6 @@ public class TntWorld implements Listener {
                 safePlayerIndex = i;
             }
             i = i + 1;
-        }
-        if (safePlayerCount==1){
-            Player player = players.get(safePlayerIndex);
-            this.winner = player;
         }
         return safePlayerCount;
     }
