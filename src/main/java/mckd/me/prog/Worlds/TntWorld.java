@@ -2,10 +2,7 @@ package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
 import net.md_5.bungee.api.chat.ClickEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -54,6 +51,7 @@ public class TntWorld implements Listener {
             if (item.getType() == Material.WOOD_BUTTON) {
                 player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                 player.sendMessage("移動するよ");
+
                 this.startGame();
             }
             this.allFloors(50);
@@ -72,6 +70,7 @@ public class TntWorld implements Listener {
                 @Override
                 public void run() {
                     player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 52, 1052));
+                    player.setGameMode(GameMode.CREATIVE);
                 }
             }.runTaskLater(this.plugin, 20);
         }
