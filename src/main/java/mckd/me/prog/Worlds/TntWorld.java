@@ -39,7 +39,12 @@ public class TntWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.startPlace);
+            player.getInventory().clear();
+            player.setFoodLevel(20);
+            player.setHealth(20.0);
+            player.setFlying(false);
             player.setGameMode(GameMode.SURVIVAL);
+            ItemStack itemStack = new ItemStack(Material.WOOD_BUTTON);
 
         }
     }
