@@ -44,7 +44,8 @@ public class TntWorld implements Listener {
             player.setFoodLevel(20);
             player.setHealth(20.0);
             player.setFlying(false);
-            player.setGameMode(GameMode.CREATIVE);
+            player.getWorld().setPVP(false);
+            player.setGameMode(GameMode.SURVIVAL);
             ItemStack itemStack = new ItemStack(Material.WOOD_BUTTON);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName("ゲームスタート");
@@ -194,17 +195,7 @@ public class TntWorld implements Listener {
         }
         return safePlayerCount;
     }
-    //飛べないようにする
-    public  void notFry() {
-        World world = Bukkit.getWorld("tnt");
-        List<Player> players = world.getPlayers();
-        for (Player player : players) {
-            double y = player.getLocation().getY();
-            if (y+2>y){
-                y=y-2;
-            }
-        }
-    }
+
 
     @EventHandler
     public void onBrakeBlock(BlockBreakEvent e){
