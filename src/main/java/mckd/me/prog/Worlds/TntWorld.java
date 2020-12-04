@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Button;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -43,9 +44,11 @@ public class TntWorld implements Listener {
             player.setFoodLevel(20);
             player.setHealth(20.0);
             player.setFlying(false);
-            player.setGameMode(GameMode.SURVIVAL);
+            player.setGameMode(GameMode.CREATIVE);
             ItemStack itemStack = new ItemStack(Material.WOOD_BUTTON);
-
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName("ゲームスタート");
+            itemStack.setItemMeta(itemMeta);
         }
     }
 
