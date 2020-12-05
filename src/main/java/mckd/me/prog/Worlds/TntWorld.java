@@ -33,10 +33,12 @@ public class TntWorld implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 52, 1088);
     }
+    //死んだとき
     @EventHandler
     public  void deathPlayer(PlayerDeathEvent e){
         if (e.getEntity().getWorld().getName().equals(this.worldName)){
             Player player = e.getEntity();
+            player.sendMessage("sss");
             player.teleport(this.startPlace);
         }
     }
