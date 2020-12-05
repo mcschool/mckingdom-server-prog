@@ -33,12 +33,16 @@ public class TntWorld implements Listener {
         this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 52, 1088);
     }
     //ダメージ受けない
+    @EventHandler
  public  void onEntityDamage(EntityDamageEvent e){
         if(e.getEntity().getWorld().getName().equals(this.worldName)){
             if (!(e.getEntity() instanceof  Player)){
                 return;
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL){
+                e.setCancelled(true);
+            }
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.LAVA){
                 e.setCancelled(true);
             }
             return;
