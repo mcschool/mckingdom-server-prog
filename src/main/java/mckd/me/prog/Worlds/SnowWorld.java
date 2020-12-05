@@ -31,10 +31,10 @@ public class SnowWorld implements Listener {
 
     public static void hitPlayer(Player player){
         Location spawnLocation = player.getLocation().clone().add(0, 6, 0);
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<10;i++) {
             Random r = new Random();
-            int x = r.nextInt(15);
-            int z = r.nextInt(15);
+            int x = r.nextInt(150);
+            int z = r.nextInt(150);
             spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
         }
     }
