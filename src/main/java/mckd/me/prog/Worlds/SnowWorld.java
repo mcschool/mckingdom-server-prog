@@ -35,8 +35,6 @@ public class SnowWorld implements Listener {
         location.add(n,0,0);
         location.add(0,0,m);
         world.getBlockAt(location).setType(Material.WOOD);
-
-
     }
 
     @EventHandler
@@ -46,9 +44,7 @@ public class SnowWorld implements Listener {
             Block block = e.getBlock();
             if(block.getType() == Material.STONE){
                 player.sendMessage("test1");
-
                 this.random();
-
             }
         }
     }

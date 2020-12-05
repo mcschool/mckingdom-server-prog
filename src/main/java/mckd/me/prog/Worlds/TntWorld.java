@@ -32,6 +32,7 @@ public class TntWorld implements Listener {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 52, 1088);
+
     }
 
     //ダメージ受けない
@@ -81,6 +82,7 @@ public class TntWorld implements Listener {
             itemMeta.setDisplayName("ゲームスタート");
             itemStack.setItemMeta(itemMeta);
             player.getInventory().addItem(itemStack);
+            
         }
     }
 
@@ -113,7 +115,7 @@ public class TntWorld implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 52, 1052));
+                    player.teleport(new Location(Bukkit.getWorld("tnt"), -250, 51, 1061));
                 }
             }.runTaskLater(this.plugin, 20);
         }
@@ -171,7 +173,7 @@ public class TntWorld implements Listener {
     //床作る
     public void allFloors(int y) {
         World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName), -266, y, 1049);
+        Location location = new Location(Bukkit.getWorld(this.worldName), -254, y, 1059);
         for (int i = 0; i < 5; i++) {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
@@ -190,7 +192,7 @@ public class TntWorld implements Listener {
             location.add(0, 0, 1);
             for (int j = 0; j < 20; j++) {
                 location.add(1, 0, 0);
-                world.getBlockAt(location).setType(Material.GRASS);
+                world.getBlockAt(location).setType(Material.LAVA);
             }
             location.add(-20, 0, 0);
         }
