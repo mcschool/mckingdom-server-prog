@@ -45,7 +45,7 @@ public class SnowWorld implements Listener {
             int z = r.nextInt(15);
             Location location = new Location(Bukkit.getWorld("snow"),507, 20, 630);
             location.add(x,0,z);
-            location.getWorld().spawnArrow(location,new Vector(0,0,0),0.2f,0);
+            location.getWorld().spawnArrow(location,new Vector(0,0,0),0.2f,16);
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
         }
     }
