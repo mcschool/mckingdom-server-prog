@@ -42,9 +42,10 @@ public class TntWorld implements Listener {
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL){
                 e.setCancelled(true);
             }
-            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.LAVA){
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FIRE){
                 e.setCancelled(true);
             }
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.LAVA)
             return;
         }
  }
