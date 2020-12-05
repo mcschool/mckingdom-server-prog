@@ -32,11 +32,11 @@ public class SnowWorld implements Listener {
     public static void hitPlayer(Player player){
         for (int i=0;i<10;i++) {
             Random r = new Random();
-            int x = r.nextInt(150);
-            int z = r.nextInt(150);
+            int x = r.nextInt(15);
+            int z = r.nextInt(15);
             Location location = new Location(Bukkit.getWorld("snow"),507, 6, 630);
             location.add(x,0,z);
-            location.getWorld().spawnArrow(location,new Vector(0,0,0),0.2f,8);
+            location.getWorld().spawnArrow(location,new Vector(0,-90,0),0.2f,0);
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
         }
     }
