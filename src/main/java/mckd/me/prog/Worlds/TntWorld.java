@@ -39,13 +39,18 @@ public class TntWorld implements Listener {
             if (!(e.getEntity() instanceof  Player)){
                 return;
             }
+            String a = e.getCause().toString();
+            Player player = (Player) e.getEntity();
+            player.sendMessage(a);
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL){
                 e.setCancelled(true);
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FIRE){
                 e.setCancelled(true);
             }
-            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.LAVA)
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.LAVA){
+                e.setCancelled(true);
+            }
             return;
         }
  }
