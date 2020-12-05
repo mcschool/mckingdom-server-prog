@@ -57,7 +57,9 @@ public class SnowWorld implements Listener {
             Block block = e.getBlock();
             if (block.getType() == Material.STONE) {
                 player.sendMessage("test1");
+
                 this.random();
+<<<<<<< HEAD
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -66,6 +68,9 @@ public class SnowWorld implements Listener {
 
                 }.runTaskLater(this.plugin, 20);
                 this.hitPlayer(player);
+=======
+
+>>>>>>> 3d9822206f1bab9f1fd3dd3c6f58b6b096495616
             }
         }
     }
