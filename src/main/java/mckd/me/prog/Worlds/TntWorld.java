@@ -10,11 +10,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerChangedMainHandEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Button;
@@ -33,15 +32,18 @@ public class TntWorld implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 52, 1088);
     }
-    //死んだとき
-    @EventHandler
-    public  void deathPlayer(PlayerDeathEvent e){
-        if (e.getEntity().getWorld().getName().equals(this.worldName)){
-            Player player = e.getEntity();
-            player.sendMessage("sss");
-            player.teleport(this.startPlace);
+    //ダメージ受けない
+ public  void onEntityDamage(EntityDamageEvent e){
+        if(e.getEntity().getWorld().getName().equals(this.worldName)){
+            if (!(e.getEntity() instanceof  Player)){
+                return;
+            }
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL){
+                e.setCancelled(true);
+            }
+            return;
         }
-    }
+ }
     //待合所にテレポート
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
@@ -58,6 +60,7 @@ public class TntWorld implements Listener {
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName("ゲームスタート");
             itemStack.setItemMeta(itemMeta);
+            player.getInventory().addItem(itemStack);
         }
     }
 
