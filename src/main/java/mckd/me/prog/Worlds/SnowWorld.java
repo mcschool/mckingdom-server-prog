@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.Random;
 
@@ -26,27 +28,44 @@ public class SnowWorld implements Listener {
         this.StartPlace = new Location(Bukkit.getWorld(this.worldName),507,6,630);
     }
 
-    public void random(){
+
+    public static void hitPlayer(Player player){
+        Location spawnLocation = player.getLocation().clone().add(0, 6, 0);
+        for (int i=0;i<5;i++) {
+            spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(0, -1, 0), 0.2f,8);
+        }
+    }
+
+
+    public void random() {
         World world = Bukkit.getWorld("snow");
-        Location location = new Location(Bukkit.getWorld(this.worldName),507,6,630);
+        Location location = new Location(Bukkit.getWorld(this.worldName), 507, 6, 630);
         Random r = new Random();
         int n = r.nextInt(15);
         int m = r.nextInt(15);
-        location.add(n,0,0);
-        location.add(0,0,m);
+        location.add(n, 0, 0);
+        location.add(0, 0, m);
         world.getBlockAt(location).setType(Material.WOOD);
-
 
     }
 
+
     @EventHandler
-    public void breakBlock(BlockBreakEvent e){
-        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
+    public void breakBlock(BlockBreakEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-            if(block.getType() == Material.STONE){
+            if (block.getType() == Material.STONE) {
                 player.sendMessage("test1");
                 this.random();
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        player.sendMessage("start");
+                    }
+
+                }.runTaskLater(this.plugin, 20);
+                this.hitPlayer(player);
             }
         }
     }
