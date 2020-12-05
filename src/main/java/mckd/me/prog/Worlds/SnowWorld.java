@@ -21,21 +21,28 @@ public class SnowWorld implements Listener {
     private Prog plugin;
     public String worldName = "snow";
     public Location StartPlace;
+    public Location centerPlace;
 
 
     public SnowWorld(Prog plugin){
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this,plugin);
-        this.StartPlace = new Location(Bukkit.getWorld(this.worldName),507,6,630);
+        this.centerPlace = new Location(Bukkit.getWorld(this.worldName),507,6,630);
+        this.StartPlace = new Location(Bukkit.getWorld(this.worldName),568,6,662);
     }
 
 
-   /* @EventHandler
+
+    @EventHandler
     public void chengeWorld(PlayerChangedWorldEvent e){
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
+            player.teleport(this.StartPlace);
+            player.getInventory().clear();
+            player.setFoodLevel(20);
+            player.setHealth(20.0);
         }
-    }*/
+    }
 
 
     public static void hitPlayer(Player player){
