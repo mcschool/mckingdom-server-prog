@@ -27,6 +27,7 @@ public class TntWorld implements Listener {
     public String worldName = "tnt";
     public Location startPlace;
     public Player winner;
+    public boolean  isPlaying = false ;
 
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
@@ -85,6 +86,7 @@ public class TntWorld implements Listener {
             this.resetFloors(10);
         }
     }
+    //ゲーム中にほかのプレイヤーが来た場合
     //ゲームスタート
     @EventHandler
     public void breakBlock(PlayerInteractEvent e) {
@@ -92,9 +94,16 @@ public class TntWorld implements Listener {
             Player player = e.getPlayer();
             ItemStack item = e.getItem();
             if (item.getType() == Material.WOOD_BUTTON) {
-                player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
-                player.sendMessage("移動するよ");
-                this.startGame();
+                int NowPlayerCount=player.getWorld().getPlayers().size();
+                if (NowPlayerCount>=2){
+                    isPlaying=true;
+                    player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
+                    player.sendMessage("移動するよ");
+                    this.startGame();
+                }else {
+                    isPlaying=false;
+                    player.sendMessage("2人まで待ってね！");
+                }
             }
             this.allFloors(50);
             this.allFloors(40);
@@ -170,7 +179,7 @@ public class TntWorld implements Listener {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
                 location.add(1, 0, 0);
-                world.getBlockAt(location).setType(Material.TNT);
+                world.getBlockAt(location).setType(Material.STONE);
             }
             location.add(-5, 0, 0);
         }
