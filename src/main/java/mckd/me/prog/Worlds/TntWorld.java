@@ -31,10 +31,8 @@ public class TntWorld implements Listener {
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 52, 1088);
-
+        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -258, 52, 1057);
     }
-
     //ダメージ受けない
     @EventHandler
     public void onEntityDamage(EntityDamageEvent e) {
@@ -54,7 +52,6 @@ public class TntWorld implements Listener {
             return;
         }
     }
-
     //空腹停止
     @EventHandler
     public void onFoodLevelChangeEvent(FoodLevelChangeEvent e) {
@@ -64,7 +61,6 @@ public class TntWorld implements Listener {
             return;
         }
     }
-
     //待合所にテレポート
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
@@ -82,10 +78,13 @@ public class TntWorld implements Listener {
             itemMeta.setDisplayName("ゲームスタート");
             itemStack.setItemMeta(itemMeta);
             player.getInventory().addItem(itemStack);
-            
+            this.resetFloors(50);
+            this.resetFloors(40);
+            this.resetFloors(30);
+            this.resetFloors(20);
+            this.resetFloors(10);
         }
     }
-
     //ゲームスタート
     @EventHandler
     public void breakBlock(PlayerInteractEvent e) {
@@ -95,7 +94,6 @@ public class TntWorld implements Listener {
             if (item.getType() == Material.WOOD_BUTTON) {
                 player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                 player.sendMessage("移動するよ");
-
                 this.startGame();
             }
             this.allFloors(50);
@@ -106,21 +104,18 @@ public class TntWorld implements Listener {
             this.damageFloors();
         }
     }
-
     public void startGame() {
         World world = Bukkit.getWorld("tnt");
         List<Player> players = world.getPlayers();
-
         for (Player player : players) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(new Location(Bukkit.getWorld("tnt"), -250, 51, 1061));
+                    player.teleport(new Location(Bukkit.getWorld("tnt"), -255, 51, 1060));
                 }
             }.runTaskLater(this.plugin, 20);
         }
     }
-
     //爆発させない
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent e) {
@@ -128,7 +123,6 @@ public class TntWorld implements Listener {
             e.setCancelled(true);
         }
     }
-
     //TNT消える
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
@@ -151,7 +145,6 @@ public class TntWorld implements Listener {
             }
         }
     }
-
     //ゲームオーバー
     @EventHandler
     public void gameOver(PlayerMoveEvent e) {
@@ -169,11 +162,10 @@ public class TntWorld implements Listener {
             }
         }
     }
-
     //床作る
     public void allFloors(int y) {
         World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName), -254, y, 1059);
+        Location location = new Location(Bukkit.getWorld(this.worldName), -258, y, 1057);
         for (int i = 0; i < 5; i++) {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
@@ -183,6 +175,19 @@ public class TntWorld implements Listener {
             location.add(-5, 0, 0);
         }
     }
+    //ステージリセット
+    public void resetFloors(int y){
+        World world = Bukkit.getWorld("tnt");
+        Location location = new Location(Bukkit.getWorld(this.worldName),-258,y,1057);
+        for (int i = 0; i<5; i++){
+            location.add(0,0,1);
+            for (int j=0; j<5; j++){
+                location.add(1,0,0);
+                    world.getBlockAt(location).setType(Material.AIR);
+                }
+                location.add(-5,0,0);
+            }
+        }
 
     //マグマ作る
     public void damageFloors() {
@@ -198,7 +203,6 @@ public class TntWorld implements Listener {
         }
         location.add(0, 0, -20);
     }
-
     //ゲームクリア
     public void gameClear() {
         World world = Bukkit.getWorld("tnt");
@@ -208,7 +212,6 @@ public class TntWorld implements Listener {
             player.sendTitle("GameWin", winnerName + "勝利しました", 20, 20, 20);
         }
     }
-
     //プレイヤーチェック
     public int playerCheck() {
         World world = Bukkit.getWorld("tnt");
@@ -230,8 +233,6 @@ public class TntWorld implements Listener {
         }
         return safePlayerCount;
     }
-
-
     @EventHandler
     public void onBrakeBlock(BlockBreakEvent e) {
         if (e.getPlayer().getWorld().getName().equals("tnt")) {
