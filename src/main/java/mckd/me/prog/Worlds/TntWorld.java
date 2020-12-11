@@ -9,12 +9,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Button;
@@ -76,6 +79,7 @@ public class TntWorld implements Listener {
             player.setFlying(false);
             player.getWorld().setPVP(false);
             player.setGameMode(GameMode.SURVIVAL);
+            player.setPlayerWeather(WeatherType.CLEAR);
             ItemStack itemStack = new ItemStack(Material.TNT);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName("ゲームスタート");
@@ -131,6 +135,11 @@ public class TntWorld implements Listener {
             }.runTaskLater(this.plugin, 20);
         }
     }
+    //天気
+    @EventHandler
+    public  void onChangeWeather(WeatherChangeEvent e){
+
+    }
     //爆発させない
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent e) {
@@ -174,6 +183,25 @@ public class TntWorld implements Listener {
                 this.playerCheck();
                 player.sendTitle("GameOver", "ゲームオーバー", 20, 20, 20);
                 player.teleport(new Location(Bukkit.getWorld("tnt"), -265, 52, 1088));
+            }
+        }
+    }
+    //ブロックを置けないようにする
+    @EventHandler
+    public void onSetBlock(BlockPlaceEvent e){
+     if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+         if (e.getPlayer().getGameMode() == GameMode.SURVIVAL){
+             e.setCancelled(true);
+             }
+        }
+    }
+    //ブロックを壊せないようにする
+    @EventHandler
+    public  void onBrakeBlock(BlockBreakEvent e){
+    if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+        if (e.getPlayer().getGameMode() == GameMode.SURVIVAL){
+            e.getPlayer().sendMessage("壊せないで！");
+            e.setCancelled(true);
             }
         }
     }
@@ -248,19 +276,7 @@ public class TntWorld implements Listener {
         }
         return safePlayerCount;
     }
-    @EventHandler
-    public void onBrakeBlock(BlockBreakEvent e) {
-        if (e.getPlayer().getWorld().getName().equals("tnt")) {
-            Player player = e.getPlayer();
-            Block block = e.getBlock();
-            if (block.getType() == Material.SAND) {
-                int safePlayerCount = this.playerCheck();
-                player.sendMessage(String.valueOf(safePlayerCount));
-                this.gameClear();
 
-            }
-        }
-    }
 } // end
 
 
