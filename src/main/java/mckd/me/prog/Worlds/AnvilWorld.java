@@ -1,12 +1,10 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -35,7 +33,10 @@ public class AnvilWorld implements Listener {
             player.getInventory().clear();
             player.setFoodLevel(20);
             player.setHealth(20.0);
+            player.setPlayerWeather(WeatherType.CLEAR);
             player.setGameMode(GameMode.CREATIVE);
+            World world = player.getWorld();
+            world.setTime(0);
         }
     }
 
