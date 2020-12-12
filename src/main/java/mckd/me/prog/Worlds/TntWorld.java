@@ -85,34 +85,30 @@ public class TntWorld implements Listener {
             itemMeta.setDisplayName("ゲームスタート");
             itemStack.setItemMeta(itemMeta);
             player.getInventory().addItem(itemStack);
-            this.resetFloors(50);
-            this.resetFloors(40);
-            this.resetFloors(30);
-            this.resetFloors(20);
-            this.resetFloors(10);
         }
     }
     //ゲーム中にほかのプレイヤーが来た場合
     //ゲームスタート
     @EventHandler
-    public void breakBlock(PlayerInteractEvent e) {
+    public void interactBlock(PlayerInteractEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             ItemStack item = e.getItem();
             if (item.getType() == Material.TNT) {
                 int NowPlayerCount=player.getWorld().getPlayers().size();
-                if (NowPlayerCount>=2){
-                    isPlaying=true;
-                    this.startGame();
-                    player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
-                    player.sendMessage("移動するよ");
-                }else {
-                    isPlaying=false;
-                    player.sendMessage("2人まで待ってね！");
-                }
                 if (isPlaying==true){
-                    isPlaying=false;
                     player.sendMessage("ゲーム終わるまで待ってね！");
+                }else {
+                    if (NowPlayerCount >= 1) {
+                        isPlaying = true;
+                        this.startGame();
+                        player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
+                        player.sendMessage("移動するよ");
+                    } else {
+                        isPlaying = false;
+                        player.sendMessage("2人まで待ってね！");
+                    }
+
                 }
             }
             this.allFloors(50);
@@ -134,11 +130,6 @@ public class TntWorld implements Listener {
                 }
             }.runTaskLater(this.plugin, 20);
         }
-    }
-    //天気
-    @EventHandler
-    public  void onChangeWeather(WeatherChangeEvent e){
-
     }
     //爆発させない
     @EventHandler
@@ -205,6 +196,15 @@ public class TntWorld implements Listener {
             }
         }
     }
+    //プレイヤーがマイクラから落ちた時
+    //プレイ中にサーバーから出てもらう
+    @EventHandler
+    public  void quitPlayer(PlayerQuitEvent e){
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+            this.playerCheck();
+            Bukkit.getLogger().info("ok");
+        }
+    }
     //床作る
     public void allFloors(int y) {
         World world = Bukkit.getWorld("tnt");
@@ -218,20 +218,6 @@ public class TntWorld implements Listener {
             location.add(-5, 0, 0);
         }
     }
-    //ステージリセット
-    public void resetFloors(int y){
-        World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName),-258,y,1057);
-        for (int i = 0; i<5; i++){
-            location.add(0,0,2);
-            for (int j=0; j<5; j++){
-                location.add(2,0,0);
-                    world.getBlockAt(location).setType(Material.AIR);
-                }
-                location.add(-5,0,0);
-            }
-        }
-
     //マグマ作る
     public void damageFloors() {
         World world = Bukkit.getWorld("tnt");
@@ -252,8 +238,9 @@ public class TntWorld implements Listener {
         List<Player> players = world.getPlayers();
         for (Player player : players) {
             String winnerName = this.winner.getDisplayName();
-            player.sendTitle("GameWin", winnerName + "勝利しました", 20, 20, 20);
+            player.sendTitle("GameWin", winnerName + "勝利しました", 40, 40, 40);
         }
+        isPlaying=false;
     }
     //プレイヤーチェック
     public int playerCheck() {

@@ -53,7 +53,7 @@ public class SnowWorld implements Listener {
 
 
     @EventHandler
-    public void chengeWorld(PlayerChangedWorldEvent e){
+    public void changeWorld(PlayerChangedWorldEvent e){
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.StartPlace);
