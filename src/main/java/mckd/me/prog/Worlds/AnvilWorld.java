@@ -35,7 +35,7 @@ public class AnvilWorld implements Listener {
             player.getInventory().clear();
             player.setFoodLevel(20);
             player.setHealth(20.0);
-            player.setGameMode(GameMode.ADVENTURE);
+            player.setGameMode(GameMode.CREATIVE);
         }
     }
 
