@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,13 +40,13 @@ public class SnowWorld implements Listener {
         if (!e.getEntity().getWorld().equals(this.worldName)) {
             return;
         }
-        if (e.getEntity() instanceof Arrow) {
-            Player player = (Player) e.getEntity();
-            player.sendMessage("test6");
+        Player player = (Player) e.getEntity();
+        Projectile projectile = e.getEntity();
+        if(projectile instanceof Arrow){
+            player.sendMessage("test4");
         }
-        if (e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
-            player.sendMessage("test5");
+        if(projectile instanceof Player){
+            player.sendMessage("test6");
         }
 
     }
