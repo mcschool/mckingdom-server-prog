@@ -63,7 +63,7 @@ public class SnowWorld implements Listener {
 
 
 
-    public void random() {
+    public void random(Player player) {
         World world = Bukkit.getWorld("snow");
         Location location = new Location(Bukkit.getWorld(this.worldName), 507, 6, 630);
         Random r = new Random();
@@ -75,7 +75,7 @@ public class SnowWorld implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-
+                player.sendMessage("test");
             }
 
         }.runTaskLater(this.plugin, 80);
@@ -91,7 +91,7 @@ public class SnowWorld implements Listener {
             Block block = e.getBlock();
             if (block.getType() == Material.STONE) {
                 player.sendMessage("test1");
-                this.random();
+                this.random(player);
                 new BukkitRunnable() {
                     @Override
                     public void run() {
