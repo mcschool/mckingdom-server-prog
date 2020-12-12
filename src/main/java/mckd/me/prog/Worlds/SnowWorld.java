@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -58,6 +59,10 @@ public class SnowWorld implements Listener {
     }
 
 
+
+
+
+
     public void random() {
         World world = Bukkit.getWorld("snow");
         Location location = new Location(Bukkit.getWorld(this.worldName), 507, 6, 630);
@@ -67,7 +72,14 @@ public class SnowWorld implements Listener {
         location.add(n, 0, 0);
         location.add(0, 0, m);
         world.getBlockAt(location).setType(Material.WOOD);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
 
+            }
+
+        }.runTaskLater(this.plugin, 80);
+        world.getBlockAt(location).setType(Material.AIR);
     }
 
 
