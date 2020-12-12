@@ -42,7 +42,7 @@ public class AnvilWorld implements Listener {
     @EventHandler
     public void breakBlock(BlockBreakEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-            Player player = (Player) e.getPlayer();
+            Player player = e.getPlayer();
             Block block = e.getBlock();
             if (block.getType() == Material.STONE) {
                 player.sendMessage("anvil1");
