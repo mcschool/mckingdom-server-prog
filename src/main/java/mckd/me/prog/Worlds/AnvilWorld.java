@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerRegisterChannelEvent;
 
 public class AnvilWorld implements Listener {
     private Prog plugin;
@@ -34,9 +35,8 @@ public class AnvilWorld implements Listener {
             player.setFoodLevel(20);
             player.setHealth(20.0);
             player.setPlayerWeather(WeatherType.CLEAR);
-            player.setGameMode(GameMode.CREATIVE);
             World world = player.getWorld();
-            world.setTime(0);
+            world.setTime(30000);
         }
     }
 
@@ -47,6 +47,7 @@ public class AnvilWorld implements Listener {
             Block block = e.getBlock();
             if (block.getType() == Material.STONE) {
                 player.sendMessage("anvil1");
+                player.setGameMode(GameMode.CREATIVE);
             }
 
 
