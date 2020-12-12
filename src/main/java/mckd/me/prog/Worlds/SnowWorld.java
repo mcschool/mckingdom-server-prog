@@ -79,7 +79,7 @@ public class SnowWorld implements Listener {
             }
 
         }.runTaskLater(this.plugin, 140);
-        //world.getBlockAt(location).setType(Material.AIR);
+        world.getBlockAt(location).setType(Material.AIR);
         player.sendMessage("test2");
 
     }
