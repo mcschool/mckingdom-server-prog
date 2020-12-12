@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 
 public class AnvilWorld implements Listener {
     private Prog plugin;
-    public String worldName = "Anvil";
+    public String worldName = "anvil";
     public Location StartPlace;
     public Location centerPlace;
 
