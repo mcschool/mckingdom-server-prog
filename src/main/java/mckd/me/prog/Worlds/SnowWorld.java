@@ -72,7 +72,6 @@ public class SnowWorld implements Listener {
         location.add(n, 0, 0);
         location.add(0, 0, m);
         world.getBlockAt(location).setType(Material.WOOD);
-<<<<<<< HEAD
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -81,8 +80,7 @@ public class SnowWorld implements Listener {
 
         }.runTaskLater(this.plugin, 80);
         world.getBlockAt(location).setType(Material.AIR);
-=======
->>>>>>> 4248c163263078aca8daa5f163385560a39d735d
+
     }
 
 
