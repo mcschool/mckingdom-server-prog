@@ -9,12 +9,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Button;
@@ -27,13 +30,13 @@ public class TntWorld implements Listener {
     public String worldName = "tnt";
     public Location startPlace;
     public Player winner;
+    public boolean  isPlaying = false ;
 
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -263, 52, 1088);
+        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -261, 52, 1088);
     }
-
     //ダメージ受けない
     @EventHandler
     public void onEntityDamage(EntityDamageEvent e) {
@@ -53,7 +56,6 @@ public class TntWorld implements Listener {
             return;
         }
     }
-
     //空腹停止
     @EventHandler
     public void onFoodLevelChangeEvent(FoodLevelChangeEvent e) {
@@ -63,12 +65,13 @@ public class TntWorld implements Listener {
             return;
         }
     }
-
     //待合所にテレポート
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
+            player.sendTitle("Welcome to TNT RUN","",20,20,20);
+            player.sendMessage("TNTを右クリックするとゲームが始まるよ！");
             player.teleport(this.startPlace);
             player.getInventory().clear();
             player.setFoodLevel(20);
@@ -76,25 +79,41 @@ public class TntWorld implements Listener {
             player.setFlying(false);
             player.getWorld().setPVP(false);
             player.setGameMode(GameMode.SURVIVAL);
-            ItemStack itemStack = new ItemStack(Material.WOOD_BUTTON);
+            player.setPlayerWeather(WeatherType.CLEAR);
+            ItemStack itemStack = new ItemStack(Material.TNT);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName("ゲームスタート");
             itemStack.setItemMeta(itemMeta);
             player.getInventory().addItem(itemStack);
+            this.resetFloors(50);
+            this.resetFloors(40);
+            this.resetFloors(30);
+            this.resetFloors(20);
+            this.resetFloors(10);
         }
     }
-
+    //ゲーム中にほかのプレイヤーが来た場合
     //ゲームスタート
     @EventHandler
     public void breakBlock(PlayerInteractEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             ItemStack item = e.getItem();
-            if (item.getType() == Material.WOOD_BUTTON) {
-                player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
-                player.sendMessage("移動するよ");
-
-                this.startGame();
+            if (item.getType() == Material.TNT) {
+                int NowPlayerCount=player.getWorld().getPlayers().size();
+                if (NowPlayerCount>=2){
+                    isPlaying=true;
+                    this.startGame();
+                    player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
+                    player.sendMessage("移動するよ");
+                }else {
+                    isPlaying=false;
+                    player.sendMessage("2人まで待ってね！");
+                }
+                if (isPlaying==true){
+                    isPlaying=false;
+                    player.sendMessage("ゲーム終わるまで待ってね！");
+                }
             }
             this.allFloors(50);
             this.allFloors(40);
@@ -104,21 +123,23 @@ public class TntWorld implements Listener {
             this.damageFloors();
         }
     }
-
     public void startGame() {
         World world = Bukkit.getWorld("tnt");
         List<Player> players = world.getPlayers();
-
         for (Player player : players) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.teleport(new Location(Bukkit.getWorld("tnt"), -263, 52, 1052));
+                    player.teleport(new Location(Bukkit.getWorld("tnt"), -255, 51, 1060));
                 }
             }.runTaskLater(this.plugin, 20);
         }
     }
+    //天気
+    @EventHandler
+    public  void onChangeWeather(WeatherChangeEvent e){
 
+    }
     //爆発させない
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent e) {
@@ -126,7 +147,6 @@ public class TntWorld implements Listener {
             e.setCancelled(true);
         }
     }
-
     //TNT消える
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
@@ -149,7 +169,6 @@ public class TntWorld implements Listener {
             }
         }
     }
-
     //ゲームオーバー
     @EventHandler
     public void gameOver(PlayerMoveEvent e) {
@@ -167,11 +186,29 @@ public class TntWorld implements Listener {
             }
         }
     }
-
+    //ブロックを置けないようにする
+    @EventHandler
+    public void onSetBlock(BlockPlaceEvent e){
+     if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+         if (e.getPlayer().getGameMode() == GameMode.SURVIVAL){
+             e.setCancelled(true);
+             }
+        }
+    }
+    //ブロックを壊せないようにする
+    @EventHandler
+    public  void onBrakeBlock(BlockBreakEvent e){
+    if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+        if (e.getPlayer().getGameMode() == GameMode.SURVIVAL){
+            e.getPlayer().sendMessage("壊せないで！");
+            e.setCancelled(true);
+            }
+        }
+    }
     //床作る
     public void allFloors(int y) {
         World world = Bukkit.getWorld("tnt");
-        Location location = new Location(Bukkit.getWorld(this.worldName), -266, y, 1049);
+        Location location = new Location(Bukkit.getWorld(this.worldName), -258, y, 1057);
         for (int i = 0; i < 5; i++) {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
@@ -181,6 +218,19 @@ public class TntWorld implements Listener {
             location.add(-5, 0, 0);
         }
     }
+    //ステージリセット
+    public void resetFloors(int y){
+        World world = Bukkit.getWorld("tnt");
+        Location location = new Location(Bukkit.getWorld(this.worldName),-258,y,1057);
+        for (int i = 0; i<5; i++){
+            location.add(0,0,2);
+            for (int j=0; j<5; j++){
+                location.add(2,0,0);
+                    world.getBlockAt(location).setType(Material.AIR);
+                }
+                location.add(-5,0,0);
+            }
+        }
 
     //マグマ作る
     public void damageFloors() {
@@ -190,13 +240,12 @@ public class TntWorld implements Listener {
             location.add(0, 0, 1);
             for (int j = 0; j < 20; j++) {
                 location.add(1, 0, 0);
-                world.getBlockAt(location).setType(Material.GRASS);
+                world.getBlockAt(location).setType(Material.LAVA);
             }
             location.add(-20, 0, 0);
         }
         location.add(0, 0, -20);
     }
-
     //ゲームクリア
     public void gameClear() {
         World world = Bukkit.getWorld("tnt");
@@ -206,7 +255,6 @@ public class TntWorld implements Listener {
             player.sendTitle("GameWin", winnerName + "勝利しました", 20, 20, 20);
         }
     }
-
     //プレイヤーチェック
     public int playerCheck() {
         World world = Bukkit.getWorld("tnt");
@@ -229,19 +277,6 @@ public class TntWorld implements Listener {
         return safePlayerCount;
     }
 
-
-    @EventHandler
-    public void onBrakeBlock(BlockBreakEvent e) {
-        if (e.getPlayer().getWorld().getName().equals("tnt")) {
-            Player player = e.getPlayer();
-            Block block = e.getBlock();
-            if (block.getType() == Material.STONE) {
-                int safePlayerCount = this.playerCheck();
-                player.sendMessage(String.valueOf(safePlayerCount));
-                this.gameClear();
-            }
-        }
-    }
 } // end
 
 
