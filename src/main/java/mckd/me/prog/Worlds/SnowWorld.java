@@ -39,12 +39,11 @@ public class SnowWorld implements Listener {
         if (!e.getEntity().getWorld().equals(this.worldName)) {
             return;
         }
-        if(e.getEntity() instanceof Arrow) {
-            if (e.getEntity() instanceof Player) {
-                Player player = (Player) e.getEntity();
-                player.sendMessage("test5");
-            }
+        if (e.getEntity() instanceof Player) {
+            Player player = (Player) e.getEntity();
+            player.sendMessage("test5");
         }
+
     }
 
 
