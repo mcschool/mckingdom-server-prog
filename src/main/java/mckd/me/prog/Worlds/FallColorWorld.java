@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds;
 
+import jdk.javadoc.internal.doclets.formats.html.SearchIndexItems;
 import mckd.me.prog.Prog;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -10,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import sun.jvm.hotspot.ui.ObjectHistogramPanel;
 
 import java.util.List;
@@ -49,10 +51,13 @@ public class FallColorWorld implements Listener {
           Player player = e.getPlayer();
           World world = player.getWorld();
           if (e.getPlayer().getWorld().getName().equals("fallColor")){
-              Location location = e.getPlayer().getLocation().clone().subtract(0,-1,0);
+              Location location = e.getPlayer().getLocation().clone().subtract(0,0,0);
             if (location.getY()<=4){
                 player.teleport(this.startPlace);
-                world.getBlockAt(location).setType(Material.WOOL);
+                ItemStack RedWool = new ItemStack(Material.WOOL,1,(byte)4);
+                world.getBlockAt(location).setType(RedWool.getType());
+
+
             }
         }
     }
