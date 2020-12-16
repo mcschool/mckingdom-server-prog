@@ -30,13 +30,14 @@ public class TntWorld implements Listener {
     public String worldName = "tnt";
     public Location startPlace;
     public Player winner;
-    public boolean  isPlaying = false ;
+    public boolean isPlaying = false;
 
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.startPlace = new Location(Bukkit.getWorld(this.worldName), -261, 52, 1088);
     }
+
     //ダメージ受けない
     @EventHandler
     public void onEntityDamage(EntityDamageEvent e) {
@@ -65,12 +66,13 @@ public class TntWorld implements Listener {
             return;
         }
     }
+
     //待合所にテレポート
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
-            player.sendTitle("Welcome to TNT RUN","",20,20,20);
+            player.sendTitle("Welcome to TNT RUN", "", 20, 20, 20);
             player.sendMessage("TNTを右クリックするとゲームが始まるよ！");
             player.teleport(this.startPlace);
             player.getInventory().clear();
@@ -87,6 +89,7 @@ public class TntWorld implements Listener {
             player.getInventory().addItem(itemStack);
         }
     }
+
     //ゲーム中にほかのプレイヤーが来た場合
     //ゲームスタート
     @EventHandler
@@ -95,10 +98,10 @@ public class TntWorld implements Listener {
             Player player = e.getPlayer();
             ItemStack item = e.getItem();
             if (item.getType() == Material.TNT) {
-                int NowPlayerCount=player.getWorld().getPlayers().size();
-                if (isPlaying==true){
+                int NowPlayerCount = player.getWorld().getPlayers().size();
+                if (isPlaying == true) {
                     player.sendMessage("ゲーム終わるまで待ってね！");
-                }else {
+                } else {
                     if (NowPlayerCount >= 1) {
                         isPlaying = true;
                         this.startGame();
@@ -119,6 +122,7 @@ public class TntWorld implements Listener {
             this.damageFloors();
         }
     }
+
     public void startGame() {
         World world = Bukkit.getWorld("tnt");
         List<Player> players = world.getPlayers();
@@ -131,6 +135,7 @@ public class TntWorld implements Listener {
             }.runTaskLater(this.plugin, 20);
         }
     }
+
     //爆発させない
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent e) {
@@ -138,6 +143,7 @@ public class TntWorld implements Listener {
             e.setCancelled(true);
         }
     }
+
     //TNT消える
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
@@ -160,6 +166,7 @@ public class TntWorld implements Listener {
             }
         }
     }
+
     //ゲームオーバー
     @EventHandler
     public void gameOver(PlayerMoveEvent e) {
@@ -177,34 +184,38 @@ public class TntWorld implements Listener {
             }
         }
     }
+
     //ブロックを置けないようにする
     @EventHandler
-    public void onSetBlock(BlockPlaceEvent e){
-     if (e.getPlayer().getWorld().getName().equals(this.worldName)){
-         if (e.getPlayer().getGameMode() == GameMode.SURVIVAL){
-             e.setCancelled(true);
-             }
-        }
-    }
-    //ブロックを壊せないようにする
-    @EventHandler
-    public  void onBrakeBlock(BlockBreakEvent e){
-    if (e.getPlayer().getWorld().getName().equals(this.worldName)){
-        if (e.getPlayer().getGameMode() == GameMode.SURVIVAL){
-            e.getPlayer().sendMessage("壊せないで！");
-            e.setCancelled(true);
+    public void onSetBlock(BlockPlaceEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) {
+                e.setCancelled(true);
             }
         }
     }
+
+    //ブロックを壊せないようにする
+    @EventHandler
+    public void onBrakeBlock(BlockBreakEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) {
+                e.getPlayer().sendMessage("壊せないで！");
+                e.setCancelled(true);
+            }
+        }
+    }
+
     //プレイヤーがマイクラから落ちた時
     //プレイ中にサーバーから出てもらう
     @EventHandler
-    public  void quitPlayer(PlayerQuitEvent e){
-        if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+    public void quitPlayer(PlayerQuitEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             this.playerCheck();
             Bukkit.getLogger().info("ok");
         }
     }
+
     //床作る
     public void allFloors(int y) {
         World world = Bukkit.getWorld("tnt");
@@ -218,6 +229,7 @@ public class TntWorld implements Listener {
             location.add(-5, 0, 0);
         }
     }
+
     //マグマ作る
     public void damageFloors() {
         World world = Bukkit.getWorld("tnt");
@@ -232,6 +244,7 @@ public class TntWorld implements Listener {
         }
         location.add(0, 0, -20);
     }
+
     //ゲームクリア
     public void gameClear() {
         World world = Bukkit.getWorld("tnt");
@@ -240,8 +253,9 @@ public class TntWorld implements Listener {
             String winnerName = this.winner.getDisplayName();
             player.sendTitle("GameWin", winnerName + "勝利しました", 40, 40, 40);
         }
-        isPlaying=false;
+        isPlaying = false;
     }
+
     //プレイヤーチェック
     public int playerCheck() {
         World world = Bukkit.getWorld("tnt");
