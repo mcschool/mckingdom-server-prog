@@ -11,7 +11,6 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import sun.jvm.hotspot.ui.ObjectHistogramPanel;
 
 import java.util.List;
 
