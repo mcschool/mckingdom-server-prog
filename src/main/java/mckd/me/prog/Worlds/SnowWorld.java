@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -47,6 +48,15 @@ public class SnowWorld implements Listener {
     }*/
 
 
+    @EventHandler
+    public void EntityDameger(EntityDamageEvent e){
+        if (e.getEntity().getWorld().getName().equals(this.worldName)) {
+            Player player = (Player)e.getEntity();
+            String a = e.getCause().toString();
+            player.sendMessage(a);
+        }
+
+    }
 
 
 
