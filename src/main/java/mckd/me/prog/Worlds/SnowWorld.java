@@ -14,6 +14,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -35,7 +36,7 @@ public class SnowWorld implements Listener {
         this.centerPlace = new Location(Bukkit.getWorld(this.worldName),507,6,630);
         this.StartPlace = new Location(Bukkit.getWorld(this.worldName),568,6,662);
     }
-    @EventHandler
+    /*@EventHandler
     public void ProjectileHit(ProjectileHitEvent e){
         if (!e.getEntity().getWorld().equals(this.worldName)) {
             return;
@@ -49,7 +50,9 @@ public class SnowWorld implements Listener {
             player.sendMessage("test6");
         }
 
-    }
+    }*/
+
+
 
 
 
@@ -64,7 +67,7 @@ public class SnowWorld implements Listener {
         }
     }
 
-
+    //矢を降らす
     public static void hitPlayer(Player player){
         for (int i=0;i<10;i++) {
             Random r = new Random();
@@ -72,7 +75,8 @@ public class SnowWorld implements Listener {
             int z = r.nextInt(15);
             Location location = new Location(Bukkit.getWorld("snow"),507, 20, 630);
             location.add(x,0,z);
-            location.getWorld().spawnArrow(location,new Vector(0,-1,0),0.2f,16);
+            location.getWorld().spawnArrow(location,new Vector(0,-1,0),0.2f,50);
+
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
 
         }
