@@ -1,10 +1,7 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,11 +49,16 @@ public class SnowWorld implements Listener {
     public void EntityDameger(EntityDamageEvent e){
         if (e.getEntity().getWorld().getName().equals(this.worldName)) {
             Player player = (Player)e.getEntity();
-            String a = e.getCause().toString();
-            player.sendMessage(a);
+            if (!(e.getEntity() instanceof Player)){
+                return;
+            }
+            if(e.getCause()!=null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE){
+                player.setGameMode(GameMode.SPECTATOR);
+            }
         }
 
     }
+
 
 
 
