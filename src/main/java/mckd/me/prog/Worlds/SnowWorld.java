@@ -6,16 +6,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -69,13 +63,13 @@ public class SnowWorld implements Listener {
 
     //矢を降らす
     public static void hitPlayer(Player player){
-        for (int i=0;i<10;i++) {
+        for (int i=0;i<100;i++) {
             Random r = new Random();
             int x = r.nextInt(15);
             int z = r.nextInt(15);
             Location location = new Location(Bukkit.getWorld("snow"),507, 20, 630);
             location.add(x,0,z);
-            location.getWorld().spawnArrow(location,new Vector(0,-1,0),0.2f,50);
+            location.getWorld().spawnArrow(location,new Vector(0,-1,0),0.2f,16);
 
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
 
