@@ -74,7 +74,6 @@ public class SnowWorld implements Listener {
             location.add(x,0,z);
             location.getWorld().spawnArrow(location,new Vector(0,-1,0),0.2f,16);
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
-
         }
     }
 
@@ -108,6 +107,7 @@ public class SnowWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
+
             if (block.getType() == Material.STONE) {
                 this.random(player);
                 new BukkitRunnable() {

@@ -23,6 +23,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Button;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.awt.event.FocusEvent;
 import java.util.List;
 
 public class TntWorld implements Listener {
@@ -45,8 +46,12 @@ public class TntWorld implements Listener {
             if (!(e.getEntity() instanceof Player)) {
                 return;
             }
+            Player player = (Player) e.getEntity();//プレイヤー型に変更
+            String a =  e.getCause().toString();
+            player.sendMessage(a);
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                 e.setCancelled(true);
+
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) {
                 e.setCancelled(true);
@@ -56,6 +61,7 @@ public class TntWorld implements Listener {
             }
             return;
         }
+
     }
     //空腹停止
     @EventHandler
