@@ -12,7 +12,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+<<<<<<< HEAD
 import org.bukkit.material.Wool;
+=======
+import org.bukkit.inventory.ItemStack;
+>>>>>>> beb05de8c3112f5c98f19598671daff9f13bead7
 
 import java.util.Random;
 
