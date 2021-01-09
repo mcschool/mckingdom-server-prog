@@ -24,6 +24,7 @@ public class SnowWorld implements Listener {
     public String worldName = "snow";
     public Location StartPlace;
     public Location centerPlace;
+    private Object Arrow;
 
 
     public SnowWorld(Prog plugin) {
@@ -87,6 +88,27 @@ public class SnowWorld implements Listener {
 
 
     @EventHandler
+    public void breakBlock2(BlockBreakEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            Player player = e.getPlayer();
+            Block block = e.getBlock();
+            World world = Bukkit.getWorld("snow");
+            Entity entity = (Entity) world.getEntities();
+            if (block.getType() == Material.REDSTONE) {
+                if (world.getEntities() == Arrow){
+                    Arrow a = (Arrow) world.getEntities();
+                    player.sendMessage("test4");
+                    a.remove();
+                }
+
+
+            }
+        }
+    }
+
+
+
+    @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
@@ -139,8 +161,6 @@ public class SnowWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-
-
             if (block.getType() == Material.STONE) {
                 this.random(player);
                 new BukkitRunnable() {
