@@ -14,7 +14,6 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import org.bukkit.entity.Snowball;
 
 import java.util.List;
 import java.util.Random;
@@ -27,12 +26,13 @@ public class SnowWorld implements Listener {
     public Location centerPlace;
 
 
-    public SnowWorld(Prog plugin){
+    public SnowWorld(Prog plugin) {
         this.plugin = plugin;
-        plugin.getServer().getPluginManager().registerEvents(this,plugin);
-        this.centerPlace = new Location(Bukkit.getWorld(this.worldName),507,6,630);
-        this.StartPlace = new Location(Bukkit.getWorld(this.worldName),568,6,662);
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        this.centerPlace = new Location(Bukkit.getWorld(this.worldName), 507, 6, 630);
+        this.StartPlace = new Location(Bukkit.getWorld(this.worldName), 568, 6, 662);
     }
+
     /*@EventHandler
     public void ProjectileHit(ProjectileHitEvent e){
         if (!e.getEntity().getWorld().equals(this.worldName)) {
@@ -49,12 +49,12 @@ public class SnowWorld implements Listener {
 
     }*/
     @EventHandler
-    public void EntitySpawn(EntitySpawnEvent e){
+    public void EntitySpawn(EntitySpawnEvent e) {
         World world = Bukkit.getWorld("worldName");
         List<Entity> entities = world.getEntities();
         for (Entity entity : entities) {
             double y = entity.getLocation().getY();
-            if (y <= 4){
+            if (y <= 4) {
                 if (e.getEntity() instanceof Arrow) {
                     Arrow a = (Arrow) e.getEntity();
                     a.remove();
@@ -66,7 +66,7 @@ public class SnowWorld implements Listener {
 
 
     @EventHandler
-    public void EntityDameger(EntityDamageEvent e){
+    public void EntityDameger(EntityDamageEvent e) {
         if (e.getEntity().getWorld().getName().equals(this.worldName)) {
             Player player = (Player) e.getEntity();
             if (!(e.getEntity() instanceof Player)) {
@@ -80,10 +80,8 @@ public class SnowWorld implements Listener {
     }
 
 
-
-
     @EventHandler
-    public void changeWorld(PlayerChangedWorldEvent e){
+    public void changeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.StartPlace);
@@ -94,20 +92,18 @@ public class SnowWorld implements Listener {
     }
 
     //矢を降らす
-    public static void hitPlayer(Player player){
-        for (int i=0;i<100;i++) {
+    public static void hitPlayer(Player player) {
+        for (int i = 0; i < 100; i++) {
             Random r = new Random();
             int x = r.nextInt(15);
             int z = r.nextInt(15);
-            Location location = new Location(Bukkit.getWorld("snow"),507, 20, 630);
-            location.add(x,0,z);
-            location.getWorld().spawnArrow(location,new Vector(0,-1,0),0.2f,16);
+            Location location = new Location(Bukkit.getWorld("snow"), 507, 20, 630);
+            location.add(x, 0, z);
+            location.getWorld().spawnArrow(location, new Vector(0, -1, 0), 0.2f, 16);
 
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
         }
     }
-
-
 
 
     public void random(Player player) {
@@ -137,11 +133,9 @@ public class SnowWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-<<<<<<< HEAD
-=======
+
 
             if (block.getType() == Material.STONE) {
->>>>>>> 74f5d103de8d6447828ddc14b72ce0823b22c27e
                 this.random(player);
                 new BukkitRunnable() {
                     @Override
@@ -154,4 +148,5 @@ public class SnowWorld implements Listener {
             }
         }
     }
+}
 
