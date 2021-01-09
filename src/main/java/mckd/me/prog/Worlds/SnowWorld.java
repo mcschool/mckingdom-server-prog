@@ -51,12 +51,17 @@ public class SnowWorld implements Listener {
     @EventHandler
     public void EntitySpawn(EntitySpawnEvent e) {
         World world = Bukkit.getWorld("worldName");
+        Player player = (Player) e.getEntity();
         List<Entity> entities = world.getEntities();
         for (Entity entity : entities) {
+            player.sendMessage("test1");
             double y = entity.getLocation().getY();
-            if (y <= 4) {
+            player.sendMessage("test2");
+            if (y <= 5) {
+                player.sendMessage("test3");
                 if (e.getEntity() instanceof Arrow) {
                     Arrow a = (Arrow) e.getEntity();
+                    player.sendMessage("test4");
                     a.remove();
                 }
             }
