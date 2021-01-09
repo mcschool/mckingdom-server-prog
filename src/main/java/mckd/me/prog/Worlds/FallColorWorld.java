@@ -1,37 +1,48 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
+
+
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Wool;
 
 import java.util.List;
+import java.util.Random;
 
 public class FallColorWorld implements Listener {
     private Prog plugin;
-    public  String worldName = "fallColor";
+    public String worldName = "fallColor";
     public Location startPlace;
 
-    public  FallColorWorld(Prog plugin){
+
+    public FallColorWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.startPlace = new Location(Bukkit.getWorld(this.worldName), 87,70,111);
+        this.startPlace = new Location(Bukkit.getWorld(this.worldName), 87, 70, 111);
     }
+
     //待合所にテレポート
     @EventHandler
     public void onChangeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
-            player.sendTitle("FallColor","",20,20,20);
+            Random rand = new Random();
+            int colors = rand.nextInt(5) + 1;
+            player.sendTitle("FallColor", "", 20, 20, 20);
             player.sendMessage("ここから落ちたら地面に色がつくよ！");
             player.sendMessage("次落ちるときは色が付いたところに着地しないでね！");
+            player.sendMessage(String.valueOf(colors));
+            String colorName;
             player.teleport(this.startPlace);
             player.getInventory().clear();
             player.setFoodLevel(20);
@@ -41,47 +52,122 @@ public class FallColorWorld implements Listener {
             player.getWorld().setPVP(false);
             player.setGameMode(GameMode.SURVIVAL);
             player.setPlayerWeather(WeatherType.CLEAR);
+            FileConfiguration config = this.plugin.getConfig();
+            player.sendMessage(player.getUniqueId().toString());
+            this.playerCheck();
+            if (colors == 1) {
+                colorName = "red";
+                player.sendMessage("赤チーム");
+            } else if (colors == 2) {
+                colorName = "blue";
+                player.sendMessage("青チーム");
+            } else if (colors == 3) {
+                colorName = "green";
+                player.sendMessage("緑チーム");
+            } else {
+                colorName = "black";
+                player.sendMessage("黒チーム");
             }
+            config.set(player.getUniqueId() + "test", colorName);
+        }
     }
+
     //着地したとき
     @EventHandler
-    public  void FallPlayer(PlayerMoveEvent e){
-          Player player = e.getPlayer();
-          World world = player.getWorld();
-          if (e.getPlayer().getWorld().getName().equals("fallColor")){
-              Location location = e.getPlayer().getLocation().clone().subtract(0,0,0);
-            if (location.getY()<=4){
+    public void FallPlayer(PlayerMoveEvent e) {
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        if (e.getPlayer().getWorld().getName().equals("fallColor")) {
+            Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
+            if (location.getY() <= 4) {
+                this.SetColorBlock(player);
                 player.teleport(this.startPlace);
-                ItemStack RedWool = new ItemStack(Material.WOOL,1,(byte)4);
-                world.getBlockAt(location).setType(RedWool.getType());
-
-
+                FileConfiguration config = this.plugin.getConfig();
+                String color = config.getString(player.getUniqueId() + "test");
+                player.sendMessage(color);
             }
         }
     }
+
+    //色分け
+    public void SetColorBlock(Player player) {
+        World world = player.getWorld();
+        Location location = player.getLocation().clone().subtract(0, 0, 0);
+        Block block = world.getBlockAt(location);
+        block.setType(Material.WOOL);
+        BlockState blockState = block.getState();
+        FileConfiguration config = this.plugin.getConfig();
+        String color = config.getString(player.getUniqueId() + "test");
+        player.sendMessage(color);
+        if (color.equals("red")) {
+            player.sendMessage("a");
+            blockState.setData(new Wool(DyeColor.RED));
+        } else if (color.equals("blue")) {
+            player.sendMessage("b");
+            blockState.setData(new Wool(DyeColor.BLUE));
+        } else if (color.equals("green")) {
+            player.sendMessage("c");
+            blockState.setData(new Wool(DyeColor.GREEN));
+        } else if (color.equals("black")) {
+            player.sendMessage("d");
+            blockState.setData(new Wool(DyeColor.BLACK));
+        }
+        blockState.update();
+    }
+
     //ダメージ無効化
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent e){
-        if (e.getEntity().getWorld().getName().equals(this.worldName)){
-            if (!(e.getEntity() instanceof Player)){
+    public void onEntityDamage(EntityDamageEvent e) {
+        if (e.getEntity().getWorld().getName().equals(this.worldName)) {
+            if (!(e.getEntity() instanceof Player)) {
                 return;
             }
-            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL){
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                 e.setCancelled(true);
             }
         }
     }
-    //色を踏んだ
+
+    //羊毛を踏んだ時
     @EventHandler
-    public  void onStepColor(PlayerMoveEvent e){
+    public void onStepColor(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
-        if (e.getPlayer().getWorld().getName().equals("fallColor")){
-            Location location = e.getPlayer().getLocation().clone().subtract(0,0,0);
+        if (e.getPlayer().getWorld().getName().equals("fallColor")) {
+            Location location = e.getPlayer().getLocation().clone().subtract(0, +1, 0);
             Block block = location.getBlock();
-            if (block.getType() == Material.WOOL){
-                player.setGameMode(GameMode.SPECTATOR);
+            if (block.getType() == Material.WOOL) {
+                player.teleport(location);
             }
         }
     }
+
+    //プレイヤー数確認
+    public int playerCheck() {
+        World world = Bukkit.getWorld("fallColor");
+        List<Player> players = world.getPlayers();
+        int safePlayerCount = 0;
+        int safePlayerIndex = 0;
+        int i = 0;
+        for (Player player : players) {
+            double y = player.getLocation().getY();
+            if (y <= 70) {
+                safePlayerCount = safePlayerCount + 1;
+                safePlayerIndex = i;
+            }
+            i = i + 1;
+        }
+        if (safePlayerCount == 10){
+            Player player = players.get(safePlayerIndex);
+            player.setGameMode(GameMode.SPECTATOR);
+        }
+        return safePlayerCount;
+    }
+    //時間測る
+
+    //羊毛の色ごと計算
+
 }
+
+
+
