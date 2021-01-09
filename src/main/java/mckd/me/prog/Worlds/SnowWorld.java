@@ -49,27 +49,7 @@ public class SnowWorld implements Listener {
         }
 
     }*/
-    @EventHandler
-    public void EntitySpawn(EntitySpawnEvent e) {
-        World world = Bukkit.getWorld("snow");
-        Player player = (Player) e.getEntity();
-        player.sendMessage("test5");
-        List<Entity> entities = world.getEntities();
-        for (Entity entity : entities) {
-            player.sendMessage("test1");
-            double y = entity.getLocation().getY();
-            player.sendMessage("test2");
-            if (y <= 5) {
-                player.sendMessage("test3");
-                if (e.getEntity() instanceof Arrow) {
-                    Arrow a = (Arrow) e.getEntity();
-                    player.sendMessage("test4");
-                    a.remove();
-                }
-            }
-        }
 
-    }
 
 
     @EventHandler
@@ -87,31 +67,20 @@ public class SnowWorld implements Listener {
     }
 
 
-    @EventHandler
-    public void breakBlock2(BlockBreakEvent e) {
-        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-            Player player = e.getPlayer();
-            Block block = e.getBlock();
-            World world = Bukkit.getWorld("snow");
-            //Entity entity = (Entity) world.getEntities();
-            if (block.getType() == Material.SAND) {
-                player.sendMessage("test1");
-                /*if (world.getEntities() == Arrow){
-                    //Arrow a = (Arrow) world.getEntities();
-                    player.sendMessage("test4");
-                    entity.remove();
-                }*/
-                for (Entity entity1 : world.getEntities()){
-                    player.sendMessage(entity1.toString());
-                    if (entity1 instanceof Arrow) {
-                        entity1.remove();
-                    }
-                }
 
 
+
+    public void removeArrow(Player player){
+        World world = Bukkit.getWorld("snow");
+        for (Entity entity1 : world.getEntities()) {
+            player.sendMessage(entity1.toString());
+            if (entity1 instanceof Arrow) {
+                entity1.remove();
             }
         }
     }
+
+
 
 
 
@@ -136,9 +105,12 @@ public class SnowWorld implements Listener {
             location.add(x, 0, z);
             location.getWorld().spawnArrow(location, new Vector(0, -1, 0), 0.2f, 16);
 
+
             //spawnLocation.getWorld().spawnArrow(spawnLocation, new Vector(x, -1, z), 0.2f,8);
         }
     }
+
+
 
 
     public void random(Player player) {
@@ -178,6 +150,12 @@ public class SnowWorld implements Listener {
                     }
 
                 }.runTaskLater(this.plugin, 40);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        removeArrow(player);
+                    }
+                }.runTaskLater(this.plugin, 100);
             }
         }
     }
