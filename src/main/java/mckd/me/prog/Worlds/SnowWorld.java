@@ -50,8 +50,9 @@ public class SnowWorld implements Listener {
     }*/
     @EventHandler
     public void EntitySpawn(EntitySpawnEvent e) {
-        World world = Bukkit.getWorld("worldName");
+        World world = Bukkit.getWorld("snow");
         Player player = (Player) e.getEntity();
+        player.sendMessage("test5");
         List<Entity> entities = world.getEntities();
         for (Entity entity : entities) {
             player.sendMessage("test1");
