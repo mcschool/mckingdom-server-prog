@@ -94,7 +94,7 @@ public class SnowWorld implements Listener {
             Block block = e.getBlock();
             World world = Bukkit.getWorld("snow");
             //Entity entity = (Entity) world.getEntities();
-            if (block.getType() == Material.REDSTONE) {
+            if (block.getType() == Material.SAND) {
                 player.sendMessage("test1");
                 /*if (world.getEntities() == Arrow){
                     //Arrow a = (Arrow) world.getEntities();
