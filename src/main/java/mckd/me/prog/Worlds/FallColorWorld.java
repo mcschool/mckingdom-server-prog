@@ -7,15 +7,19 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.material.Wool;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +27,7 @@ public class FallColorWorld implements Listener {
     private Prog plugin;
     public String worldName = "fallColor";
     public Location startPlace;
+    private Object Arrow;
 
 
     public FallColorWorld(Prog plugin) {
@@ -54,6 +59,7 @@ public class FallColorWorld implements Listener {
             player.setPlayerWeather(WeatherType.CLEAR);
             FileConfiguration config = this.plugin.getConfig();
             player.sendMessage(player.getUniqueId().toString());
+            this.woolCount();
             this.playerCheck();
             if (colors == 1) {
                 colorName = "red";
@@ -70,6 +76,7 @@ public class FallColorWorld implements Listener {
             }
             config.set(player.getUniqueId() + "test", colorName);
         }
+
     }
 
     //着地したとき
@@ -149,7 +156,7 @@ public class FallColorWorld implements Listener {
         int safePlayerCount = 0;
         int safePlayerIndex = 0;
         int i = 0;
-        for (Player player : players) {
+              for (Player player : players) {
             double y = player.getLocation().getY();
             if (y <= 70) {
                 safePlayerCount = safePlayerCount + 1;
@@ -166,7 +173,52 @@ public class FallColorWorld implements Listener {
     //時間測る
 
     //羊毛の色ごと計算
+    public int woolCount(){
+    World world = Bukkit.getWorld("fallColor");
+    List<Player> players = world.getPlayers();
+    int WoolCount = 0;
+    int WoolIndex = 0;
+    int i= 0;
+        ArrayList<Block> blocks = new ArrayList<Block>();
+        for (Block block : blocks){
+                block.getType().getData();
+                double y = block.getLocation().getY();
+                if (y<=4){
+                    WoolCount = WoolCount +1;
+                    WoolIndex = i;
+                }
+                i = i+1;
+        }
+        if (WoolCount==1){
+            Block block = blocks.get(WoolIndex);
+        }
+        return WoolCount;
+    }
+    //羊毛消す
+    public void removeWool(Player player){
+        World world = Bukkit.getWorld("fallColor");
+        for (Entity entity : world.getEntities()){
+            if (entity instanceof Wool){
+                entity.remove();
+            }
+        }
+    }
 
+    public  void onBlockBreak(BlockBreakEvent e) {
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        Entity entity = (Entity) world.getEntities();
+        if (e.getPlayer().getWorld().getName().equals("fallColor")) {
+            Location location = e.getPlayer().getLocation().clone().subtract(0, 0, 0);
+            Block block = location.getBlock();
+            if (block.getType() == Material.STONE) {
+                this.woolCount();
+                if (world.getEntities() == Arrow){
+                    
+                }
+            }
+        }
+    }
 }
 
 

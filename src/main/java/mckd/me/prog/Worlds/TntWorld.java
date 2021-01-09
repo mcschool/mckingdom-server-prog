@@ -279,6 +279,7 @@ public class TntWorld implements Listener {
         }
         if (safePlayerCount == 1) {
             Player player = players.get(safePlayerIndex);
+
             this.winner = player;
         }
         return safePlayerCount;
