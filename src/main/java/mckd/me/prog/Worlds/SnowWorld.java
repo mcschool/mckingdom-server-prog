@@ -3,15 +3,20 @@ package mckd.me.prog.Worlds;
 import mckd.me.prog.Prog;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.bukkit.entity.Snowball;
 
+import java.util.List;
 import java.util.Random;
 
 
@@ -43,16 +48,31 @@ public class SnowWorld implements Listener {
         }
 
     }*/
+    @EventHandler
+    public void EntitySpawn(EntitySpawnEvent e){
+        World world = Bukkit.getWorld("worldName");
+        List<Entity> entities = world.getEntities();
+        for (Entity entity : entities) {
+            double y = entity.getLocation().getY();
+            if (y <= 4){
+                if (e.getEntity() instanceof Arrow) {
+                    Arrow a = (Arrow) e.getEntity();
+                    a.remove();
+                }
+            }
+        }
+
+    }
 
 
     @EventHandler
     public void EntityDameger(EntityDamageEvent e){
         if (e.getEntity().getWorld().getName().equals(this.worldName)) {
-            Player player = (Player)e.getEntity();
-            if (!(e.getEntity() instanceof Player)){
+            Player player = (Player) e.getEntity();
+            if (!(e.getEntity() instanceof Player)) {
                 return;
             }
-            if(e.getCause()!=null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE){
+            if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
                 player.setGameMode(GameMode.SPECTATOR);
             }
         }
@@ -118,7 +138,6 @@ public class SnowWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-            if (block.getType() == Material.STONE) {
                 this.random(player);
                 new BukkitRunnable() {
                     @Override
@@ -131,4 +150,4 @@ public class SnowWorld implements Listener {
             }
         }
     }
-}
+
