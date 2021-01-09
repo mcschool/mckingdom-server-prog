@@ -98,7 +98,7 @@ public class SnowWorld implements Listener {
                 if (world.getEntities() == Arrow){
                     Arrow a = (Arrow) world.getEntities();
                     player.sendMessage("test4");
-                    a.remove();
+                    entity.remove();
                 }
 
 
