@@ -66,45 +66,42 @@ public class AnvilWorld implements Listener {
     }
 
 
-            @EventHandler
-                public void interactBlock(PlayerInteractEvent e) {
-         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-             Player player = e.getPlayer();
-             ItemStack item = e.getItem();
-             if (item.getType() == Material.ANVIL) {
-                 int NowPlayerCount = player.getWorld().getPlayers().size();
-                 if (isPlaying == true) {
-                     player.sendMessage("ゲームがおわるまでまってね");
-                 } else {
-                     if (NowPlayerCount >= 1) {
-                         isPlaying = true;
-                         this.startGame();
-                         player.sendTitle("Gamestart", "ゲームスタート",20,20,20);
-                         player.sendMessage("移動するよ");
-                     } else {
-                         isPlaying = false;
-                         player.sendMessage("2人まで待ってね");
-                     }
-                 }
-             }
-
-         }
+    @EventHandler
+    public void interactBlock(PlayerInteractEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            Player player = e.getPlayer();
+            ItemStack item = e.getItem();
+            if (item.getType() == Material.ANVIL) {
+                int NowPlayerCount = player.getWorld().getPlayers().size();
+                if (isPlaying == true) {
+                    player.sendMessage("ゲームがおわるまでまってね");
+                } else {
+                    if (NowPlayerCount >= 1) {
+                        isPlaying = true;
+                        this.startGame();
+                        player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
+                        player.sendMessage("移動するよ");
+                    } else {
+                        isPlaying = false;
+                        player.sendMessage("2人まで待ってね");
+                    }
                 }
-          public void startGame() {
-              World world = Bukkit.getWorld("Anvil");
-              List<Player> players = world.getPlayers();
-              for (Player player : players) {
-                  player.teleport(new Location(Bukkit.getWorld("Anvil"),-520,5,-1292));
-
-
-
-
-
-
             }
-
 
         }
     }
+
+    public void startGame() {
+        World world = Bukkit.getWorld("Anvil");
+        List<Player> players = world.getPlayers();
+        for (Player player : players) {
+            player.teleport(new Location(Bukkit.getWorld("Anvil"), -520, 5, -1292));
+
+
+        }
+
+
+    }
+}
 
 
