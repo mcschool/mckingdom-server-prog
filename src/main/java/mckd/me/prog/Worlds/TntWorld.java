@@ -36,7 +36,7 @@ public class TntWorld implements Listener {
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -261, 52, 1088);
+        this.startPlace = new Location(Bukkit.getWorld(this.worldName), -264, 52, 1087);
     }
 
     //ダメージ受けない
