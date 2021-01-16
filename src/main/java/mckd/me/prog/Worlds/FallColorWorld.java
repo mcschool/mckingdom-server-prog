@@ -43,6 +43,7 @@ public class FallColorWorld implements Listener {
             Player player = e.getPlayer();
             Random rand = new Random();
             int colors = rand.nextInt(5) + 1;
+            this.removeWool(player);
             player.sendTitle("FallColor", "", 20, 20, 20);
             player.sendMessage("ここから落ちたら地面に色がつくよ！");
             player.sendMessage("次落ちるときは色が付いたところに着地しないでね！");
@@ -59,8 +60,6 @@ public class FallColorWorld implements Listener {
             player.setPlayerWeather(WeatherType.CLEAR);
             FileConfiguration config = this.plugin.getConfig();
             player.sendMessage(player.getUniqueId().toString());
-            this.woolCount();
-            this.playerCheck();
             if (colors == 1) {
                 colorName = "red";
                 player.sendMessage("赤チーム");
@@ -198,6 +197,7 @@ public class FallColorWorld implements Listener {
     public void removeWool(Player player){
         World world = Bukkit.getWorld("fallColor");
         for (Entity entity : world.getEntities()){
+            player.sendMessage(entity.toString());
             if (entity instanceof Wool){
                 entity.remove();
             }
@@ -213,6 +213,8 @@ public class FallColorWorld implements Listener {
             Block block = location.getBlock();
             if (block.getType() == Material.STONE) {
                 this.woolCount();
+                this.removeWool(player);
+
                 if (world.getEntities() == Arrow){
                     
                 }
