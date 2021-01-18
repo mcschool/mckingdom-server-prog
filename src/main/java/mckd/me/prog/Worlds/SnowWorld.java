@@ -83,6 +83,7 @@ public class SnowWorld implements Listener {
     @EventHandler
     public void signClick(PlayerInteractEvent e) {
         Player player = e.getPlayer();
+        World world = player.getWorld();
         if (!player.getWorld().getName().equals("snow")) {
             return;
         }
@@ -99,7 +100,11 @@ public class SnowWorld implements Listener {
                     if (NowPlayerCount >= 2) {
                         isPlaying = true;
                         Location location = new Location(player.getWorld(), 528, 5, 622);
-                        player.teleport(location);
+                        for (Entity entity2 : world.getEntities()) {
+                            if (entity2 instanceof Player) {
+                                player.teleport(location);
+                            }
+                        }
                         this.random(player);
                         new BukkitRunnable() {
                             @Override
@@ -162,7 +167,7 @@ public class SnowWorld implements Listener {
 
     public void random(Player player) {
         World world = Bukkit.getWorld("snow");
-        Location location = new Location(Bukkit.getWorld(this.worldName), 521, 6, 615);
+        Location location = new Location(Bukkit.getWorld(this.worldName), 521, 5, 615);
         Random r = new Random();
         int n = r.nextInt(15);
         int m = r.nextInt(15);
