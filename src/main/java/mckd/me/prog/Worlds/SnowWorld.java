@@ -83,7 +83,7 @@ public class SnowWorld implements Listener {
     @EventHandler
     public void signClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if (!p.getWorld().getName().equals("pve")) {
+        if (!p.getWorld().getName().equals("snow")) {
             return;
         }
         Block b = e.getClickedBlock();
