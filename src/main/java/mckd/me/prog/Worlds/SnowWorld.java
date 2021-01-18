@@ -3,14 +3,17 @@ package mckd.me.prog.Worlds;
 import mckd.me.prog.Prog;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -71,9 +74,26 @@ public class SnowWorld implements Listener {
     public void removeArrow(Player player){
         World world = Bukkit.getWorld("snow");
         for (Entity entity1 : world.getEntities()) {
-            player.sendMessage(entity1.toString());
             if (entity1 instanceof Arrow) {
                 entity1.remove();
+            }
+        }
+    }
+
+    @EventHandler
+    public void signClick(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+        if (!p.getWorld().getName().equals("pve")) {
+            return;
+        }
+        Block b = e.getClickedBlock();
+        Sign sign;
+        sign = (Sign) b.getState();
+        String line = sign.getLine(1);
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
+            if (line.equals("GameStart")) {
+                Location location = new Location(p.getWorld(), 528, 5, 622);
+                p.teleport(location);
             }
         }
     }
@@ -96,7 +116,7 @@ public class SnowWorld implements Listener {
 
     //矢を降らす
     public static void hitPlayer(Player player) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 500; i++) {
             Random r = new Random();
             int x = r.nextInt(15);
             int z = r.nextInt(15);
