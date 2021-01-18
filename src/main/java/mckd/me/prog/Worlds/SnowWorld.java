@@ -64,6 +64,7 @@ public class SnowWorld implements Listener {
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
                 player.setGameMode(GameMode.SPECTATOR);
+                isPlaying = false;
                 int count = 0;
                 for (Player player1 : players) {
                     if (player1.getGameMode() == GameMode.SURVIVAL) {
