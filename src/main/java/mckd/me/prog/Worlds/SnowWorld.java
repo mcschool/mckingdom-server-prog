@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.List;
 import java.util.Random;
 
 
@@ -52,20 +53,40 @@ public class SnowWorld implements Listener {
     }*/
 
 
-
     @EventHandler
     public void EntityDameger(EntityDamageEvent e) {
         if (e.getEntity().getWorld().getName().equals(this.worldName)) {
             Player player = (Player) e.getEntity();
+            World world = player.getWorld();
+            List<Player> players = player.getWorld().getPlayers();
             if (!(e.getEntity() instanceof Player)) {
                 return;
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
                 player.setGameMode(GameMode.SPECTATOR);
+                int count = 0;
+                for (Player player1 : players) {
+                    if (player1.getGameMode() == GameMode.SURVIVAL) {
+                        count++;
+                    }
+                }
+                if (count == 1) {
+                    for (Player player1 : players) {
+                        if (player1.getGameMode() == GameMode.SURVIVAL) {
+                            player1.sendMessage("You Win !!");
+                            isPlaying = false;
+                        }
+                    }
+                }
             }
-        }
 
+
+
+
+        }
     }
+
+
 
 
 
