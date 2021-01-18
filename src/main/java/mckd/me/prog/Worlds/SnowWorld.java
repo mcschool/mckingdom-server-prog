@@ -162,7 +162,7 @@ public class SnowWorld implements Listener {
 
     public void random(Player player) {
         World world = Bukkit.getWorld("snow");
-        Location location = new Location(Bukkit.getWorld(this.worldName), 521, 5, 615);
+        Location location = new Location(Bukkit.getWorld(this.worldName), 521, 6, 615);
         Random r = new Random();
         int n = r.nextInt(15);
         int m = r.nextInt(15);
