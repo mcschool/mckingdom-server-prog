@@ -24,6 +24,7 @@ public class SnowWorld implements Listener {
     public String worldName = "snow";
     public Location StartPlace;
     public Location centerPlace;
+    public boolean isPlaying = false;
     private Object Arrow;
 
 
@@ -91,23 +92,36 @@ public class SnowWorld implements Listener {
         String line = sign.getLine(1);
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("GameStart")) {
-                Location location = new Location(player.getWorld(), 528, 5, 622);
-                player.teleport(location);
-                this.random(player);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.sendMessage("start");
-                        hitPlayer(player);
+                int NowPlayerCount = player.getWorld().getPlayers().size();
+                if (isPlaying == true) {
+                    player.sendMessage("ゲーム終わるまで待ってね！");
+                } else {
+                    if (NowPlayerCount >= 2) {
+                        isPlaying = true;
+                        Location location = new Location(player.getWorld(), 528, 5, 622);
+                        player.teleport(location);
+                        this.random(player);
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                player.sendMessage("start");
+                                hitPlayer(player);
+                            }
+
+                        }.runTaskLater(this.plugin, 40);
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                removeArrow(player);
+                            }
+                        }.runTaskLater(this.plugin, 100);
+                    } else {
+                        isPlaying = false;
+                        player.sendMessage("2人まで待ってね！");
                     }
 
-                }.runTaskLater(this.plugin, 40);
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        removeArrow(player);
-                    }
-                }.runTaskLater(this.plugin, 100);
+
+                }
             }
         }
     }
