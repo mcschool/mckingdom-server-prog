@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -82,8 +81,8 @@ public class SnowWorld implements Listener {
 
     @EventHandler
     public void signClick(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-        if (!p.getWorld().getName().equals("snow")) {
+        Player player = e.getPlayer();
+        if (!player.getWorld().getName().equals("snow")) {
             return;
         }
         Block b = e.getClickedBlock();
@@ -92,8 +91,23 @@ public class SnowWorld implements Listener {
         String line = sign.getLine(1);
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("GameStart")) {
-                Location location = new Location(p.getWorld(), 528, 5, 622);
-                p.teleport(location);
+                Location location = new Location(player.getWorld(), 528, 5, 622);
+                player.teleport(location);
+                this.random(player);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        player.sendMessage("start");
+                        hitPlayer(player);
+                    }
+
+                }.runTaskLater(this.plugin, 40);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        removeArrow(player);
+                    }
+                }.runTaskLater(this.plugin, 100);
             }
         }
     }
@@ -154,7 +168,7 @@ public class SnowWorld implements Listener {
     }
 
 
-    @EventHandler
+    /*@EventHandler
     public void breakBlock(BlockBreakEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
@@ -177,6 +191,6 @@ public class SnowWorld implements Listener {
                 }.runTaskLater(this.plugin, 100);
             }
         }
-    }
+    }*/
 }
 
