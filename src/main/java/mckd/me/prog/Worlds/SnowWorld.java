@@ -124,6 +124,7 @@ public class SnowWorld implements Listener {
         Sign sign;
         sign = (Sign) b.getState();
         String line = sign.getLine(1);
+        List<Player> players = player.getWorld().getPlayers();
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("GameStart")) {
                 int NowPlayerCount = player.getWorld().getPlayers().size();
@@ -135,7 +136,9 @@ public class SnowWorld implements Listener {
                         Location location = new Location(player.getWorld(), 528, 5, 622);
                         for (Entity entity2 : world.getEntities()) {
                             if (entity2 instanceof Player) {
-                                player.teleport(location);
+                                for (Player player1 : players) {
+                                    player1.teleport(location);
+                                }
                             }
                         }
                         this.random(player);
