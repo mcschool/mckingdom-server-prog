@@ -95,9 +95,22 @@ public class AnvilWorld implements Listener {
 
 
         }
+    }
+
+    @EventHandler
+    public void fallAnvil(BlockBreakEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            Player player = e.getPlayer();
+            Block block = e.getBlock();
+            Location location = new Location(Bukkit.getWorld(this.worldName), -520, 55, -1292);
+            World world = Bukkit.getWorld("anvil");
+            if (block.getType() == Material.SANDSTONE) {
+                world.getBlockAt(location).setType(Material.ANVIL);
 
 
+            }
+
+
+        }
     }
 }
-
-
