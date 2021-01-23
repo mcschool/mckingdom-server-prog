@@ -109,6 +109,7 @@ public class AnvilWorld implements Listener {
             int x = R.nextInt(7);
             int z = R.nextInt(7);
             location.add(x,0,z) ;
+            location.add(-x,0,-z);
             if (block.getType() == Material.SANDSTONE) {
                 world.getBlockAt(location).setType(Material.ANVIL);
 
