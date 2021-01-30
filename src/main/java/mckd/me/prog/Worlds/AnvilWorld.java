@@ -103,13 +103,13 @@ public class AnvilWorld implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             Block block = e.getBlock();
-            Location location = new Location(Bukkit.getWorld(this.worldName), -521, 55, -1293);
             World world = Bukkit.getWorld("anvil");
             if (block.getType() == Material.SANDSTONE) {
                 for (int i = 0; i < 100; i++) {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
+                            Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
                             Random R = new Random();
                             int x = R.nextInt(14);
                             int z = R.nextInt(14);
