@@ -75,8 +75,27 @@ public class SnowWorld implements Listener {
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
                 player.setGameMode(GameMode.SPECTATOR);
+                this.checkGamemode();
             }
 
+
+        }
+    }
+
+    public void checkGamemode(){
+        World world = Bukkit.getWorld("snow");
+        int SurviralCount = 0;
+        for (Player p : world.getPlayers()){
+            if(p.getGameMode() == GameMode.SURVIVAL){
+                SurviralCount ++;
+            }
+        }
+        if (SurviralCount == 1){
+            isPlaying = false;
+            for (Player p: world.getPlayers()) {
+                p.setGameMode(GameMode.ADVENTURE);
+                p.teleport(StartPlace);
+            }
         }
     }
 
@@ -159,6 +178,7 @@ public class SnowWorld implements Listener {
             player.getInventory().clear();
             player.setFoodLevel(20);
             player.setHealth(20.0);
+            player.setGameMode(GameMode.ADVENTURE);
 
 
         }
