@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Random;
 
 public class AnvilWorld implements Listener {
     private Prog plugin;
@@ -95,9 +96,26 @@ public class AnvilWorld implements Listener {
 
 
         }
+    }
+
+    @EventHandler
+    public void fallAnvil(BlockBreakEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            Player player = e.getPlayer();
+            Block block = e.getBlock();
+            Location location = new Location(Bukkit.getWorld(this.worldName), -520, 55, -1292);
+            World world = Bukkit.getWorld("anvil");
+            Random R = new Random();
+            int x = R.nextInt(14);
+            int z = R.nextInt(14);
+            location.add(x,0,z) ;
+            if (block.getType() == Material.SANDSTONE) {
+                world.getBlockAt(location).setType(Material.ANVIL);
 
 
+            }
+
+
+        }
     }
 }
-
-
