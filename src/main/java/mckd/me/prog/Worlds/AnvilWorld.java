@@ -57,15 +57,14 @@ public class AnvilWorld implements Listener {
             Player player = e.getPlayer();
             Block block = e.getBlock();
             if (block.getType() == Material.SANDSTONE) {
-                player.sendMessage("anvil1");
-                if (block.getType() == Material.STONE) {
+                if (block.getType() == Material.SANDSTONE) {
                     player.setGameMode(GameMode.CREATIVE);
                 }
             }
         }
     }
 
-
+        @EventHandler
         public void interactBlock (PlayerInteractEvent e){
             if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
                 Player player = e.getPlayer();
