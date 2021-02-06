@@ -79,6 +79,12 @@ public class AnvilWorld implements Listener {
                             this.startGame();
                             player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                             player.sendMessage("移動するよ");
+                            for(int i = 0; i < 4; i++) {
+
+
+
+                            }
+
                         } else {
                             isPlaying = false;
                             player.sendMessage("2人まで待ってね");
@@ -95,15 +101,9 @@ public class AnvilWorld implements Listener {
                 player.teleport(new Location(Bukkit.getWorld("Anvil"), -512, 5, -1284));
             }
         }
-
-        @EventHandler
-        public void fallAnvil (BlockBreakEvent e){
-            if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-                Player player = e.getPlayer();
-                Block block = e.getBlock();
+        public void fallAnvil (Player player) {
                 World world = Bukkit.getWorld("anvil");
                 Location location = new Location(Bukkit.getWorld(worldName),-521,55,-1293);
-                if (block.getType() == Material.SANDSTONE) {
                     world.getBlockAt(location).setType(Material.ANVIL);
                      for(int i = 0; i < 100; i++) {
                         new BukkitRunnable() {
@@ -119,7 +119,5 @@ public class AnvilWorld implements Listener {
                         }.runTaskLater(this.plugin, 20 * i);
                     }
                 }
-            }
-        }
-    }
+
 
