@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 import java.util.Random;
@@ -57,71 +58,69 @@ public class AnvilWorld implements Listener {
             Block block = e.getBlock();
             if (block.getType() == Material.SANDSTONE) {
                 player.sendMessage("anvil1");
-                player.setGameMode(GameMode.CREATIVE);
+                if (block.getType() == Material.STONE) {
+                    player.setGameMode(GameMode.CREATIVE);
+                }
             }
         }
     }
 
 
-    @EventHandler
-    public void interactBlock(PlayerInteractEvent e) {
-        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-            Player player = e.getPlayer();
-            ItemStack item = e.getItem();
-            if (item.getType() == Material.ANVIL) {
-                int NowPlayerCount = player.getWorld().getPlayers().size();
-                if (isPlaying == true) {
-                    player.sendMessage("ゲームがおわるまでまってね");
-                } else {
-                    if (NowPlayerCount >= 1) {
-                        isPlaying = true;
-                        this.startGame();
-                        player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
-                        player.sendMessage("移動するよ");
+        public void interactBlock (PlayerInteractEvent e){
+            if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+                Player player = e.getPlayer();
+                ItemStack item = e.getItem();
+                if (item.getType() == Material.ANVIL) {
+                    int NowPlayerCount = player.getWorld().getPlayers().size();
+                    if (isPlaying == true) {
+                        player.sendMessage("ゲームがおわるまでまってね");
                     } else {
-                        isPlaying = false;
-                        player.sendMessage("2人まで待ってね");
+                        if (NowPlayerCount >= 1) {
+                            isPlaying = true;
+                            this.startGame();
+                            player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
+                            player.sendMessage("移動するよ");
+                        } else {
+                            isPlaying = false;
+                            player.sendMessage("2人まで待ってね");
+                        }
+                    }
+                }
+
+            }
+        }
+        public void startGame() {
+            World world = Bukkit.getWorld("Anvil");
+            List<Player> players = world.getPlayers();
+            for (Player player : players) {
+                player.teleport(new Location(Bukkit.getWorld("Anvil"), -512, 5, -1284));
+            }
+        }
+
+        @EventHandler
+        public void fallAnvil (BlockBreakEvent e){
+            if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+                Player player = e.getPlayer();
+                Block block = e.getBlock();
+                World world = Bukkit.getWorld("anvil");
+                Location location = new Location(Bukkit.getWorld(worldName),-521,55,-1293);
+                if (block.getType() == Material.SANDSTONE) {
+                    world.getBlockAt(location).setType(Material.ANVIL);
+                     for(int i = 0; i < 100; i++) {
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+                                Random R = new Random();
+                                int x = R.nextInt(14);
+                                int z = R.nextInt(14);
+                                location.add(x, 0, z);
+                                world.getBlockAt(location).setType(Material.ANVIL);
+                            }
+                        }.runTaskLater(this.plugin, 20 * i);
                     }
                 }
             }
-
         }
     }
 
-    public void startGame() {
-        World world = Bukkit.getWorld("Anvil");
-        List<Player> players = world.getPlayers();
-        for (Player player : players) {
-            player.teleport(new Location(Bukkit.getWorld("Anvil"), -520, 5, -1292));
-
-
-        }
-    }
-
-    @EventHandler
-    public void fallAnvil(BlockBreakEvent e) {
-        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-            Player player = e.getPlayer();
-            Block block = e.getBlock();
-            Location location = new Location(Bukkit.getWorld(this.worldName), -520, 55, -1292);
-            World world = Bukkit.getWorld("anvil");
-            Random R = new Random();
-            int x = R.nextInt(14);
-            int z = R.nextInt(14);
-            location.add(x,0,z) ;
-            if (block.getType() == Material.SANDSTONE) {
-                world.getBlockAt(location).setType(Material.ANVIL);
-
-    @EventHandler
-    public void
-
-
-
-
-
-            }
-
-
-        }
-    }
-}

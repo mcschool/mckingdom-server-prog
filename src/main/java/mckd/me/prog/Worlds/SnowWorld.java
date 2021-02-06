@@ -33,7 +33,7 @@ public class SnowWorld implements Listener {
     public SnowWorld(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.centerPlace = new Location(Bukkit.getWorld(this.worldName), 507, 6, 630);
+        this.centerPlace = new Location(Bukkit.getWorld(this.worldName), 528, 6, 622);
         this.StartPlace = new Location(Bukkit.getWorld(this.worldName), 482, 7, 653);
     }
 
@@ -75,26 +75,27 @@ public class SnowWorld implements Listener {
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
                 player.setGameMode(GameMode.SPECTATOR);
-                isPlaying = false;
-                int count = 0;
-                for (Player player1 : players) {
-                    if (player1.getGameMode() == GameMode.SURVIVAL) {
-                        count++;
-                    }
-                }
-                if (count == 1) {
-                    for (Player player1 : players) {
-                        if (player1.getGameMode() == GameMode.SURVIVAL) {
-                            player1.sendMessage("You Win !!");
-                            isPlaying = false;
-                        }
-                    }
-                }
+                this.checkGamemode();
             }
 
 
+        }
+    }
 
-
+    public void checkGamemode(){
+        World world = Bukkit.getWorld("snow");
+        int SurviralCount = 0;
+        for (Player p : world.getPlayers()){
+            if(p.getGameMode() == GameMode.SURVIVAL){
+                SurviralCount ++;
+            }
+        }
+        if (SurviralCount == 1){
+            isPlaying = false;
+            for (Player p: world.getPlayers()) {
+                p.setGameMode(GameMode.ADVENTURE);
+                p.teleport(StartPlace);
+            }
         }
     }
 
@@ -124,7 +125,6 @@ public class SnowWorld implements Listener {
         Sign sign;
         sign = (Sign) b.getState();
         String line = sign.getLine(1);
-        List<Player> players = player.getWorld().getPlayers();
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("GameStart")) {
                 int NowPlayerCount = player.getWorld().getPlayers().size();
@@ -133,11 +133,10 @@ public class SnowWorld implements Listener {
                 } else {
                     if (NowPlayerCount >= 2) {
                         isPlaying = true;
-                        Location location = new Location(player.getWorld(), 528, 5, 622);
                         for (Entity entity2 : world.getEntities()) {
                             if (entity2 instanceof Player) {
-                                for (Player player1 : players) {
-                                    player1.teleport(location);
+                                for (Player p: world.getPlayers()) {
+                                    p.teleport(centerPlace);
                                 }
                             }
                         }
@@ -179,6 +178,8 @@ public class SnowWorld implements Listener {
             player.getInventory().clear();
             player.setFoodLevel(20);
             player.setHealth(20.0);
+            player.setGameMode(GameMode.ADVENTURE);
+
 
         }
     }
