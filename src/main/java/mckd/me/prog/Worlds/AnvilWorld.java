@@ -79,6 +79,14 @@ public class AnvilWorld implements Listener {
                             this.startGame();
                             player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                             player.sendMessage("移動するよ");
+<<<<<<< HEAD
+=======
+                            for(int i = 0; i < 4; i++) {
+
+
+
+                            }
+>>>>>>> 5f77563db8db2479bd5c59e18b76847de43a952a
 
                         } else {
                             isPlaying = false;
@@ -96,12 +104,19 @@ public class AnvilWorld implements Listener {
                 player.teleport(new Location(Bukkit.getWorld("Anvil"), -512, 5, -1284));
             }
         }
+<<<<<<< HEAD
 
 
         public void fallAnvil (Player player){
                 World world = Bukkit.getWorld("anvil");
                 Location location = new Location(Bukkit.getWorld(worldName),-521,55,-1293);
                 world.getBlockAt(location).setType(Material.ANVIL);
+=======
+        public void fallAnvil (Player player) {
+                World world = Bukkit.getWorld("anvil");
+                Location location = new Location(Bukkit.getWorld(worldName),-521,55,-1293);
+                    world.getBlockAt(location).setType(Material.ANVIL);
+>>>>>>> 5f77563db8db2479bd5c59e18b76847de43a952a
                      for(int i = 0; i < 100; i++) {
                         new BukkitRunnable() {
                             @Override
@@ -116,6 +131,9 @@ public class AnvilWorld implements Listener {
                         }.runTaskLater(this.plugin, 20 * i);
                     }
                 }
+<<<<<<< HEAD
             }
+=======
+>>>>>>> 5f77563db8db2479bd5c59e18b76847de43a952a
 
 
