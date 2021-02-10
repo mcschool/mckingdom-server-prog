@@ -1,37 +1,31 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
-import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.Button;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 public class TntWorld implements Listener {
     private Prog plugin;
     public String worldName = "tnt";
     public Location startPlace;
     public Player winner;
     public boolean isPlaying = false;
+    public ArrayList<Player> PlayerList = new ArrayList<>();
 
     public TntWorld(Prog plugin) {
         this.plugin = plugin;
@@ -93,6 +87,15 @@ public class TntWorld implements Listener {
             itemMeta.setDisplayName("ゲームスタート");
             itemStack.setItemMeta(itemMeta);
             player.getInventory().addItem(itemStack);
+            PlayerList.add(e.getPlayer());
+            for (int i = 0; i<PlayerList.size(); i++ ){
+                Player p = PlayerList.get(i);
+                if (p.getUniqueId() == player.getUniqueId()){
+                    PlayerList.remove(i);
+                    player.setGameMode(GameMode.SPECTATOR);
+                    break;
+                }
+            }
         }
     }
 
@@ -111,6 +114,7 @@ public class TntWorld implements Listener {
                     if (NowPlayerCount >= 1) {
                         isPlaying = true;
                         this.startGame();
+                        this.countdown();
                         player.sendTitle("GameStart", "ゲームスタート", 20, 20, 20);
                         player.sendMessage("移動するよ");
                     } else {
@@ -226,6 +230,7 @@ public class TntWorld implements Listener {
     public void allFloors(int y) {
         World world = Bukkit.getWorld("tnt");
         Location location = new Location(Bukkit.getWorld(this.worldName), -258, y, 1057);
+
         for (int i = 0; i < 5; i++) {
             location.add(0, 0, 1);
             for (int j = 0; j < 5; j++) {
@@ -285,6 +290,45 @@ public class TntWorld implements Listener {
         return safePlayerCount;
     }
 
+   public void countdown(){
+        World world = Bukkit.getWorld("tnt");
+        List<Player> players = world.getPlayers();
+        for (Player player : players) {
+            player.sendTitle("3", " ", 20, 20, 20);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle("2", " ", 20, 20, 20);
+                }
+            }.runTaskLater(this.plugin,20);
+            new BukkitRunnable(){
+                @Override
+                public void run(){
+                    player.sendTitle("1", " ",20,20,20);
+                }
+            }.runTaskLater(this.plugin,20);
+        }
+   }
+@EventHandler
+    public void breakBlock(BlockBreakEvent e){
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+            Block block =e.getBlock();
+            if (block.getType()== Material.STONE){
+                this.countdown();
+            }
+        }
+}
+@EventHandler
+    public void breakBlock2(BlockBreakEvent e){
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)){
+            Block block = e.getBlock();
+            Player player = e.getPlayer();
+            if (block.getType() == Material.SAND){
+                ArrayList<Player> list = new ArrayList<Player>(Arrays.asList(e.getPlayer()));
+                player.sendMessage(String.valueOf(list));
+            }
+        }
+    }
 } // end
 
 

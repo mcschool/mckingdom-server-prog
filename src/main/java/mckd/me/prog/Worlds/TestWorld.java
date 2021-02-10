@@ -1,19 +1,19 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Arrow;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockCanBuildEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class TestWorld implements Listener {
+    private Prog plugin;
+    public String worldName = "Test";
+
     public TestWorld(Prog plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -21,8 +21,11 @@ public class TestWorld implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         if (e.getPlayer().getWorld().getName().equals("test")) {
             Player player = e.getPlayer();
-            int count = this.getPlayer(player);
-            player.sendMessage("Hello" + String.valueOf(count));
+            Block block = e.getBlock();
+            if (block.getType() == Material.SAND) {
+                int count = this.getPlayer(player);
+                player.sendMessage("Hello" + String.valueOf(count));
+            }
         }
     }
 
