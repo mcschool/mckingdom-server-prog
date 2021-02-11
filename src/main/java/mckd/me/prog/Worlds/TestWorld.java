@@ -23,14 +23,8 @@ public class TestWorld implements Listener {
             Player player = e.getPlayer();
             Block block = e.getBlock();
             if (block.getType() == Material.SAND) {
-                int count = this.getPlayer(player);
-                player.sendMessage("Hello" + String.valueOf(count));
+                player.sendMessage("Hello World!");
             }
         }
     }
-
-        private int getPlayer (Player player){
-            int playerCount = player.getWorld().getPlayers().size();
-            return playerCount;
-        }
-    }
+}

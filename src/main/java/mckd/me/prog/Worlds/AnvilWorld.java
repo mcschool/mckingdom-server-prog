@@ -64,76 +64,66 @@ public class AnvilWorld implements Listener {
         }
     }
 
-        @EventHandler
-        public void interactBlock (PlayerInteractEvent e){
-            if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
-                Player player = e.getPlayer();
-                ItemStack item = e.getItem();
-                if (item.getType() == Material.ANVIL) {
-                    int NowPlayerCount = player.getWorld().getPlayers().size();
-                    if (isPlaying == true) {
-                        player.sendMessage("ゲームがおわるまでまってね");
-                    } else {
-                        if (NowPlayerCount >= 1) {
-                            isPlaying = true;
-                            this.startGame();
-                            player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
-                            player.sendMessage("移動するよ");
-<<<<<<< HEAD
-=======
-                            for(int i = 0; i < 4; i++) {
+    @EventHandler
+    public void interactBlock(PlayerInteractEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            Player player = e.getPlayer();
+            ItemStack item = e.getItem();
+            if (item.getType() == Material.ANVIL) {
+                int NowPlayerCount = player.getWorld().getPlayers().size();
+                if (isPlaying == true) {
+                    player.sendMessage("ゲームがおわるまでまってね");
+                } else {
+                    if (NowPlayerCount >= 1) {
+                        isPlaying = true;
+                        this.startGame();
+                        player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
+                        player.sendMessage("移動するよ");
+                        for (int i = 0; i < 4; i++) {
 
-
-
-                            }
->>>>>>> 5f77563db8db2479bd5c59e18b76847de43a952a
-
-                        } else {
-                            isPlaying = false;
-                            player.sendMessage("2人まで待ってね");
                         }
+                    } else {
+                        isPlaying = false;
+                        player.sendMessage("2人まで待ってね");
                     }
                 }
-
             }
-        }
-        public void startGame() {
-            World world = Bukkit.getWorld("Anvil");
-            List<Player> players = world.getPlayers();
-            for (Player player : players) {
-                player.teleport(new Location(Bukkit.getWorld("Anvil"), -512, 5, -1284));
-            }
-        }
-<<<<<<< HEAD
 
+        }
+    }
 
+    public void startGame() {
+        World world = Bukkit.getWorld("Anvil");
+        List<Player> players = world.getPlayers();
+        for (Player player : players) {
+            player.teleport(new Location(Bukkit.getWorld("Anvil"), -512, 5, -1284));
+        }
+    }
+//    public void fallAnvil(Player player) {
+//        World world = Bukkit.getWorld("anvil");
+//        Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+//        world.getBlockAt(location).setType(Material.ANVIL);
+//    }
         public void fallAnvil (Player player){
-                World world = Bukkit.getWorld("anvil");
-                Location location = new Location(Bukkit.getWorld(worldName),-521,55,-1293);
-                world.getBlockAt(location).setType(Material.ANVIL);
-=======
-        public void fallAnvil (Player player) {
-                World world = Bukkit.getWorld("anvil");
-                Location location = new Location(Bukkit.getWorld(worldName),-521,55,-1293);
-                    world.getBlockAt(location).setType(Material.ANVIL);
->>>>>>> 5f77563db8db2479bd5c59e18b76847de43a952a
-                     for(int i = 0; i < 100; i++) {
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
-                                Random R = new Random();
-                                int x = R.nextInt(14);
-                                int z = R.nextInt(14);
-                                location.add(x, 0, z);
-                                world.getBlockAt(location).setType(Material.ANVIL);
-                            }
-                        }.runTaskLater(this.plugin, 20 * i);
+            World world = Bukkit.getWorld("anvil");
+            Location location= new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+            world.getBlockAt(location).setType(Material.ANVIL);
+            for (int i = 0; i < 100; i++) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+                        Random R = new Random();
+                        int x = R.nextInt(14);
+                        int z = R.nextInt(14);
+                        location.add(x, 0, z);
+                        world.getBlockAt(location).setType(Material.ANVIL);
                     }
-                }
-<<<<<<< HEAD
+                }.runTaskLater(this.plugin, 20 * i);
             }
-=======
->>>>>>> 5f77563db8db2479bd5c59e18b76847de43a952a
+        }
+    }
+
+
 
 
