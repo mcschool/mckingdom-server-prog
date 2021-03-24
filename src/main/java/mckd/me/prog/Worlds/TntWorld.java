@@ -45,7 +45,6 @@ public class TntWorld implements Listener {
             player.sendMessage(a);
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                 e.setCancelled(true);
-
             }
             if (e.getCause() != null && e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) {
                 e.setCancelled(true);
@@ -82,6 +81,7 @@ public class TntWorld implements Listener {
             player.getWorld().setPVP(false);
             player.setGameMode(GameMode.SURVIVAL);
             player.setPlayerWeather(WeatherType.CLEAR);
+            player.sendMessage("https://twitter.com/home");
             ItemStack itemStack = new ItemStack(Material.TNT);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName("ゲームスタート");
