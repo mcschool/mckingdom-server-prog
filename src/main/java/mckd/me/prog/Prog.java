@@ -15,6 +15,7 @@ public final class Prog extends JavaPlugin {
         new SnowWorld(this);
         new AnvilWorld(this);
         new FallColorWorld(this);
+        new Raid(this);
     }
 
     @Override
