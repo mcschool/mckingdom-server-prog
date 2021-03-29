@@ -17,8 +17,10 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,20 +47,14 @@ public class Raid implements Listener {
         BukkitTask task = new GameTimer(this.plugin, LimitTime).runTaskTimer(this.plugin,0,20);
     }*/
     @EventHandler
-    public void test(BlockBreakEvent e) {
-        this.Mission();
-    }
-    @EventHandler
     public void ChangeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             World world = player.getWorld();
             player.teleport(this.startPlace);
             this.SetChest(new Location(world,297,68,471),0);
-            this.Mission();
         }
     }
-
 
     public void SetChest(Location location, int type) {
         World world = Bukkit.getWorld(this.worldName);
@@ -84,6 +80,20 @@ public class Raid implements Listener {
     public void test(InventoryMoveItemEvent e) {
         Bukkit.broadcastMessage("test");
     }
+
+    @EventHandler
+    public void clickSign(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        if (e.getClickedBlock().getType() == Material.SIGN) {
+            this.Mission();
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    countDown();
+                }
+            }.runTaskLater(this.plugin,20);
+        }
+    }
     public  void Mission(){
         World world = Bukkit.getWorld("raid");
         List<Player> players = world.getPlayers();
@@ -92,10 +102,35 @@ public class Raid implements Listener {
         for (Player player : players) {
             String ms  = str[r.nextInt(str.length)];
             player.sendMessage(ms);
-            if (Arrays.asList(str).contains("ゾンビを五体討伐せよ")) {
+/*            if (Arrays.asList(str).contains("ゾンビを五体討伐せよ")) {
                 player.sendMessage("test");
                 player.teleport(this.Arena);
-            }
+            }*/
+        }
+    }
+    public void countDown() {
+        World world = Bukkit.getWorld("raid");
+        List<Player> players = world.getPlayers();
+        for (Player player : players) {
+            player.sendTitle("ミッションが始まります", "", 20, 20,20);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle("3 ", "", 20, 20, 20);
+                }
+            }.runTaskLater(this.plugin,20);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle("2", "", 20, 20, 20);
+                }
+            }.runTaskLater(this.plugin,20);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle("1", "", 20, 20, 20);
+                }
+            }.runTaskLater(this.plugin,20);
         }
     }
 }
