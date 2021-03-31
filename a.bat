@@ -1,2 +1,2 @@
-mvn install && move .\target\prog-1.0-SNAPSHOT.jar C:\マイクラserver\plugins\prog-1.0-SNAPSHOT.jar
+mvn install && copy -Y .\target\prog-1.0-SNAPSHOT.jar C:\TestServer\plugins\prog-1.0-SNAPSHOT.jar pause
 
