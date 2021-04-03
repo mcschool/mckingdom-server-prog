@@ -99,25 +99,21 @@ public class AnvilWorld implements Listener {
             player.teleport(new Location(Bukkit.getWorld("Anvil"), -512, 5, -1284));
         }
     }
-//    public void fallAnvil(Player player) {
-//        World world = Bukkit.getWorld("anvil");
-//        Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
-//        world.getBlockAt(location).setType(Material.ANVIL);
-//    }
-        public void fallAnvil (Player player){
-            World world = Bukkit.getWorld("anvil");
-            Location location= new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
-            world.getBlockAt(location).setType(Material.ANVIL);
-            for (int i = 0; i < 100; i++) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
-                        Random R = new Random();
-                        int x = R.nextInt(14);
-                        int z = R.nextInt(14);
-                        location.add(x, 0, z);
-                        world.getBlockAt(location).setType(Material.ANVIL);
+
+    public void fallAnvil (Player player){
+        World world = Bukkit.getWorld("anvil");
+        Location location= new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+        world.getBlockAt(location).setType(Material.ANVIL);
+        for (int i = 0; i < 100; i++) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+                    Random R = new Random();
+                    int x = R.nextInt(14);
+                    int z = R.nextInt(14);
+                    location.add(x, 0, z);
+                    world.getBlockAt(location).setType(Material.ANVIL);
                     }
                 }.runTaskLater(this.plugin, 20 * i);
             }
