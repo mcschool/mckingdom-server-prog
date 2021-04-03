@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -118,7 +119,22 @@ public class AnvilWorld implements Listener {
                 }.runTaskLater(this.plugin, 20 * i);
             }
         }
-    }
+        @EventHandler
+        public void PlayerDeath(PlayerDeathEvent e) {
+            if (e.getEntity().getWorld().getName().equals(this.worldName)) {
+                Player player = e.getEntity();
+                if (e.getEntity() instanceof Player) {
+                    player.sendMessage("金床の下敷きになった！");
+                    player.setHealth(20.0);
+                    player.setFoodLevel(10);
+                    player.setGameMode(GameMode.SPECTATOR);
+                }
+            }
+        }
+
+
+
+}
 
 
 
