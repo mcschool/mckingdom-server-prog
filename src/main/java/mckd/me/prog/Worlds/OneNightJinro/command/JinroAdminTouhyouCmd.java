@@ -1,6 +1,5 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
-import javafx.print.Collation;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
