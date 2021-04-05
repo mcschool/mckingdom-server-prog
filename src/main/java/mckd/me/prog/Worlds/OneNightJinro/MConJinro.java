@@ -6,6 +6,9 @@ import mckd.me.prog.Worlds.OneNightJinro.command.JinroToJobALLChatCommand;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.scoreboard.JinroScoreboard;
 import mckd.me.prog.Worlds.OneNightJinro.task.BaseTask;
+import mckd.me.prog.Worlds.OneNightJinro.event.Event;
+import  mckd.me.prog.Worlds.OneNightJinro.event.GuiEvent;
+
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

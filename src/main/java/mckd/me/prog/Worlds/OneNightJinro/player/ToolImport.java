@@ -5,6 +5,9 @@ import mckd.me.prog.Worlds.OneNightJinro.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 
 import java.util.UUID;
 import java.util.logging.Logger;
