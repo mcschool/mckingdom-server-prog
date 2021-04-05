@@ -27,6 +27,9 @@ public class Event implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onChat(AsyncPlayerChatEvent e){
+        if (!e.getPlayer().getWorld().getName().equals("OneNightJinro")){
+            return;
+        }
         String str = e.getMessage();
         // マイクラ上で表示がおかしいスペースを半角スペースに変更
         str = Utility.myReplaceAll("ㅤ", " ", str);
@@ -75,6 +78,9 @@ public class Event implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(PlayerDeathEvent e){
+        if (!e.getEntity().getWorld().getName().equals("OneNightJinro")){
+            return;
+        }
         if( JinroPlayers.getExecutionPlayers().contains(e.getEntity().getUniqueId()) && GameStatus.getStatus().equals(GameStatus.Playing) ){
             e.setDeathMessage(ChatColor.RED + e.getEntity().getName() + "は処刑されました。");
             e.getEntity().getPlayer().setGlowing(false);
@@ -92,6 +98,9 @@ public class Event implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent e) {
+        if (!e.getPlayer().getWorld().getName().equals("OneNightJinro")){
+            return;
+        }
         if (JinroPlayers.getExecutionPlayers().contains(e.getPlayer().getUniqueId()) && GameStatus.getStatus().equals(GameStatus.Playing)) {
             e.setRespawnLocation(MConJinro.getReikaiLoc());
             return;
@@ -101,6 +110,9 @@ public class Event implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDamageByEntity(EntityDamageByEntityEvent e) {
+        if (!e.getEntity().getWorld().getName().equals("OneNightJinro")){
+            return;
+        }
         if( e.getDamager() instanceof Player ){
             if( JinroPlayers.isGameMaster( (Player)e.getDamager() ) ) {
                 return;
