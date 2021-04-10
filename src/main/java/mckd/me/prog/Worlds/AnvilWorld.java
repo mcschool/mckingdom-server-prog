@@ -148,6 +148,7 @@ public class AnvilWorld implements Listener {
             for (Player p: world.getPlayers()) {
                 p.setGameMode(GameMode.ADVENTURE);
                 p.teleport(StartPlace);
+                p.sendTitle("Gameset!","ゲームが終了しました",0,40 ,0);
             }
         }
     }
