@@ -3,7 +3,6 @@ package mckd.me.prog.Worlds.OneNightJinro.command;
 import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import mckd.me.prog.Worlds.OneNightJinro.JinroConfig;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.PlayerData;
@@ -51,18 +50,18 @@ public class JinroAdminCommand implements TabExecutor {
             return true;
         }
         if( args[0].equalsIgnoreCase("init") ){
-            MConJinro.init();
-            Bukkit.broadcastMessage(MConJinro.getPrefix() + "初期化しました。");
+            Prog.init();
+            Bukkit.broadcastMessage(Prog.getPrefix() + "初期化しました。");
         }
         if( args[0].equalsIgnoreCase("reload") ){
-            MConJinro.getMain().reloadConfig();
-            sender.sendMessage(MConJinro.getPrefix() + "Configの再読込を行いました。");
+            Prog.getMain().reloadConfig();
+            sender.sendMessage(Prog.getPrefix() + "Configの再読込を行いました。");
         }
         if( args[0].equalsIgnoreCase("start") ){
             if( GameStatus.getStatus().equals(GameStatus.Ready) ){
 
                 if( JinroPlayers.getPlayersFromPlayingType(PlayerData.PlayingType.Player).size() == 0 ){
-                    sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "やる人誰も居ないですよ...?");
+                    sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "やる人誰も居ないですよ...?");
                     return true;
                 }
 
@@ -83,38 +82,38 @@ public class JinroAdminCommand implements TabExecutor {
                         JinroPlayers.setData(p , pd);
                     }
                 }
-                MConJinro.setTask(task);
+                Prog.setTask(task);
                 GameStatus.setStatus(GameStatus.Playing);
                 task.start();
             } else {
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "ゲームは既に開始されています。");
+                sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "ゲームは既に開始されています。");
             }
             return true;
         } else if( args[0].equalsIgnoreCase("stop") ){
-            if( MConJinro.getTask() != null ){
-                MConJinro.getTask().stop();
-                Bukkit.broadcastMessage(MConJinro.getPrefix() + ChatColor.YELLOW + "ゲームを強制終了しました。");
+            if( Prog.getTask() != null ){
+                Prog.getTask().stop();
+                Bukkit.broadcastMessage(Prog.getPrefix() + ChatColor.YELLOW + "ゲームを強制終了しました。");
             } else {
-                Bukkit.broadcastMessage(MConJinro.getPrefix() + ChatColor.RED + "ゲームが実行中ではありません。");
+                Bukkit.broadcastMessage(Prog.getPrefix() + ChatColor.RED + "ゲームが実行中ではありません。");
             }
         } else if( args[0].equalsIgnoreCase("next") ){
             if( args.length >= 2){
                 if( args[1].equalsIgnoreCase("force") ){
-                    if( MConJinro.getTask() != null ){
-                        MConJinro.getTask().end();
+                    if( Prog.getTask() != null ){
+                        Prog.getTask().end();
                     } else {
-                        sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "タスクが存在しません。");
+                        sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "タスクが存在しません。");
                     }
                 }
             }
             if( GameStatus.Cycle.getCycle().equals(GameStatus.Cycle.Vote) ){
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.YELLOW + "投票時間です。強制的に次に移行する場合は、");
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.AQUA + "/jinro_ad next force"+ ChatColor.YELLOW +" を実行してください。");
+                sender.sendMessage(Prog.getPrefix() + ChatColor.YELLOW + "投票時間です。強制的に次に移行する場合は、");
+                sender.sendMessage(Prog.getPrefix() + ChatColor.AQUA + "/jinro_ad next force"+ ChatColor.YELLOW +" を実行してください。");
             } else {
-                if( MConJinro.getTask() != null ){
-                    MConJinro.getTask().end();
+                if( Prog.getTask() != null ){
+                    Prog.getTask().end();
                 } else {
-                    sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "タスクが存在しません。");
+                    sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "タスクが存在しません。");
                 }
             }
         } else if( args[0].equalsIgnoreCase("touhyou") ){
@@ -133,24 +132,24 @@ public class JinroAdminCommand implements TabExecutor {
             // jinro_ad timer set 100
             if(args.length >= 3) {
                 if( args[1].equalsIgnoreCase("set") ){
-                    BaseTask task = MConJinro.getTask();
+                    BaseTask task = Prog.getTask();
                     if( !(task instanceof BaseTimerTask) ){
-                        sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "実行中のタスクはタイマーが存在しません。");
+                        sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "実行中のタスクはタイマーが存在しません。");
                         return true;
                     }
                     ((BaseTimerTask)task).setSecondsRest( Integer.parseInt(args[2]) );
                 } else if( args[1].equalsIgnoreCase("add") ){
-                    BaseTask task = MConJinro.getTask();
+                    BaseTask task = Prog.getTask();
                     if( !(task instanceof BaseTimerTask) ){
-                        sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "実行中のタスクはタイマーが存在しません。");
+                        sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "実行中のタスクはタイマーが存在しません。");
                         return true;
                     }
                     int t = ((BaseTimerTask)task).getSeconds();
                     ((BaseTimerTask)task).setSecondsRest( t + Integer.parseInt(args[2]) );
                 }
             } else if( args[1].equalsIgnoreCase("pause") ) {
-                MConJinro.getTask().pause();
-                sender.sendMessage(MConJinro.getPrefix() + "タイマーを一時停止しました。");
+                Prog.getTask().pause();
+                sender.sendMessage(Prog.getPrefix() + "タイマーを一時停止しました。");
             } else {
                 Utility.sendCmdHelp(sender, "/jinro_ad timer set <秒数>", "タイマーの秒数を設定します。");
                 Utility.sendCmdHelp(sender, "/jinro_ad timer add <秒数>", "タイマーの秒数を追加します。");

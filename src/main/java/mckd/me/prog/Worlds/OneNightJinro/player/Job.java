@@ -1,7 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.player;
 
-;
-;
+
 import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
