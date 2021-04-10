@@ -29,6 +29,7 @@ public class AnvilWorld implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.centerPlace = new Location(Bukkit.getWorld(this.worldName), -520, 50, 1292);
         this.StartPlace = new Location(Bukkit.getWorld(this.worldName), -473, 53, -1289);
+
     }
 
 
@@ -101,7 +102,7 @@ public class AnvilWorld implements Listener {
         }
     }
 
-    public void fallAnvil (Player player){
+    public void fallAnvil (Player player) {
         World world = Bukkit.getWorld("anvil");
         Location location= new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
         world.getBlockAt(location).setType(Material.ANVIL);
@@ -128,9 +129,27 @@ public class AnvilWorld implements Listener {
                     player.setHealth(20.0);
                     player.setFoodLevel(10);
                     player.setGameMode(GameMode.SPECTATOR);
+                    this.checkGamemode();
                 }
             }
         }
+        public void checkGamemode(){
+            World world = Bukkit.getWorld("Anvil");
+            int SurviralCount = 0;
+            for (Player p : world.getPlayers()){
+                if(p.getGameMode() == GameMode.SURVIVAL){
+                    SurviralCount ++;
+            }
+        }
+            if (SurviralCount == 1){
+                isPlaying = false;
+                for (Player p: world.getPlayers()) {
+                    p.setGameMode(GameMode.ADVENTURE);
+                    p.teleport(StartPlace);
+            }
+        }
+    }
+
 
 
 
