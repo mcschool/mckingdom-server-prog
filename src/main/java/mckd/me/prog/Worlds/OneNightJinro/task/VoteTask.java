@@ -1,7 +1,7 @@
 package mckd.me.prog.Worlds.OneNightJinro.task;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.Job;
 import mckd.me.prog.Worlds.OneNightJinro.player.PlayerData;
@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class VoteTask extends BaseTask {
 
-    VoteTask(MConJinro pl ){
+    VoteTask(Prog pl ){
         super(pl);
     }
 
@@ -25,7 +25,7 @@ public class VoteTask extends BaseTask {
     public void start() {
         super.start();
         GameStatus.Cycle.setCycle(GameStatus.Cycle.Vote);
-        MConJinro.getRespawnLoc().getWorld().setTime(12250);
+        Prog.getRespawnLoc().getWorld().setTime(12250);
         HashMap<UUID, PlayerData> pl = JinroPlayers.getPlayers();
 
         for(Player p : Bukkit.getOnlinePlayers()){
@@ -40,9 +40,9 @@ public class VoteTask extends BaseTask {
         Bukkit.broadcastMessage(ChatColor.AQUA + "投票は「/jinro touhyou <Player>」で行えます");
         Bukkit.broadcastMessage(ChatColor.AQUA + "投票時間中のチャットはGMにしか聞こえません。");
 
-        MConJinro.sendGameMaster(ChatColor.YELLOW + "===============[GMの操作]===============", false);
-        MConJinro.sendGameMaster(ChatColor.AQUA + "/jinro_ad touhyou check で投票状況を確認できます。", false);
-        MConJinro.sendGameMaster(ChatColor.AQUA + "/jinro_ad touhyou open で開票できます。", false);
+        Prog.sendGameMaster(ChatColor.YELLOW + "===============[GMの操作]===============", false);
+        Prog.sendGameMaster(ChatColor.AQUA + "/jinro_ad touhyou check で投票状況を確認できます。", false);
+        Prog.sendGameMaster(ChatColor.AQUA + "/jinro_ad touhyou open で開票できます。", false);
     }
 
     /**
@@ -79,7 +79,7 @@ public class VoteTask extends BaseTask {
     @Override
     public void onChat(AsyncPlayerChatEvent e) {
         Job job = JinroPlayers.getData(e.getPlayer()).getFirstJob();
-        MConJinro.sendGameMaster(job.getColor() + "[" + job.getJobName2Moji() + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+        Prog.sendGameMaster(job.getColor() + "[" + job.getJobName2Moji() + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
         e.getPlayer().sendMessage( job.getColor() + "[" + job.getJobName2Moji() + "] <" + e.getPlayer().getName() + "> " + e.getMessage() );
     }
 

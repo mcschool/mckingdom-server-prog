@@ -2,8 +2,8 @@ package mckd.me.prog.Worlds.OneNightJinro.player;
 
 ;
 ;
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -116,13 +116,13 @@ public enum Job {
         public void Action(Player p, String[] args) {
             PlayerData pd = JinroPlayers.getData(p);
             if(!GameStatus.getStatus().equals(GameStatus.Playing) || !GameStatus.Cycle.getCycle().equals(GameStatus.Cycle.Night) ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "現在は使用できません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + "現在は使用できません。");
                 return;
             } else if( !JinroPlayers.equalsFirstJob( p, this ) ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + this.getJobName() + "ではありません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + this.getJobName() + "ではありません。");
                 return;
             } else if( pd.isAction() ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "あなたは行動済みです。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + "あなたは行動済みです。");
                 return;
             }
             if( args.length <= 1 ){
@@ -131,27 +131,27 @@ public enum Job {
                 return;
             }
             if( args[1].equalsIgnoreCase("nope##") ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + "行動済みにしました。これ以降の交換はできません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.GREEN + "行動済みにしました。これ以降の交換はできません。");
                 pd.setAction(true);
                 JinroPlayers.setData(p, pd);
-                MConJinro.sendGameMaster(
-                        MConJinro.getPrefix() + getColor() + "[" + getJobName() + ":交換] "+ p.getName() +" <=-=> なし "
+                Prog.sendGameMaster(
+                        Prog.getPrefix() + getColor() + "[" + getJobName() + ":交換] "+ p.getName() +" <=-=> なし "
                 );
                 return;
             }
             Player target = Bukkit.getPlayerExact(args[1]);
             if( target == null ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーは存在しません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + "指定プレイヤーは存在しません。");
                 return;
             }
             if( !JinroPlayers.getPlayers().containsKey( target.getUniqueId() ) ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーは参加していません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + "指定プレイヤーは参加していません。");
                 return;
             }
             Job j = JinroPlayers.getData(target).getFirstJob();
-            MConJinro.sendGameMaster(MConJinro.getPrefix() + getColor() + "[" + getJobName() + ":交換] "+ p.getName() +" <=-=> " +
+            Prog.sendGameMaster(Prog.getPrefix() + getColor() + "[" + getJobName() + ":交換] "+ p.getName() +" <=-=> " +
                     target.getName() + j.getColor() + " ["+ j.getJobName() +"]");
-            p.sendMessage(MConJinro.getPrefix() +
+            p.sendMessage(Prog.getPrefix() +
                     ChatColor.GREEN + target.getName() + " とすり替えた結果、あなたは " +
                     j.getColor() + "["+j.getJobName()+"] " +
                     ChatColor.GREEN + "になりました。");
@@ -211,13 +211,13 @@ public enum Job {
         public void Action(Player p, String[] args) {
             PlayerData pd = JinroPlayers.getData(p);
             if(!GameStatus.getStatus().equals(GameStatus.Playing) || !GameStatus.Cycle.getCycle().equals(GameStatus.Cycle.Night)){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "現在は使用できません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + "現在は使用できません。");
                 return;
             } else if( !JinroPlayers.equalsFirstJob( p, this ) ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + this.getJobName() + "ではありません。");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + this.getJobName() + "ではありません。");
                 return;
             } else if( pd.isAction() ){
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "あなたは行動済みです");
+                p.sendMessage(Prog.getPrefix() + ChatColor.RED + "あなたは行動済みです");
                 return;
             }
             if( args.length <= 1 ){
@@ -233,26 +233,26 @@ public enum Job {
                             .append(ChatColor.GREEN)
                             .append(", ");
                 }
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + "余っている役を占った結果はこちらです:");
+                p.sendMessage(Prog.getPrefix() + ChatColor.GREEN + "余っている役を占った結果はこちらです:");
                 String ss = null;
                 if( (s.length() - 2) > 0 ){
                     ss = s.substring(0, s.length() - 2);
                 }
-                p.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + ss);
+                p.sendMessage(Prog.getPrefix() + ChatColor.GREEN + ss);
             } else {
                 Player target = Bukkit.getPlayerExact(args[1]);
                 if( target == null ){
-                    p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーは存在しません。");
+                    p.sendMessage(Prog.getPrefix() + ChatColor.RED + "指定プレイヤーは存在しません。");
                     return;
                 }
                 if( !JinroPlayers.getPlayers().containsKey( target.getUniqueId() ) ){
-                    p.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーは参加していません。");
+                    p.sendMessage(Prog.getPrefix() + ChatColor.RED + "指定プレイヤーは参加していません。");
                     return;
                 }
                 Job j = JinroPlayers.getData(target).getFirstJob();
-                MConJinro.sendGameMaster(MConJinro.getPrefix() + getColor() + "[" + getJobName() + ":占い] "+ p.getName() +" -> " +
+                Prog.sendGameMaster(Prog.getPrefix() + getColor() + "[" + getJobName() + ":占い] "+ p.getName() +" -> " +
                         target.getName() + j.getColor() + " ["+ j.getJobName() +"]");
-                p.sendMessage(MConJinro.getPrefix() +
+                p.sendMessage(Prog.getPrefix() +
                         ChatColor.GREEN + target.getName() + " は " +
                         j.getColor() + "["+j.getJobName()+"] " +
                         ChatColor.GREEN + "でした。");
@@ -387,7 +387,7 @@ public enum Job {
     public static String[] getJobHelp(){
         ArrayList<String> s = new ArrayList<String>(){
             {
-                add(MConJinro.getPrefix() + ChatColor.GREEN + "役職指定には以下の文字が使用できます。");
+                add(Prog.getPrefix() + ChatColor.GREEN + "役職指定には以下の文字が使用できます。");
             }
         };
         int i = 0;
@@ -396,7 +396,7 @@ public enum Job {
             i++;
             ss.append(j.getJobName()).append(":").append(j.getJobID()).append(", ");
             if( i >= 3 ){
-                s.add(MConJinro.getPrefix() + ChatColor.AQUA + ss.toString().substring(0, ss.length() - 2));
+                s.add(Prog.getPrefix() + ChatColor.AQUA + ss.toString().substring(0, ss.length() - 2));
                 ss = new StringBuilder();
             }
         }

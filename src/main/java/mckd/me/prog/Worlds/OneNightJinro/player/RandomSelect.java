@@ -1,8 +1,8 @@
 package mckd.me.prog.Worlds.OneNightJinro.player;
 
 import com.sun.org.apache.xerces.internal.xs.StringList;
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -428,11 +428,11 @@ public class RandomSelect implements Listener {
             } else {
                 out = sb.toString();
             }
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.YELLOW + out);
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + "上記の役職が余ってしまいました。");
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + "人数の調整をしてみてください。");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.YELLOW + out);
+            sender.sendMessage(Prog.getPrefix() + ChatColor.GREEN + "上記の役職が余ってしまいました。");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.GREEN + "人数の調整をしてみてください。");
         } else {
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + "役職が余らず配布できました (*´ω｀*)");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.GREEN + "役職が余らず配布できました (*´ω｀*)");
         }
         sender.closeInventory();
         if( !isKeepSetting ){

@@ -1,8 +1,8 @@
 package mckd.me.prog.Worlds.OneNightJinro.scoreboard;
 
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.JinroConfig;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import org.bukkit.Bukkit;
 import org.bukkit.scoreboard.*;
 
@@ -23,7 +23,7 @@ public class JinroScoreboard {
     }
 
     public static String getInfoName() {
-        String InfoName = MConJinro.getMain().getConfig().getString(JinroConfig.InfoObjectiveName.getPath());
+        String InfoName = Prog.getMain().getConfig().getString(JinroConfig.InfoObjectiveName.getPath());
         return InfoName;
     }
 }

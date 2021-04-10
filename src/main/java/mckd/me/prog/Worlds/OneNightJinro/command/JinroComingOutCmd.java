@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
@@ -23,7 +24,7 @@ public class JinroComingOutCmd implements TabExecutor{
             return true;
         }
         if( !GameStatus.getStatus().equals(GameStatus.Playing) ){
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "現在は使用できません。");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "現在は使用できません。");
             return true;
         }
         if( args[1].equalsIgnoreCase("siro") || args[1].equalsIgnoreCase("kuro") ){
@@ -38,7 +39,7 @@ public class JinroComingOutCmd implements TabExecutor{
             data.setMarker(j);
             JinroPlayers.setData(p, data);
             p.setPlayerListName( "[" + j.getString() + "] " + p.getName() + " " );
-            p.sendMessage(MConJinro.getPrefix() + j.getName() + "マーカーを付けました");
+            p.sendMessage(Prog.getPrefix() + j.getName() + "マーカーを付けました");
         } else {
             try {
                 Player p = (Player)sender;
@@ -49,7 +50,7 @@ public class JinroComingOutCmd implements TabExecutor{
                 p.setPlayerListName( j.getColor() + "[" + j.getJobName2Moji() + "] " + p.getName() + " " );
                 Bukkit.broadcastMessage(j.getColor() + p.getName() + "が" + j.getJobName() + "COしました。");
             } catch (IllegalArgumentException e){
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + args[1] + "に該当する役職はありません。");
+                sender.sendMessage(Prog.getPrefix() + ChatColor.RED + args[1] + "に該当する役職はありません。");
                 sender.sendMessage( Job.getJobHelp() );
             }
         }

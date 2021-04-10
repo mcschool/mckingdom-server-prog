@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import mckd.me.prog.Worlds.OneNightJinro.JinroConfig;
 import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
@@ -33,11 +34,11 @@ import static org.bukkit.Bukkit.getServer;
 
 public class JinroAdminCommand implements TabExecutor {
 
-    private MConJinro plugin;
+    private Prog plugin;
 
     private RandomSelect rs;
 
-    public JinroAdminCommand(MConJinro plugin){
+    public JinroAdminCommand(Prog plugin){
         this.plugin = plugin;
         this.rs = new RandomSelect();
         getServer().getPluginManager().registerEvents(new RandomSelect(), plugin);

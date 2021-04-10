@@ -1,6 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.Job;
@@ -16,9 +16,9 @@ import java.util.List;
 
 public class JinroToJobALLChatCommand implements TabExecutor {
 
-    private MConJinro plugin;
+    private Prog plugin;
 
-    public JinroToJobALLChatCommand(MConJinro plugin){
+    public JinroToJobALLChatCommand(Prog plugin){
         this.plugin = plugin;
     }
 
@@ -27,7 +27,7 @@ public class JinroToJobALLChatCommand implements TabExecutor {
         if( args.length == 0 ){
             Utility.sendCmdHelp(sender, "/c <役職> <メッセージ...>", "指定役職全体に向けてメッセージを表示できます。", true);
             sender.sendMessage(Job.getJobHelp());
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.AQUA + "観戦: kansen");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.AQUA + "観戦: kansen");
             return true;
         } else {
             sendMsgToYakuALL(Utility.CommandText(args, 1), args[0], sender);
@@ -37,7 +37,7 @@ public class JinroToJobALLChatCommand implements TabExecutor {
 
     public void sendMsgToYakuALL(String msg, String job, CommandSender sender) {
         if(msg.equalsIgnoreCase("")){
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "メッセージがありません。");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "メッセージがありません。");
             return;
         } else {
             if( job.equalsIgnoreCase("kansen") || job.equalsIgnoreCase("spec") ){
@@ -46,7 +46,7 @@ public class JinroToJobALLChatCommand implements TabExecutor {
                     p.sendMessage(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
                 }
                 if( !(sender instanceof ConsoleCommandSender) ){
-                    MConJinro.sendConsole(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
+                    Prog.sendConsole(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
                 }
                 return;
             } else {
@@ -57,7 +57,7 @@ public class JinroToJobALLChatCommand implements TabExecutor {
                         p.sendMessage(ChatColor.YELLOW + "[GM -> " + j.getJobName() + "] <" + sender.getName() + "> " + msg);
                     }
                     if( !(sender instanceof ConsoleCommandSender) ){
-                        MConJinro.sendConsole(ChatColor.YELLOW + "[GM -> " + j.getJobName() + "] <" + sender.getName() + "> " + msg);
+                        Prog.sendConsole(ChatColor.YELLOW + "[GM -> " + j.getJobName() + "] <" + sender.getName() + "> " + msg);
                     }
                 } catch (IllegalArgumentException e) {
                     sender.sendMessage(ChatColor.RED + "[GM -> 宛先不明] <"+sender.getName()+"> "+msg);

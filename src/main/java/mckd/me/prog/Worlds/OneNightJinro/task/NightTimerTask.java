@@ -1,8 +1,8 @@
 package mckd.me.prog.Worlds.OneNightJinro.task;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import mckd.me.prog.Worlds.OneNightJinro.JinroConfig;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.Job;
@@ -16,7 +16,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class NightTimerTask extends BaseTimerTask {
 
-    public NightTimerTask(MConJinro pl, int sec) {
+    public NightTimerTask(Prog pl, int sec) {
         super(pl, sec);
     }
 
@@ -26,7 +26,7 @@ public class NightTimerTask extends BaseTimerTask {
         GameStatus.Cycle.setCycle(GameStatus.Cycle.Night);
         Bukkit.broadcastMessage(ChatColor.RED + "===============[恐ろしい夜がやって来ました]===============");
         Bukkit.broadcastMessage(ChatColor.YELLOW + "各役職の行動を開始してください。");
-        MConJinro.getRespawnLoc().getWorld().setTime(15000);
+        Prog.getRespawnLoc().getWorld().setTime(15000);
         for( Player p : Bukkit.getOnlinePlayers() ){
             PlayerData pd = JinroPlayers.getData(p);
             if( pd.getPlayingType().equals(PlayerData.PlayingType.Player) ){
@@ -66,12 +66,12 @@ public class NightTimerTask extends BaseTimerTask {
     public void EndExec(){
         BaseTimerTask dt = new DiscussionTimerTask(
                 getPlugin(),
-                MConJinro.getMain().getConfig().getInt(
+                Prog.getMain().getConfig().getInt(
                         JinroConfig.DiscussionTime.getPath()
                 )
         );
         dt.start();
-        MConJinro.setTask(dt);
+        Prog.setTask(dt);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class NightTimerTask extends BaseTimerTask {
     @Override
     public void onChat(AsyncPlayerChatEvent e) {
         Job job = JinroPlayers.getData(e.getPlayer()).getFirstJob();
-        MConJinro.sendGameMaster(job.getColor() + "[" + job.getJobName2Moji() + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+        Prog.sendGameMaster(job.getColor() + "[" + job.getJobName2Moji() + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
         e.getPlayer().sendMessage( job.getColor() + "[" + job.getJobName2Moji() + "] <" + e.getPlayer().getName() + "> " + e.getMessage() );
     }
 }

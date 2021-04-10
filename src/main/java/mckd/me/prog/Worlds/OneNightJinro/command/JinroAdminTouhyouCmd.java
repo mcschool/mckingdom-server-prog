@@ -1,7 +1,7 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.PlayerData;
@@ -25,7 +25,7 @@ public class JinroAdminTouhyouCmd implements TabExecutor {
             return true;
         }
         if(!GameStatus.Cycle.getCycle().equals(GameStatus.Cycle.Vote)){
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "投票の時間ではありません。");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "投票の時間ではありません。");
             return true;
         }
         if( args[1].equalsIgnoreCase("check") ){
@@ -54,15 +54,15 @@ public class JinroAdminTouhyouCmd implements TabExecutor {
                 if( (out.length() - 2) > 0 ){
                     out = out.substring(0, out.length() - 2);
                 }
-                sender.sendMessage(MConJinro.getPrefix() + out);
-                sender.sendMessage(MConJinro.getPrefix() + "が投票していません。");
+                sender.sendMessage(Prog.getPrefix() + out);
+                sender.sendMessage(Prog.getPrefix() + "が投票していません。");
             }
         } else if(args[1].equalsIgnoreCase("open")) {
             int rep = TouhyouOpen();
             if( rep != 0 ){
                 switch ( rep ){
                     case 1:
-                        sender.sendMessage(MConJinro.getPrefix() + "まだ投票していないプレイヤーが居ます。");
+                        sender.sendMessage(Prog.getPrefix() + "まだ投票していないプレイヤーが居ます。");
                         break;
                 }
             }
@@ -108,9 +108,9 @@ public class JinroAdminTouhyouCmd implements TabExecutor {
         }
         Bukkit.broadcastMessage(ChatColor.AQUA + "チャットが全体に聞こえるようになりました。");
         Bukkit.broadcastMessage(ChatColor.RED + "===============================");
-        BaseTask task = new ExecutionTask(MConJinro.getMain());
+        BaseTask task = new ExecutionTask(Prog.getMain());
         task.start();
-        MConJinro.setTask(task);
+        Prog.setTask(task);
         return 0;
     }
 

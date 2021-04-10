@@ -1,5 +1,7 @@
 package mckd.me.prog.Worlds.OneNightJinro;
 
+import mckd.me.prog.Prog;
+
 public enum JinroConfig {
     // 夜の間の時間
     NightTime(){
@@ -35,6 +37,6 @@ public enum JinroConfig {
      * pluginのreloadConfig()と同じです。
      */
     public void reload(){
-        MConJinro.getMain().reloadConfig();
+        Prog.getMain().reloadConfig();
     }
 }

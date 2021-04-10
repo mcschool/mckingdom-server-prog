@@ -1,8 +1,8 @@
 package mckd.me.prog.Worlds.OneNightJinro.task;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.ActionBar;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.Job;
 import mckd.me.prog.Worlds.OneNightJinro.player.PlayerData;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class ExecutionTask extends BaseTask {
 
-    public ExecutionTask(MConJinro pl){
+    public ExecutionTask(Prog pl){
         super(pl);
     }
 
@@ -157,7 +157,7 @@ public class ExecutionTask extends BaseTask {
         PlayerData pd = JinroPlayers.getData(e.getPlayer());
         Job coming = pd.getComingOut();
         Job.Marker ma = pd.getMarker();
-        if ( !MConJinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+        if ( !Prog.getMain().getConfig().getBoolean("ShowComingOut")) {
             Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
         } else {
             if( coming != null ){

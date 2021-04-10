@@ -1,7 +1,7 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.PlayerData;
@@ -20,7 +20,7 @@ public class JinroTouhyouCmd implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if( !GameStatus.getStatus().equals(GameStatus.Playing) && !GameStatus.Cycle.getCycle().equals(GameStatus.Cycle.Vote) ){
-            sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "まだ使用できません。");
+            sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "まだ使用できません。");
             return true;
         }
         if( args.length <= 0 ){
@@ -31,18 +31,18 @@ public class JinroTouhyouCmd implements TabExecutor {
             PlayerData pd = JinroPlayers.getData( (Player)sender );
 
             if(!pd.getPlayingType().equals(PlayerData.PlayingType.Player)){
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "あなたは投票できません。");
+                sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "あなたは投票できません。");
                 return true;
             }
 
             Player target = Utility.getPlayer( args[1] );
             if(target == null){
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "プレイヤーが見つかりませんでした。");
+                sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "プレイヤーが見つかりませんでした。");
                 return true;
             }
 
-            if( pd.getUUID().equals( target.getUniqueId() ) && !MConJinro.isDEBUG() ){
-                sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + "自分自身に投票はできません。");
+            if( pd.getUUID().equals( target.getUniqueId() ) && !Prog.isDEBUG() ){
+                sender.sendMessage(Prog.getPrefix() + ChatColor.RED + "自分自身に投票はできません。");
                 return true;
             }
 
@@ -55,12 +55,12 @@ public class JinroTouhyouCmd implements TabExecutor {
                     JinroPlayers.setData(ps.getUniqueId(), pds);
                     ps.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                     ps.updateInventory();
-                    sender.sendMessage(MConJinro.getPrefix() + ChatColor.GREEN + target.getName() + " に投票しました。");
-                    MConJinro.sendGameMaster(
-                            MConJinro.getPrefix() + ChatColor.GREEN + sender.getName() + " -> " + target.getName()
+                    sender.sendMessage(Prog.getPrefix() + ChatColor.GREEN + target.getName() + " に投票しました。");
+                    Prog.sendGameMaster(
+                            Prog.getPrefix() + ChatColor.GREEN + sender.getName() + " -> " + target.getName()
                     );
                 } else {
-                    sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + target.getName() + " には投票できません。");
+                    sender.sendMessage(Prog.getPrefix() + ChatColor.RED + target.getName() + " には投票できません。");
                 }
             }
         }

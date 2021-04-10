@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.Job;
@@ -21,9 +22,9 @@ import java.util.UUID;
 
 public class JinroCommand implements TabExecutor {
 
-    private MConJinro plugin;
+    private Prog plugin;
 
-    public JinroCommand(MConJinro plugin){
+    public JinroCommand(Prog plugin){
         this.plugin = plugin;
     }
 

@@ -1,15 +1,15 @@
 package mckd.me.prog.Worlds.OneNightJinro.task;
 
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class BaseTask extends BukkitRunnable {
 
-    private MConJinro plugin;
+    private Prog plugin;
 
     private BukkitTask task;
 
@@ -21,7 +21,7 @@ public class BaseTask extends BukkitRunnable {
         PAUSED,;
     }
 
-    BaseTask(MConJinro pl ){
+    BaseTask(Prog pl ){
         this.plugin = pl;
     }
 
@@ -143,7 +143,7 @@ public class BaseTask extends BukkitRunnable {
 
     }
 
-    public MConJinro getPlugin() {
+    public Prog getPlugin() {
         return plugin;
     }
 }

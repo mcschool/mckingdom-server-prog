@@ -1,8 +1,8 @@
 package mckd.me.prog.Worlds.OneNightJinro.task;
 
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.scoreboard.JinroScoreboard;
 import org.bukkit.Bukkit;
@@ -17,7 +17,7 @@ public class BaseTimerTask extends BaseTask {
     private static final long OFFSET = 1150;
     private static final long DEC_OFFSET = 0;
 
-    private MConJinro plugin;
+    private Prog plugin;
 
     private BukkitTask task;
 
@@ -27,14 +27,14 @@ public class BaseTimerTask extends BaseTask {
 
     private boolean isPaused = false;
 
-    BaseTimerTask( MConJinro pl, int sec ){
+    BaseTimerTask( Prog pl, int sec ){
         super(pl);
         this.plugin = pl;
         secondsRest = sec + (int)DEC_OFFSET;
         secondsMax = sec;
         secondsBefore = sec;
         tickBase = System.currentTimeMillis() + secondsRest * 1000 + OFFSET;
-        MConJinro.setTask(this);
+        Prog.setTask(this);
     }
 
     public void run() {

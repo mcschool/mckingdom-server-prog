@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
@@ -22,18 +23,18 @@ public class JinroAdminSpecCmd implements TabExecutor {
         }
         Player p = Bukkit.getPlayerExact( args[1] );
         if( p == null ){
-            sender.sendMessage( MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーはオフラインです。" );
+            sender.sendMessage( Prog.getPrefix() + ChatColor.RED + "指定プレイヤーはオフラインです。" );
             return true;
         }
         PlayerData pd = JinroPlayers.getData(p.getUniqueId());
         if( !pd.getPlayingType().equals(PlayerData.PlayingType.Spectator) ){
             pd.setPlayingType(PlayerData.PlayingType.Spectator);
-            sender.sendMessage( MConJinro.getPrefix() + ChatColor.GREEN + p.getName() + "を観戦者に設定しました。" );
-            p.sendMessage(MConJinro.getPrefix() + ChatColor.YELLOW + "あなたは観戦者に設定されました。" );
+            sender.sendMessage( Prog.getPrefix() + ChatColor.GREEN + p.getName() + "を観戦者に設定しました。" );
+            p.sendMessage(Prog.getPrefix() + ChatColor.YELLOW + "あなたは観戦者に設定されました。" );
         } else {
             pd.setPlayingType(PlayerData.PlayingType.Player);
-            sender.sendMessage( MConJinro.getPrefix() + ChatColor.GREEN + p.getName() + "を参加者に設定しました。" );
-            p.sendMessage(MConJinro.getPrefix() + ChatColor.YELLOW + "あなたは参加者に設定されました。" );
+            sender.sendMessage( Prog.getPrefix() + ChatColor.GREEN + p.getName() + "を参加者に設定しました。" );
+            p.sendMessage(Prog.getPrefix() + ChatColor.YELLOW + "あなたは参加者に設定されました。" );
         }
         JinroPlayers.setData(p.getUniqueId(), pd);
         return true;
