@@ -13,13 +13,20 @@ groups:
       default: false
     permissions:
       - '*'
-
-
-
   Jinro.Spectator:
-    description: Spectator
-    default: false
-  J
+    options:
+      default: false
+    permissions:
+      - '*'
+  users:
+    4966b6cb90e34b63a523cc62dc1e91ce:
+      group:
+        - Jinro.GameMaster
+      options:
+        name: nankotsu029
+
+
+
 commands:
   jinro:
     description: Player
