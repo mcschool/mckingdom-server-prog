@@ -5,7 +5,7 @@ authors: [nankotsu029]
 groups:
   default:
     permissions:
-      - modifyworld.*
+    - modifyworld.*
     options:
       default: true
   Jinro.GameMaster:
@@ -19,9 +19,9 @@ groups:
     permissions:
     - '*'
   users:
-    4966b6cb90e34b63a523cc62dc1e91ce:
+    4966b6cb-90e3-4b63-a523-cc62dc1e91ce:
       group:
-        - Jinro.GameMaster
+      - Jinro.GameMaster
       options:
         name: nankotsu029
 
