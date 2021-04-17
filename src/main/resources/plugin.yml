@@ -1,7 +1,7 @@
 name: Prog
 version: ${project.version}
 main: mckd.me.prog.Prog
-authors: [4tqff]
+authors: [nankotsu029]
 permissions:
   Jinro.GameMaster:
     description: GameMaster
