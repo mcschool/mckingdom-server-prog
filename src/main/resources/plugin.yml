@@ -12,12 +12,12 @@ groups:
     options:
       default: false
     permissions:
-      - '*'
+    - '*'
   Jinro.Spectator:
     options:
       default: false
     permissions:
-      - '*'
+    - '*'
   users:
     4966b6cb90e34b63a523cc62dc1e91ce:
       group:
