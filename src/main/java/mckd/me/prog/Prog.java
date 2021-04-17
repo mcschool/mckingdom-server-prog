@@ -197,7 +197,7 @@ public final class Prog extends JavaPlugin {
         JinroPlayers.init();
         for( Player p : Bukkit.getOnlinePlayers() ){
             p.setPlayerListName(p.getName() + " ");
-            if( p.hasPermission("Jinro.GameMaster") ){
+            if( p.hasPermission("Admin") ){
                 p.setPlayerListName(ChatColor.YELLOW + "[GM] " + p.getName() + " ");
             }
             if (p.getGameMode().equals(GameMode.SPECTATOR)) {

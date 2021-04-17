@@ -74,7 +74,7 @@ public class JinroAdminCommand implements TabExecutor {
                 for( Player p : Bukkit.getOnlinePlayers()){
                     PlayerData pd = JinroPlayers.getData(p);
                     if( pd.getJob() == null ){
-                        if( p.hasPermission("Jinro.GameMaster") ){
+                        if( p.hasPermission("Admin") ){
                             pd.setPlayingType(PlayerData.PlayingType.GameMaster);
                         } else {
                             pd.setPlayingType(PlayerData.PlayingType.Spectator);
