@@ -4,8 +4,12 @@ main: mckd.me.prog.Prog
 authors: [nankotsu029]
 permissions:
   Jinro.GameMaster:
+    options:
+      default: false
+    permissions:
+      - '*'
     description: GameMaster
-    default: op
+
   Jinro.Spectator:
     description: Spectator
     default: false
