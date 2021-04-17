@@ -2,20 +2,24 @@ name: Prog
 version: ${project.version}
 main: mckd.me.prog.Prog
 authors: [nankotsu029]
-permissions:
+groups:
+  default:
+    permissions:
+      - modifyworld.*
+    options:
+      default: true
   Jinro.GameMaster:
     options:
       default: false
     permissions:
       - '*'
-    description: GameMaster
+
+
 
   Jinro.Spectator:
     description: Spectator
     default: false
-  Jinro.Player:
-    description: Player
-    default: true
+  J
 commands:
   jinro:
     description: Player
