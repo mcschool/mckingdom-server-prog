@@ -57,7 +57,7 @@ public class JinroAdminCommand implements TabExecutor {
             Prog.getMain().reloadConfig();
             sender.sendMessage(Prog.getPrefix() + "Configの再読込を行いました。");
         }
-        if( args[1].equalsIgnoreCase("start") ){
+        if( args[0].equalsIgnoreCase("start") ){
             if( GameStatus.getStatus().equals(GameStatus.Ready) ){
 
                 if( JinroPlayers.getPlayersFromPlayingType(PlayerData.PlayingType.Player).size() == 0 ){
