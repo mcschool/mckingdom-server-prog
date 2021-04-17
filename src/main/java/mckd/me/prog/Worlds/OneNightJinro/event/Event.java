@@ -67,8 +67,8 @@ public class Event implements Listener {
         } catch (Exception e1 ){
             e.setCancelled(true);
             e.getPlayer().sendMessage(Prog.getPrefix() + ChatColor.RED + "チャット処理時に例外が発生しました....");
-            Bukkit.broadcast("[例外:" + e1 + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
-            Bukkit.broadcast("[例外:" + e1 + "] " + e1.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
+            Bukkit.broadcast("[例外:" + e1 + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "nankotsu029.admin");
+            Bukkit.broadcast("[例外:" + e1 + "] " + e1.getLocalizedMessage(), "nakotsu029.admin");
             e1.printStackTrace();
         }
 

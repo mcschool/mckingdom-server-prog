@@ -248,7 +248,7 @@ public class JinroPlayers {
 
     public static boolean isGameMaster(PlayerData pd) {
         if (pd.getPlayingType().equals(PlayerData.PlayingType.GameMaster)
-                || ((GameStatus.getStatus().equals(GameStatus.Ready) || GameStatus.getStatus().equals(GameStatus.End)) && pd.getPlayer().hasPermission("Jinro.GameMaster"))) {
+                || ((GameStatus.getStatus().equals(GameStatus.Ready) || GameStatus.getStatus().equals(GameStatus.End)) && pd.getPlayer().hasPermission("admin"))) {
             return true;
         }
         return false;
