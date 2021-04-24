@@ -89,6 +89,7 @@ public final class Prog extends JavaPlugin {
         new AnvilWorld(this);
         new FallColorWorld(this);
         new Raid(this);
+        new BuildBattle(this);
         main = this;
 
         // ワールド読み込み
