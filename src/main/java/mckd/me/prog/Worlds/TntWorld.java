@@ -274,7 +274,7 @@ public class TntWorld implements Listener {
         int safePlayerCount = 0;
         int safePlayerIndex = 0;
         int i = 0;
-        for (Player player : players) {
+        for (Player player : players) {/**/
             double y = player.getLocation().getY();
             if (y <= 50) {
                 safePlayerCount = safePlayerCount + 1;
