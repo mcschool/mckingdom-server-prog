@@ -1,3 +1,42 @@
 name: Prog
 version: ${project.version}
 main: mckd.me.prog.Prog
+authors: [nankotsu029]
+groups:
+  default:
+    permissions:
+    - modifyworld.*
+    options:
+      default: true
+  Jinro.GameMaster:
+    options:
+      default: false
+    permissions:
+    - '*'
+  Jinro.Spectator:
+    options:
+      default: false
+    permissions:
+    - '*'
+  users:
+    4966b6cb-90e3-4b63-a523-cc62dc1e91ce:
+      group:
+      - Jinro.GameMaster
+      options:
+        name: nankotsu029
+
+
+
+commands:
+  jinro:
+    description: Player
+    permission: Jinro.Player
+    usage: 一般向けのコマンドやで だれでも使えるやで
+  jinro_ad:
+    description: GameMaster
+    permission: Jinro.GameMaster
+    usage: GM向けのコマンドやで 一般会員は使えないやで
+  c:
+    description: 指定役職全体通知
+    permission: Jinro.GameMaster
+    usage: GM向けやで
