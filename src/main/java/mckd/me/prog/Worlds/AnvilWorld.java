@@ -143,7 +143,7 @@ public class AnvilWorld implements Listener {
                 SurviralCount++;
             }
         }
-        if (SurviralCount == 1){
+        if (SurviralCount == 1,0){
             isPlaying = false;
             for (Player p: world.getPlayers()) {
                 p.setGameMode(GameMode.ADVENTURE);
@@ -151,7 +151,9 @@ public class AnvilWorld implements Listener {
                 p.sendTitle("Gameset!","ゲームが終了しました",0,40 ,0);
             }
         }
-    }
+
+
+
 }
 
 
