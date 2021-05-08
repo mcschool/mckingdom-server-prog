@@ -17,6 +17,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 import java.util.Random;
 
+import static com.sun.tools.doclint.Entity.or;
+
 public class AnvilWorld implements Listener {
     private Prog plugin;
     public String worldName = "anvil";
@@ -121,39 +123,96 @@ public class AnvilWorld implements Listener {
         }
     }
 
-
     @EventHandler
     public void PlayerDeath(PlayerDeathEvent e) {
         if (e.getEntity().getWorld().getName().equals(this.worldName)) {
-            Player player = e.getEntity();
+            Player.player = e.getEntity();
             if (e.getEntity() instanceof Player) {
-                player.sendMessage("金床の下敷きになった！");
+                player.sendMessege("金床の下敷きになった！");
                 player.setHealth(20.0);
                 player.setFoodLevel(10);
-                player.setGameMode(GameMode.SPECTATOR);
+                player.setGamemode(GameMode.SPECTATOR);
                 this.checkGamemode();
+
             }
         }
     }
-    public void checkGamemode(){
+
+    private void checkGamemode() {
         World world = Bukkit.getWorld("Anvil");
-        int SurviralCount = 0;
-        for (Player p : world.getPlayers()){
-            if(p.getGameMode() == GameMode.SURVIVAL) {
-                SurviralCount++;
+        int SurvivalCount = 0;
+        for (Player p : world.getPlayers()) {
+            if (p.getGameMode() == GameMode.SURVIVAL) {
+                SurvivalCount++;
             }
         }
-        if (SurviralCount == 1,0){
+        if ((SurvivalCount == 1) || (SurvivalCount == 0)){
             isPlaying = false;
-            for (Player p: world.getPlayers()) {
+            for (Player p : World.getPlayers()){
                 p.setGameMode(GameMode.ADVENTURE);
                 p.teleport(StartPlace);
-                p.sendTitle("Gameset!","ゲームが終了しました",0,40 ,0);
+                p.sendTitle("GameSet!","ゲームが終了しました",0,40,0);
             }
         }
-
-
-
+    }
 }
+//    if (SurvivalCount = 1) or (SurvivalCount = 0){
+//        isPlaying = false;
+//        for (Player p: World.getPlayers()){
+//            p.setGameMode(GameMode.ADVENTURE);
+//            p.teleport(StartPlace);
+//            p.sendTitle("Gameset!","ゲームが終了しました",0,40 ,0);
+//        }
+//
+//        }
+//        }
+//
+//    }
 
 
+
+
+//    @EventHandler
+//    public void PlayerDeath(PlayerDeathEvent e) {
+//        if (e.getEntity().getWorld().getName().equals(this.worldName)) {
+//            Player player = e.getEntity();
+//            if (e.getEntity() instanceof Player) {
+//                player.sendMessage("金床の下敷きになった！");
+//                player.setHealth(20.0);
+//                player.setFoodLevel(10);
+//                player.setGameMode(GameMode.SPECTATOR);
+//                this.checkGamemode();
+//                public void checkGamemode(){
+//                                World world = Bukkit.getWorld("Anvil");
+//                                int SurviralCount = 0;
+//                                for (Player p : world.getPlayers()){
+//                                    if(p.getGameMode() == GameMode.SURVIVAL) {
+//                                        SurviralCount++;
+//                                    }
+//                                }
+//                                if (SurviralCount == 1) or (SurviralCount == 0) {
+//                                    isPlaying = false;
+//                                    for (Player p: world.getPlayers()) {
+//                                        p.setGameMode(GameMode.ADVENTURE);
+//                                        p.teleport(StartPlace);
+//                                        p.sendTitle("Gameset!","ゲームが終了しました",0,40 ,0);
+//                        }
+//        }
+//
+//
+//
+//
+//
+//
+//    }
+//            }
+//
+//
+//
+//        }
+//            }
+//
+//    }
+//
+//
+//
