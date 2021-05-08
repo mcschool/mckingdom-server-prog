@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro;
 
+import mckd.me.prog.Prog;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -55,7 +56,7 @@ public class Utility {
     public static void sendCmdHelp(Player p, String cmd, String help, boolean Prefix){
         String send = " ";
         if(Prefix){
-            send = MConJinro.getPrefix();
+            send = Prog.getPrefix();
         }
         p.sendMessage(send + CmdColor(cmd));
         p.sendMessage(send + ChatColor.GREEN + "   " + help);

@@ -1,17 +1,32 @@
 name: Prog
 version: ${project.version}
 main: mckd.me.prog.Prog
-authors: [4tqff]
-permissions:
+authors: [nankotsu029]
+groups:
+  default:
+    permissions:
+    - modifyworld.*
+    options:
+      default: true
   Jinro.GameMaster:
-    description: GameMaster
-    default: op
+    options:
+      default: false
+    permissions:
+    - '*'
   Jinro.Spectator:
-    description: Spectator
-    default: false
-  Jinro.Player:
-    description: Player
-    default: true
+    options:
+      default: false
+    permissions:
+    - '*'
+  users:
+    4966b6cb-90e3-4b63-a523-cc62dc1e91ce:
+      group:
+      - Jinro.GameMaster
+      options:
+        name: nankotsu029
+
+
+
 commands:
   jinro:
     description: Player

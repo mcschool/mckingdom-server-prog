@@ -1,6 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.command;
 
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.Job;
@@ -38,40 +38,40 @@ public class JinroAdminJobCmd implements TabExecutor {
                 try {
                     Job job = Job.valueOf(args[2]);
                     JinroPlayers.addNotJob(job);
-                    sender.sendMessage( MConJinro.getPrefix() + ChatColor.GREEN + "余りに役職[ "+ job.getJobName() +" ]を追加しました。" );
+                    sender.sendMessage( Prog.getPrefix() + ChatColor.GREEN + "余りに役職[ "+ job.getJobName() +" ]を追加しました。" );
                 } catch (IllegalArgumentException e){
-                    sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + args[2] + "に該当する役職はありません。");
+                    sender.sendMessage(Prog.getPrefix() + ChatColor.RED + args[2] + "に該当する役職はありません。");
                     sender.sendMessage( Job.getJobHelp() );
                 }
             } else {
                 Player p = Bukkit.getPlayerExact( args[3] );
                 if( p == null ){
-                    sender.sendMessage( MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーはオフラインです。" );
+                    sender.sendMessage( Prog.getPrefix() + ChatColor.RED + "指定プレイヤーはオフラインです。" );
                     return true;
                 }
                 try {
                     Job job = Job.valueOf(args[2]);
                     JinroPlayers.addPlayer(p, job);
-                    sender.sendMessage( MConJinro.getPrefix() + ChatColor.GREEN + p.getName() + " を役職[ "+ job.getJobName() +" ]に設定しました。" );
+                    sender.sendMessage( Prog.getPrefix() + ChatColor.GREEN + p.getName() + " を役職[ "+ job.getJobName() +" ]に設定しました。" );
                     p.sendMessage(ChatColor.RED + "=== " + ChatColor.WHITE + "あなたは " + job.getColor() + "[" + job.getJobName() + "]" + ChatColor.WHITE + " です。" + ChatColor.RED + " ===");
                 } catch (IllegalArgumentException e){
-                    sender.sendMessage(MConJinro.getPrefix() + ChatColor.RED + args[2] + "に該当する役職はありません。");
+                    sender.sendMessage(Prog.getPrefix() + ChatColor.RED + args[2] + "に該当する役職はありません。");
                     sender.sendMessage( Job.getJobHelp() );
                 }
             }
 
         } else if(args[1].equalsIgnoreCase("del")) {
             if( args.length <= 2 ){
-                sender.sendMessage( MConJinro.getPrefix() + ChatColor.RED + "プレイヤーを指定してください。" );
+                sender.sendMessage( Prog.getPrefix() + ChatColor.RED + "プレイヤーを指定してください。" );
                 return true;
             }
             Player p = Bukkit.getPlayerExact( args[2] );
             if( p == null ){
-                sender.sendMessage( MConJinro.getPrefix() + ChatColor.RED + "指定プレイヤーはオフラインです。" );
+                sender.sendMessage( Prog.getPrefix() + ChatColor.RED + "指定プレイヤーはオフラインです。" );
                 return true;
             }
             JinroPlayers.removePlayer(p);
-            sender.sendMessage( MConJinro.getPrefix() + ChatColor.GREEN + p.getName() + " の役職を取り消しました。" );
+            sender.sendMessage( Prog.getPrefix() + ChatColor.GREEN + p.getName() + " の役職を取り消しました。" );
             p.sendMessage(ChatColor.RED + "===== " + ChatColor.AQUA + "あなたの役職は取り消されました" + ChatColor.RED + " =====");
 
         } else if(args[1].equalsIgnoreCase("")){

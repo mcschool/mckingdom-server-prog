@@ -1,7 +1,7 @@
 package mckd.me.prog.Worlds.OneNightJinro.event;
 
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
 import mckd.me.prog.Worlds.OneNightJinro.Utility;
 import mckd.me.prog.Worlds.OneNightJinro.player.JinroPlayers;
 import mckd.me.prog.Worlds.OneNightJinro.player.PlayerData;
@@ -60,15 +60,15 @@ public class Event implements Listener {
 
         try{
             // プレイヤー
-            if(MConJinro.getTask() != null && GameStatus.getStatus().equals(GameStatus.Playing)){
-                MConJinro.getTask().onChat(e);
+            if(Prog.getTask() != null && GameStatus.getStatus().equals(GameStatus.Playing)){
+                Prog.getTask().onChat(e);
                 return;
             }
         } catch (Exception e1 ){
             e.setCancelled(true);
-            e.getPlayer().sendMessage(MConJinro.getPrefix() + ChatColor.RED + "チャット処理時に例外が発生しました....");
-            Bukkit.broadcast("[例外:" + e1 + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
-            Bukkit.broadcast("[例外:" + e1 + "] " + e1.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
+            e.getPlayer().sendMessage(Prog.getPrefix() + ChatColor.RED + "チャット処理時に例外が発生しました....");
+            Bukkit.broadcast("[例外:" + e1 + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "nankotsu029.admin");
+            Bukkit.broadcast("[例外:" + e1 + "] " + e1.getLocalizedMessage(), "nakotsu029.admin");
             e1.printStackTrace();
         }
 
@@ -102,10 +102,10 @@ public class Event implements Listener {
             return;
         }
         if (JinroPlayers.getExecutionPlayers().contains(e.getPlayer().getUniqueId()) && GameStatus.getStatus().equals(GameStatus.Playing)) {
-            e.setRespawnLocation(MConJinro.getReikaiLoc());
+            e.setRespawnLocation(Prog.getReikaiLoc());
             return;
         }
-        e.setRespawnLocation(MConJinro.getRespawnLoc());
+        e.setRespawnLocation(Prog.getRespawnLoc());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

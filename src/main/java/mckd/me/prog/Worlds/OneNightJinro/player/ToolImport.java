@@ -1,6 +1,6 @@
 package mckd.me.prog.Worlds.OneNightJinro.player;
 
-import mckd.me.prog.Worlds.OneNightJinro.MConJinro;
+import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class ToolImport {
 
-    private static Logger logger = MConJinro.getMain().getLogger();
+    private static Logger logger = Prog.getMain().getLogger();
 
     public static void Import(String Json){
         Import( new JSONObject(Json) );
