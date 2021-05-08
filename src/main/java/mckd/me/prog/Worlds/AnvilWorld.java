@@ -17,8 +17,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 import java.util.Random;
 
-import static com.sun.tools.doclint.Entity.or;
-
 public class AnvilWorld implements Listener {
     private Prog plugin;
     public String worldName = "anvil";
