@@ -1,6 +1,7 @@
 package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
+import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -75,13 +76,15 @@ public class BuildBattle implements Listener {
         World world = player.getWorld();
         Location location = player.getLocation();
         if(e.getPlayer().getWorld().getName().equals(this.worldName)){
-            if(location.getY() >70){
-                double x = location.getX();
-                double y = 5;
-                double z = location.getZ();
-                player.sendMessage(ChatColor.RED + "これより上は行けないよ！(パクリ対策)");
-                Location loc = new Location(Bukkit.getWorld(this.worldName),x,y,z);
-                player.teleport(loc);
+            if(player.getGameMode() == GameMode.CREATIVE) {
+                if (location.getY() > 70) {
+                    double x = location.getX();
+                    double y = 5;
+                    double z = location.getZ();
+                    player.sendMessage(ChatColor.RED + "これより上は行けないよ！(パクリ対策)");
+                    Location loc = new Location(Bukkit.getWorld(this.worldName), x, y, z);
+                    player.teleport(loc);
+                }
             }
         }
     }
