@@ -2,11 +2,17 @@ package mckd.me.prog.Worlds;
 
 import mckd.me.prog.Prog;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+
+import java.util.List;
 
 public class BuildBattle implements Listener {
     private Prog plugin;
@@ -31,6 +37,36 @@ public class BuildBattle implements Listener {
 
         }
 
+    }
+
+    @EventHandler
+    public void signClick(PlayerInteractEvent e){
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        Location location = player.getLocation();
+        if(!player.getWorld().getName().equals(this.worldName)){
+            return;
+        }
+        Block b = e.getClickedBlock();
+        Sign sign;
+        sign = (Sign) b.getState();
+        String line = sign.getLine(1);
+        if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST){
+            if(line.equals("Start")){
+                double x = location.getX();
+                double y = 5;
+                double z = 0;
+                List<Player> players = world.getPlayers();
+                for (Player p: players){
+                    Location loc = new Location(Bukkit.getWorld(this.worldName),x+50,y,z);
+                    p.teleport(loc);
+
+
+                }
+
+
+            }
+        }
     }
 
     @EventHandler
