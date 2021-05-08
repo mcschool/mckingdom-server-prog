@@ -148,7 +148,7 @@ public class AnvilWorld implements Listener {
         }
         if ((SurvivalCount == 1) || (SurvivalCount == 0)){
             isPlaying = false;
-            for (Player p : World.getPlayers()){
+            for (Player p : world.getPlayers()){
                 p.setGameMode(GameMode.ADVENTURE);
                 p.teleport(StartPlace);
                 p.sendTitle("GameSet!","ゲームが終了しました",0,40,0);
