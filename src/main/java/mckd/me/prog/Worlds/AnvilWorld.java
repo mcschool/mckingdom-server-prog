@@ -126,12 +126,12 @@ public class AnvilWorld implements Listener {
     @EventHandler
     public void PlayerDeath(PlayerDeathEvent e) {
         if (e.getEntity().getWorld().getName().equals(this.worldName)) {
-            Player.player = e.getEntity();
+            Player player = e.getEntity();
             if (e.getEntity() instanceof Player) {
-                player.sendMessege("金床の下敷きになった！");
+                player.sendMessage("金床の下敷きになった！");
                 player.setHealth(20.0);
                 player.setFoodLevel(10);
-                player.setGamemode(GameMode.SPECTATOR);
+                player.setGameMode(GameMode.SPECTATOR);
                 this.checkGamemode();
 
             }
