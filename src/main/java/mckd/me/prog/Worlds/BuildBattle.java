@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -40,6 +41,14 @@ public class BuildBattle implements Listener {
 
     }
 
+
+    @EventHandler
+    public void BlockBreak(BlockBreakEvent e){
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+
+    }
+
     @EventHandler
     public void signClick(PlayerInteractEvent e){
         Player player = e.getPlayer();
@@ -54,11 +63,12 @@ public class BuildBattle implements Listener {
         String line = sign.getLine(1);
         if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST){
             if(line.equals("Start")){
-                double x = location.getX();
+                double x = 0;
                 double y = 5;
                 double z = 0;
                 List<Player> players = world.getPlayers();
                 for (Player p: players){
+                    p.setGameMode(GameMode.CREATIVE);
                     Location loc = new Location(Bukkit.getWorld(this.worldName),x+50,y,z);
                     p.teleport(loc);
 
