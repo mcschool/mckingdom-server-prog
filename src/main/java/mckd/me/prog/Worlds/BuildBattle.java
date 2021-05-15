@@ -69,7 +69,7 @@ public class BuildBattle implements Listener {
                 List<Player> players = world.getPlayers();
                 for (Player p: players){
                     p.setGameMode(GameMode.CREATIVE);
-                    Location loc = new Location(Bukkit.getWorld(this.worldName),x+50,y,z);
+                    Location loc = new Location(Bukkit.getWorld(this.worldName),x=x+50,y,z);
                     p.teleport(loc);
 
 
