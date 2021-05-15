@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -20,6 +21,7 @@ public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
+    public Location BlokcBreak;
 
     public BuildBattle(Prog plugin){
         this.plugin = plugin;
@@ -79,6 +81,25 @@ public class BuildBattle implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent e){
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        Block block = e.getBlock();
+        Location location = player.getLocation();
+        if(e.getPlayer().getGameMode().equals(this.worldName)){
+            if(player.getGameMode() == GameMode.CREATIVE){
+                if(location.getX() >= 50 && location.getX() < 51){
+                    e.setCancelled(true);
+
+
+                }
+            }
+        }
+    }
+
+
 
     @EventHandler
     public void PlayerMove(PlayerMoveEvent e){
