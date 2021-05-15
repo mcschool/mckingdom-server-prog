@@ -87,7 +87,7 @@ public class BuildBattle implements Listener {
         World world = player.getWorld();
         Block block = e.getBlock();
         Location location = block.getLocation();
-        if(e.getPlayer().getGameMode().equals(this.worldName)){
+        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
             if(player.getGameMode() == GameMode.CREATIVE){
                 if(location.getX() >= 48 && location.getX() < 52){
                     player.sendMessage("おい、減点するぞ");
