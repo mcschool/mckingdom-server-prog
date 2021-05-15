@@ -82,12 +82,6 @@ public class AnvilWorld implements Listener {
                         player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                         player.sendMessage("移動するよ");
                         this.fallAnvil();
-                        for (int i = 0; i < 4; i++) {
-
-                        }
-                    } else {
-                        isPlaying = false;
-                        player.sendMessage("2人まで待ってね");
                     }
                 }
             }
@@ -119,6 +113,10 @@ public class AnvilWorld implements Listener {
                     world.getBlockAt(location).setType(Material.ANVIL);
                 }
             }.runTaskLater(this.plugin, 20 * i);
+                    if(isPlaying == false) {
+                        break;
+                    }
+
         }
     }
 
