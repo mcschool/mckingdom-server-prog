@@ -81,6 +81,7 @@ public class AnvilWorld implements Listener {
                         this.startGame();
                         player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                         player.sendMessage("移動するよ");
+                        this.fallAnvil();
                         for (int i = 0; i < 4; i++) {
 
                         }
@@ -102,7 +103,7 @@ public class AnvilWorld implements Listener {
         }
     }
 
-    public void fallAnvil(Player player) {
+    public void fallAnvil() {
         World world = Bukkit.getWorld("anvil");
         Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
         world.getBlockAt(location).setType(Material.ANVIL);
