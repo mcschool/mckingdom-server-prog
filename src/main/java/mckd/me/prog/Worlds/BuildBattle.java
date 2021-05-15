@@ -87,7 +87,7 @@ public class BuildBattle implements Listener {
         Player player = e.getPlayer();
         World world = player.getWorld();
         Block block = e.getBlock();
-        Location location = player.getLocation();
+        Location location = block.getLocation();
         if(e.getPlayer().getGameMode().equals(this.worldName)){
             if(player.getGameMode() == GameMode.CREATIVE){
                 if(location.getX() >= 50 && location.getX() < 51){
