@@ -82,6 +82,26 @@ public class BuildBattle implements Listener {
     }
 
     @EventHandler
+    public void onBlockBreak(BlockBreakEvent e){
+        Player player = e.getPlayer();
+        World world = player.getWorld();
+        Block block = e.getBlock();
+        Location location = block.getLocation();
+        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
+            if(player.getGameMode() == GameMode.CREATIVE){
+                if(location.getX() >= 75 && location.getX() < 76 || location.getX() >=  125 && location.getX() < 126){
+                    player.sendMessage("おい、減点するぞ");
+                    e.setCancelled(true);
+
+
+                }
+            }
+        }
+    }
+
+
+
+    @EventHandler
     public void PlayerMove(PlayerMoveEvent e){
         Player player = e.getPlayer();
         World world = player.getWorld();
