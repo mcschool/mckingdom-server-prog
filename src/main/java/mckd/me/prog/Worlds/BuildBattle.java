@@ -82,14 +82,6 @@ public class BuildBattle implements Listener {
     }
 
     @EventHandler
-    public void BlockPlaceEvent(BlockPlaceEvent event){
-        Player player = event.getPlayer();
-        if (player != player){
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
     public void PlayerMove(PlayerMoveEvent e){
         Player player = e.getPlayer();
         World world = player.getWorld();
