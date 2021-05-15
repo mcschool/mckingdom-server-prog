@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -82,6 +83,11 @@ public class AnvilWorld implements Listener {
                         player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                         player.sendMessage("移動するよ");
                         this.fallAnvil();
+                        if(isPlaying == false) {
+                            e.setCancelled(true);
+
+                        }
+
                     }
                 }
             }
@@ -105,17 +111,16 @@ public class AnvilWorld implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
-                    Random R = new Random();
-                    int x = R.nextInt(14);
-                    int z = R.nextInt(14);
-                    location.add(x, 0, z);
-                    world.getBlockAt(location).setType(Material.ANVIL);
-                }
-            }.runTaskLater(this.plugin, 20 * i);
-                    if(isPlaying == false) {
-                        break;
+                    if (isPlaying == true) {
+                        Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+                        Random R = new Random();
+                        int x = R.nextInt(14);
+                        int z = R.nextInt(14);
+                        location.add(x, 0, z);
+                        world.getBlockAt(location).setType(Material.ANVIL);
                     }
+            }
+            }.runTaskLater(this.plugin, 2);
 
         }
     }
@@ -152,6 +157,21 @@ public class AnvilWorld implements Listener {
             }
         }
     }
+    @EventHandler
+    public void PlayerDamageEvent(EntityDamageEvent e) {
+        if (e.getEntity().getWorld().getName().equals(this.worldName)) {
+            Player player = (Player) e.getEntity();
+            if (e.getCause()!= null && e.getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+                e.setCancelled(true);
+            }
+            }
+
+        }
+
+
+
+
+
 }
 //    if (SurvivalCount = 1) or (SurvivalCount = 0){
 //        isPlaying = false;
