@@ -21,7 +21,6 @@ public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
-    public Location BlokcBreak;
 
     public BuildBattle(Prog plugin){
         this.plugin = plugin;
@@ -90,7 +89,8 @@ public class BuildBattle implements Listener {
         Location location = block.getLocation();
         if(e.getPlayer().getGameMode().equals(this.worldName)){
             if(player.getGameMode() == GameMode.CREATIVE){
-                if(location.getX() >= 50 && location.getX() < 51){
+                if(location.getX() >= 48 && location.getX() < 52){
+                    player.sendMessage("おい、減点するぞ");
                     e.setCancelled(true);
 
 
