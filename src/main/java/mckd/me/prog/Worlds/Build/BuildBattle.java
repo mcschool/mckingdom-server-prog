@@ -1,10 +1,15 @@
-package mckd.me.prog.Worlds;
+package mckd.me.prog.Worlds.Build;
 
 import mckd.me.prog.Prog;
 import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -64,6 +69,8 @@ public class BuildBattle implements Listener {
         String line = sign.getLine(1);
         if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST){
             if(line.equals("Start")){
+                new BuildScheduler(this.plugin, player.getWorld()).runTaskTimer(this.plugin, 0, 20);
+
                 double x = 0;
                 double y = 5;
                 double z = 0;
@@ -80,6 +87,13 @@ public class BuildBattle implements Listener {
             }
         }
     }
+
+
+
+
+
+
+
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
