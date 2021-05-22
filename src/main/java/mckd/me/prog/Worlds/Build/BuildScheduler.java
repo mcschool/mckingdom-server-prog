@@ -9,7 +9,6 @@ public class BuildScheduler extends BukkitRunnable {
     private final World world;
     private int count;
     private Prog plugin;
-    private int enemyCount = 0;
 
 
     public BuildScheduler(Prog plugin, World world) {
