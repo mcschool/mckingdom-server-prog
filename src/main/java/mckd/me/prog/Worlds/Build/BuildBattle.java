@@ -27,15 +27,15 @@ public class BuildBattle implements Listener {
     private BukkitTask task;
 
 
-    public BuildBattle(Prog plugin){
+    public BuildBattle(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        this.changePlace = new Location(Bukkit.getWorld(this.worldName),-20,10,538);
+        this.changePlace = new Location(Bukkit.getWorld(this.worldName), -20, 10, 538);
     }
 
     @EventHandler
-    public void changeWorld(PlayerChangedWorldEvent e){
-        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
+    public void changeWorld(PlayerChangedWorldEvent e) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
             player.teleport(this.changePlace);
             player.getInventory().clear();
@@ -49,99 +49,89 @@ public class BuildBattle implements Listener {
 
 
     @EventHandler
-    public void BlockBreak(BlockBreakEvent e){
+    public void BlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
 
     }
 
     @EventHandler
-    public void signClick(PlayerInteractEvent e){
+    public void signClick(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
         Location location = player.getLocation();
-        if(!player.getWorld().getName().equals(this.worldName)){
+        if (!player.getWorld().getName().equals(this.worldName)) {
             return;
         }
         Block b = e.getClickedBlock();
         Sign sign;
         sign = (Sign) b.getState();
         String line = sign.getLine(1);
-        if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST){
-            if(line.equals("Start")){
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
+            if (line.equals("Start")) {
                 //new BuildScheduler(this.plugin, player.getWorld()).runTaskTimer(this.plugin, 0, 20);
-                    BossBar bossBar = Bukkit.createBossBar("countdown", BarColor.YELLOW, BarStyle.SEGMENTED_10);
-                    if(task == null){
-                        new BukkitRunnable() {
-                            int seconds = 10;
+                BossBar bossBar = Bukkit.createBossBar("countdown", BarColor.YELLOW, BarStyle.SEGMENTED_10);
+                if (task == null) {
+                    new BukkitRunnable() {
+                        int seconds = 10;
 
-                            @Override
-                            public void run() {
-                                if ((seconds -= 1) == 0) {
-                                    task.cancel();
-                                    bossBar.removeAll();
-                                } else {
-                                    bossBar.setProgress(seconds / 10D);
-                                }
-
+                        @Override
+                        public void run() {
+                            if ((seconds -= 1) == 0) {
+                                task.cancel();
+                                bossBar.removeAll();
+                            } else {
+                                bossBar.setProgress(seconds / 10D);
                             }
-                        }.runTaskTimer(this.plugin, 0, 20);
-                    }
-                    bossBar.setVisible(true);
-                    bossBar.addPlayer(player);
-                    //player.sendTitle(msg, "", 0, 20, 0);
-                }
-                double x = 0;
-                double y = 5;
-                double z = 0;
-                List<Player> players = world.getPlayers();
-                for (Player p: players){
-                    p.setGameMode(GameMode.CREATIVE);
-                    Location loc = new Location(Bukkit.getWorld(this.worldName),x=x+50,y,z);
-                    p.teleport(loc);
 
-
+                        }
+                    }.runTaskTimer(this.plugin, 0, 20);
                 }
+                bossBar.setVisible(true);
+                bossBar.addPlayer(player);
+                //player.sendTitle(msg, "", 0, 20, 0);
+            }
+            double x = 0;
+            double y = 5;
+            double z = 0;
+            List<Player> players = world.getPlayers();
+            for (Player p : players) {
+                p.setGameMode(GameMode.CREATIVE);
+                Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 50, y, z);
+                p.teleport(loc);
 
 
             }
+
+
         }
     }
 
 
-
-
-
-
-
-
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent e){
+    public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
         Block block = e.getBlock();
         Location location = block.getLocation();
-        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
-            if(player.getGameMode() == GameMode.CREATIVE){
-                if(location.getX() >= 75 && location.getX() < 76 || location.getX() >=  125 && location.getX() < 126){
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if (player.getGameMode() == GameMode.CREATIVE) {
+                if (location.getX() >= 75 && location.getX() < 76 || location.getX() >= 125 && location.getX() < 126) {
                     player.sendMessage("おい、減点するぞ");
                     e.setCancelled(true);
-
-
                 }
             }
         }
     }
 
 
-
     @EventHandler
-    public void PlayerMove(PlayerMoveEvent e){
+    public void PlayerMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         World world = player.getWorld();
         Location location = player.getLocation();
-        if(e.getPlayer().getWorld().getName().equals(this.worldName)){
-            if(player.getGameMode() == GameMode.CREATIVE) {
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if (player.getGameMode() == GameMode.CREATIVE) {
                 if (location.getY() > 70) {
                     double x = location.getX();
                     double y = 5;
@@ -154,3 +144,4 @@ public class BuildBattle implements Listener {
         }
     }
 }
+
