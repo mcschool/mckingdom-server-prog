@@ -1,24 +1,22 @@
 package mckd.me.prog.Worlds.Build;
 
 import mckd.me.prog.Prog;
-import mckd.me.prog.Worlds.OneNightJinro.GameStatus;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 
@@ -26,6 +24,8 @@ public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
+    private BukkitTask task;
+
 
     public BuildBattle(Prog plugin){
         this.plugin = plugin;
@@ -69,8 +69,28 @@ public class BuildBattle implements Listener {
         String line = sign.getLine(1);
         if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST){
             if(line.equals("Start")){
-                new BuildScheduler(this.plugin, player.getWorld()).runTaskTimer(this.plugin, 0, 20);
+                //new BuildScheduler(this.plugin, player.getWorld()).runTaskTimer(this.plugin, 0, 20);
+                    BossBar bossBar = Bukkit.createBossBar("countdown", BarColor.YELLOW, BarStyle.SEGMENTED_10);
+                    if(task == null){
+                        new BukkitRunnable() {
+                            int seconds = 10;
 
+                            @Override
+                            public void run() {
+                                if ((seconds -= 1) == 0) {
+                                    task.cancel();
+                                    bossBar.removeAll();
+                                } else {
+                                    bossBar.setProgress(seconds / 10D);
+                                }
+
+                            }
+                        }.runTaskTimer(this.plugin, 0, 20);
+                    }
+                    bossBar.setVisible(true);
+                    bossBar.addPlayer(player);
+                    //player.sendTitle(msg, "", 0, 20, 0);
+                }
                 double x = 0;
                 double y = 5;
                 double z = 0;
