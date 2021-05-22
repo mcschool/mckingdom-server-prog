@@ -70,7 +70,8 @@ public class BuildBattle implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("Start")) {
                 //new BuildScheduler(this.plugin, player.getWorld()).runTaskTimer(this.plugin, 0, 20);
-                BossBar bossBar = Bukkit.createBossBar("countdown", BarColor.YELLOW, BarStyle.SEGMENTED_10);
+                BossBar bossBar = Bukkit.createBossBar("bossBar", BarColor.YELLOW, BarStyle.SEGMENTED_10);
+                bossBar.setVisible(false);
                 if (task == null) {
                     new BukkitRunnable() {
                         int seconds = 10;
@@ -82,6 +83,7 @@ public class BuildBattle implements Listener {
                                 bossBar.removeAll();
                             } else {
                                 bossBar.setProgress(seconds / 10D);
+                                player.sendMessage(Integer.toString((int) (seconds / 10D)));
                             }
 
                         }
