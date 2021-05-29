@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -79,12 +80,13 @@ public class AnvilWorld implements Listener {
                 } else {
                     if (NowPlayerCount >= 1) {
                         isPlaying = true;
+                        player.getInventory().clear();
                         this.startGame();
                         player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                         player.sendMessage("移動するよ");
                         this.fallAnvil();
                         if(isPlaying == false) {
-                            e.setCancelled(true);
+                            e.setCancelled(true);git
 
                         }
 
