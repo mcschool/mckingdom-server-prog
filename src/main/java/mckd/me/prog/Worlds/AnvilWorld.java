@@ -109,20 +109,31 @@ public class AnvilWorld implements Listener {
         World world = Bukkit.getWorld("anvil");
         Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
         world.getBlockAt(location).setType(Material.ANVIL);
+        int a = 20;
         for (int i = 0; i < 100; i++) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (isPlaying == true) {
-                        Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
-                        Random R = new Random();
-                        int x = R.nextInt(14);
-                        int z = R.nextInt(14);
-                        location.add(x, 0, z);
-                        world.getBlockAt(location).setType(Material.ANVIL);
+            if (i < 30) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        if (isPlaying == true) {
+                            Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
+                            Random R = new Random();
+                            int x = R.nextInt(14);
+                            int z = R.nextInt(14);
+                            location.add(x, 0, z);
+                            world.getBlockAt(location).setType(Material.ANVIL);
+                        }
                     }
+                }.runTaskLater(this.plugin, a * i);
+            } else if (i < 60) {
+                a = 10;
+
+
+            } else {
+                if (i <= 100 || i >= 61) ;
+                    a = 5;
+
             }
-            }.runTaskLater(this.plugin, 5 * i);
 
         }
     }
