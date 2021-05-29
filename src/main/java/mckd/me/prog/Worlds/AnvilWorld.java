@@ -122,7 +122,7 @@ public class AnvilWorld implements Listener {
                         world.getBlockAt(location).setType(Material.ANVIL);
                     }
             }
-            }.runTaskLater(this.plugin, 20);
+            }.runTaskLater(this.plugin, 20 * i);
 
         }
     }
