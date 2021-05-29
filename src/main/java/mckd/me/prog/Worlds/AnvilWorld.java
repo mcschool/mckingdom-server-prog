@@ -86,7 +86,7 @@ public class AnvilWorld implements Listener {
                         player.sendMessage("移動するよ");
                         this.fallAnvil();
                         if(isPlaying == false) {
-                            e.setCancelled(true);git
+                            e.setCancelled(true);
 
                         }
 
