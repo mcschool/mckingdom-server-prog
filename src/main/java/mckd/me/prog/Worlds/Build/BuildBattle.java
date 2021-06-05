@@ -35,7 +35,6 @@ public class BuildBattle implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.changePlace = new Location(Bukkit.getWorld(this.worldName), -20, 10, 538);
     }
-
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
