@@ -110,7 +110,7 @@ public class AnvilWorld implements Listener {
         Location location = new Location(Bukkit.getWorld(worldName), -521, 55, -1293);
         world.getBlockAt(location).setType(Material.ANVIL);
         int a = 20;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10000; i++) {
             if (i < 30) {
                 new BukkitRunnable() {
                     @Override
