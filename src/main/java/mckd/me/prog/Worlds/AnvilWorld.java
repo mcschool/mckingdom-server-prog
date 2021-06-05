@@ -180,7 +180,13 @@ public class AnvilWorld implements Listener {
         World world = Bukkit.getWorld("Anvil");
         int SurvivalCount = 0;
         for (Player p : world.getPlayers()) {
-            if (p.getGameMode() == GameMode.SURVIVAL) {
+            for (Player pa : world.getPlayers()) {
+                pa.sendMessage("うううううう");
+            }
+            if (p.getGameMode() == GameMode.ADVENTURE) {
+                for (Player pb : world.getPlayers()) {
+                    pb.sendMessage("えええええええ");
+                }
                 SurvivalCount++;
             }
         }
