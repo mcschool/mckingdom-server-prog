@@ -184,7 +184,7 @@ public class AnvilWorld implements Listener {
                 SurvivalCount++;
             }
         }
-        if ((SurvivalCount == 1)){
+        if ((SurvivalCount <= 1)){
             isPlaying = false;
             for (Player p : world.getPlayers()){
                 p.setGameMode(GameMode.ADVENTURE);
