@@ -1,8 +1,6 @@
 package mckd.me.prog.Worlds.Raid;
 
-import com.sun.glass.ui.Timer;
 import mckd.me.prog.Prog;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
