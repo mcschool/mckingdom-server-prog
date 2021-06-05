@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class BuildBattle implements Listener {
     public String worldName = "Build";
     public Location changePlace;
     private BukkitTask task;
+    public int LimitTime = 600;
+    int count = 60;
 
 
     public BuildBattle(Prog plugin) {
@@ -55,6 +58,8 @@ public class BuildBattle implements Listener {
 
     }
 
+
+
     @EventHandler
     public void signClick(PlayerInteractEvent e) {
         Player player = e.getPlayer();
@@ -69,43 +74,23 @@ public class BuildBattle implements Listener {
         String line = sign.getLine(1);
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("Start")) {
-                //new BuildScheduler(this.plugin, player.getWorld()).runTaskTimer(this.plugin, 0, 20);
-                BossBar bossBar = Bukkit.createBossBar("bossBar", BarColor.YELLOW, BarStyle.SEGMENTED_10);
-                bossBar.removeAll();
-                if (task == null) {
-                    new BukkitRunnable() {
-                        int seconds = 10;
+                player.sendMessage("test");
+        //BukkitTask task = new BuildScheduler(this.plugin, LimitTime).runTaskTimer(this.plugin,0,20);
 
-                        @Override
-                        public void run() {
-                            if ((seconds -= 1) == 0) {
-                                task.cancel();
-                                bossBar.removeAll();
-                            } else {
-                                bossBar.setProgress(seconds / 100);
-                                player.sendMessage(Integer.toString((int) (seconds / 100)));
-                            }
+                double x = 0;
+                double y = 5;
+                double z = 0;
+                List<Player> players = world.getPlayers();
+                for (Player p : players) {
+                    p.setGameMode(GameMode.CREATIVE);
+                    Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 50, y, z);
+                    p.teleport(loc);
 
-                        }
-                    }.runTaskTimer(this.plugin, 0, 20);
+
                 }
-                bossBar.setVisible(true);
-                bossBar.addPlayer(player);
-                //player.sendTitle(msg, "", 0, 20, 0);
-            }
-            double x = 0;
-            double y = 5;
-            double z = 0;
-            List<Player> players = world.getPlayers();
-            for (Player p : players) {
-                p.setGameMode(GameMode.CREATIVE);
-                Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 50, y, z);
-                p.teleport(loc);
 
 
             }
-
-
         }
     }
 
