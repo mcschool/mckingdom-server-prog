@@ -125,7 +125,7 @@ public class AnvilWorld implements Listener {
                         }
                     }
                 }.runTaskLater(this.plugin, a * i);
-            } else if (i < 60) {
+            } else if (i < 600) {
                 a = 10;
                 new BukkitRunnable() {
                     @Override
@@ -142,7 +142,7 @@ public class AnvilWorld implements Listener {
                 }.runTaskLater(this.plugin, a * i);
 
             } else {
-                    a = 5;
+                    a = 50;
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -184,7 +184,7 @@ public class AnvilWorld implements Listener {
                 SurvivalCount++;
             }
         }
-        if ((SurvivalCount == 1) || (SurvivalCount == 0)){
+        if ((SurvivalCount == 1)){
             isPlaying = false;
             for (Player p : world.getPlayers()){
                 p.setGameMode(GameMode.ADVENTURE);
