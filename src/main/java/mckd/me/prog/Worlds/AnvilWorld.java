@@ -72,6 +72,8 @@ public class AnvilWorld implements Listener {
     public void interactBlock(PlayerInteractEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             Player player = e.getPlayer();
+            World world = player.getWorld();
+            Location loc = new Location(Bukkit.getWorld(worldName),-514,16,-1284);
             ItemStack item = e.getItem();
             if (item.getType() == Material.ANVIL) {
                 int NowPlayerCount = player.getWorld().getPlayers().size();
@@ -82,6 +84,7 @@ public class AnvilWorld implements Listener {
                         isPlaying = true;
                         player.getInventory().clear();
                         this.startGame();
+                        world.getBlockAt(loc).setType(Material.SAND);
                         player.sendTitle("Gamestart", "ゲームスタート", 20, 20, 20);
                         player.sendMessage("移動するよ");
                         this.fallAnvil();
