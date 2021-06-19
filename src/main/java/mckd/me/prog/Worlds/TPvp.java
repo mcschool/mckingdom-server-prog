@@ -38,17 +38,17 @@ public class TPvp implements Listener {
             World world = player.getWorld();
             world.setTime(30000);
             player.setGameMode(GameMode.ADVENTURE);
+            this.ChangeStage1();
         }
     }
     public void ChangeStage1() {
-        Location location = new Location(Bukkit.getWorld(worldName), -1341, 12, -720);
+        Location location = new Location(Bukkit.getWorld(worldName), -1341, 11, -720);
         Location location2 = new Location(Bukkit.getWorld(worldName),-1361,12,-839);
         World world = Bukkit.getWorld("Tpvp");
         List<Player> players = world.getPlayers();
         for (Player player : players) {
             if (player.getLocation() == location) {
                 player.teleport(location2);
-
             }
         }
     }
