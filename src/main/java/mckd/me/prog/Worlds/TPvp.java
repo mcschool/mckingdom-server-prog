@@ -56,6 +56,7 @@ public class TPvp implements Listener {
             player.teleport(location2);
         }
     }
+}
 
 
 
