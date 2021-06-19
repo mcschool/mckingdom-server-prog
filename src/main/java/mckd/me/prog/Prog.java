@@ -91,6 +91,7 @@ public final class Prog extends JavaPlugin {
         new FallColorWorld(this);
         new Raid(this);
         new BuildBattle(this);
+        new TPvp(this);
         main = this;
 
         // ワールド読み込み
