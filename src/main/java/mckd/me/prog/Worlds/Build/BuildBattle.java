@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
@@ -87,11 +88,7 @@ public class BuildBattle implements Listener {
 
 
             }
-            if(line.equals("Ground")){
-                if(player.getInventory().contains(Material.LOG)){
-                    player.sendMessage("OK");
-                }
-                player.sendMessage("test2");
+            if(line.equals("KUSAblock1")){
 
             }
         }
@@ -107,7 +104,11 @@ public class BuildBattle implements Listener {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             if (player.getGameMode() == GameMode.CREATIVE) {
                 if (location.getX() >= 75 && location.getX() < 76 || location.getX() >= 125 && location.getX() < 126) {
-                    player.sendMessage("おい、減点するぞ");
+                    player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
+                    e.setCancelled(true);
+                }
+                if(location.getZ() >=0 && location.getZ() < 1 || location.getZ() >= -25 && location.getZ() < -26 || location.getZ() >= 25 && location.getZ() < 26){
+                    player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
             }
