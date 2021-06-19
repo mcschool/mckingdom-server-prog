@@ -4,9 +4,7 @@ import mckd.me.prog.Prog;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,8 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
+
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
@@ -26,8 +23,8 @@ public class BuildBattle implements Listener {
     public String worldName = "Build";
     public Location changePlace;
     private BukkitTask task;
-    public int LimitTime = 600;
-    int count = 60;
+    /*public int LimitTime = 600;
+    int count = 60;*/
 
 
     public BuildBattle(Prog plugin) {
@@ -88,6 +85,13 @@ public class BuildBattle implements Listener {
 
                 }
 
+
+            }
+            if(line.equals("Ground")){
+                if(player.getInventory().contains(Material.LOG)){
+                    player.sendMessage("OK");
+                }
+                player.sendMessage("test2");
 
             }
         }
