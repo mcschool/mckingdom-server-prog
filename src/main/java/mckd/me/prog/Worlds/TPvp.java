@@ -48,9 +48,11 @@ public class TPvp implements Listener {
         Location location2 = new Location(Bukkit.getWorld(worldName), -1361, 12, -839);
         World world = Bukkit.getWorld("Tpvp");
         Player player = e.getPlayer();
+        int x = (int) player.getLocation().getX();
+        int y = (int) player.getLocation().getY();
+        int z = (int) player.getLocation().getZ();
         //player.sendMessage(String.valueOf(player.getLocation()));
-        if (this.worldName == worldName) {
-            if (player.getLocation() == location) {
+            if (x == location.getX() && y == location.getY() && z == location.getZ()) {
                 player.teleport(location2);
             }
         }
