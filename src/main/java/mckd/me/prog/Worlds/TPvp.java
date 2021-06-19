@@ -65,12 +65,18 @@ public class TPvp implements Listener {
         int x = (int) player.getLocation().getX();
         int y = (int) player.getLocation().getY();
         int z = (int) player.getLocation().getZ();
-        if (x == (int) location3.getX() && y == (int) location3.getY() && z == (int) location3.getZ()) {
-            player.teleport(location4);
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if (x == (int) location3.getX() && y == (int) location3.getY() && z == (int) location3.getZ()) {
+                player.teleport(location4);
+            }
+
         }
     }
 
 }
+
+
+
 
 
 
