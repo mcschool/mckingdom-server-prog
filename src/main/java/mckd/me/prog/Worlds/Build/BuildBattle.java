@@ -107,7 +107,7 @@ public class BuildBattle implements Listener {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
-                if(location.getZ() >=0 && location.getZ() < 1 || location.getZ() >= -24 && location.getZ() < -23 || location.getZ() >= 25 && location.getZ() < 26){
+                if(location.getZ() >=0 && location.getZ() < 1 || location.getZ() >= -25 && location.getZ() < -24 || location.getZ() >= 25 && location.getZ() < 26){
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
