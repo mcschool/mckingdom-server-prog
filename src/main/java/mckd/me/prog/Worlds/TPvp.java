@@ -41,20 +41,23 @@ public class TPvp implements Listener {
             player.setGameMode(GameMode.ADVENTURE);
         }
     }
+
     @EventHandler
     public void ChangeStage1(PlayerMoveEvent e) {
         Location location = new Location(Bukkit.getWorld(worldName), -1341, 11, -720);
-        Location location2 = new Location(Bukkit.getWorld(worldName),-1361,12,-839);
+        Location location2 = new Location(Bukkit.getWorld(worldName), -1361, 12, -839);
         World world = Bukkit.getWorld("Tpvp");
         Player player = e.getPlayer();
-            //player.sendMessage(String.valueOf(player.getLocation()));
+        //player.sendMessage(String.valueOf(player.getLocation()));
+        if (this.worldName == worldName) {
             if (player.getLocation() == location) {
                 player.teleport(location2);
             }
         }
+
     }
 
-
+}
 
 
 
