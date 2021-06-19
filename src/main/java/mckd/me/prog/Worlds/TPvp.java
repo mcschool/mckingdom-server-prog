@@ -56,7 +56,26 @@ public class TPvp implements Listener {
             player.teleport(location2);
         }
     }
+
+    @EventHandler
+    public void ChangeStage(PlayerMoveEvent e) {
+        Location location3 = new Location(Bukkit.getWorld(worldName), -1341, 11, -727);
+        Location location4 = new Location(Bukkit.getWorld(worldName), -1277, 13, -846);
+        Player player = e.getPlayer();
+        int x = (int) player.getLocation().getX();
+        int y = (int) player.getLocation().getY();
+        int z = (int) player.getLocation().getZ();
+        if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if (x == (int) location3.getX() && y == (int) location3.getY() && z == (int) location3.getZ()) {
+                player.teleport(location4);
+            }
+
+        }
+    }
+
 }
+
+
 
 
 
