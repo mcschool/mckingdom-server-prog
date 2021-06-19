@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -38,15 +39,14 @@ public class TPvp implements Listener {
             World world = player.getWorld();
             world.setTime(30000);
             player.setGameMode(GameMode.ADVENTURE);
-            this.ChangeStage1();
         }
     }
-    public void ChangeStage1() {
+    @EventHandler
+    public void ChangeStage1(PlayerMoveEvent e) {
         Location location = new Location(Bukkit.getWorld(worldName), -1341, 11, -720);
         Location location2 = new Location(Bukkit.getWorld(worldName),-1361,12,-839);
         World world = Bukkit.getWorld("Tpvp");
-        List<Player> players = world.getPlayers();
-        for (Player player : players) {
+        Player player = e.getPlayer();
             if (player.getLocation() == location) {
                 player.teleport(location2);
             }
@@ -57,4 +57,3 @@ public class TPvp implements Listener {
 
 
 
-}
