@@ -76,11 +76,11 @@ public class BuildBattle implements Listener {
 
                 double x = 0;
                 double y = 5;
-                double z = 0;
+                double z = -12;
                 List<Player> players = world.getPlayers();
                 for (Player p : players) {
                     p.setGameMode(GameMode.CREATIVE);
-                    Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 50, y, z);
+                    Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 62, y,z);
                     p.teleport(loc);
 
 
@@ -88,7 +88,8 @@ public class BuildBattle implements Listener {
 
 
             }
-            if(line.equals("KUSAblock1")){
+            if(line.equals("O-KUBlock")){
+
 
             }
         }
