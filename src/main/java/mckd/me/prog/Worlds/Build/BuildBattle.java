@@ -93,10 +93,10 @@ public class BuildBattle implements Listener {
             if(line.equals("a1")){
                 player.sendMessage("aaa");
                 double x = 26;
-                double y = 4;
+                double y = 3;
                 double z = 24;
                 for(int i =1; i <= 24; i++){
-                    world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x = x + 1,y,z = z + 1)).setType(Material.WOOD);
+                    world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x = x + 1,y,z = z - 1)).setType(Material.WOOD);
                     player.sendMessage("bbb");
 
                 }
