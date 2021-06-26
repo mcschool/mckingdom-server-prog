@@ -96,8 +96,8 @@ public class BuildBattle implements Listener {
                 double y = 3;
                 double z = 24;
                 for(int i = 1; i <= 24; i++){
-                    world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x = x + 1, y, z)).setType(Material.WOOD);
                     for(int j = 1; j <= 24; j++) {
+                        world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x = x + 1, y, z)).setType(Material.WOOD);
                         world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x, y, z = z - 1)).setType(Material.WOOD);
                     }
                 }
