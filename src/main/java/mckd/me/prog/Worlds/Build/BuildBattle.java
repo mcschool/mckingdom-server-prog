@@ -23,6 +23,7 @@ public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
+    public Location KIBLOCK;
     private BukkitTask task;
     /*public int LimitTime = 600;
     int count = 60;*/
@@ -32,6 +33,7 @@ public class BuildBattle implements Listener {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.changePlace = new Location(Bukkit.getWorld(this.worldName), -20, 10, 538);
+        this.KIBLOCK = new Location(Bukkit.getWorld(this.worldName),26,4,24);
     }
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
@@ -89,6 +91,13 @@ public class BuildBattle implements Listener {
 
             }
             if(line.equals("O-KUBlock")){
+                double x = 26;
+                double y = 4;
+                double z = 24;
+                for(int i =1; i <= 24; i++){
+                    world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x = x + 1,y,z = z + 1));
+
+                }
 
 
             }
