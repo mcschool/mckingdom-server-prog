@@ -112,9 +112,9 @@ public class BuildBattle implements Listener {
                 double z = 24;
                 for(int i = 0; i <= 24; i++){
                     world.getBlockAt(new Location(
-                            Bukkit.getWorld(this.worldName), x + i, y, z)).setType(Material.GRASS);
+                            Bukkit.getWorld(this.worldName), x + i, y, z)).setType(Material.EMERALD_BLOCK);
                     for(int j = 0; j <= 24; j++) {
-                        world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x + i, y, z - j)).setType(Material.GRASS);
+                        world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x + i, y, z - j)).setType(Material.EMERALD_BLOCK);
                     }
                 }
 
