@@ -7,6 +7,5 @@ authors: [nankotsu029]
 
 
 commands:
-  timer:
+  count:
     description: TimerCommand
-    usage: /<command> sec
