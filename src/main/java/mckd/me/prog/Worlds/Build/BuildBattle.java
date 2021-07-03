@@ -106,6 +106,7 @@ public class BuildBattle implements Listener {
 
             }
             if(line.equals("a2")){
+                player.sendMessage("bbb");
                 double x = 26;
                 double y = 3;
                 double z = 24;
