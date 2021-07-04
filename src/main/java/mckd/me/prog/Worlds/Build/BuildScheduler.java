@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class BuildScheduler implements CommandExecutor {
 
     private BukkitTask task;
-    private BossBar bossBar;
+    //private BossBar bossBar;
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd,String label,String[] args){
@@ -42,7 +42,7 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
-                    bossBar = Bukkit.createBossBar("残り時間 " + i +" 秒", BarColor.BLUE, BarStyle.SEGMENTED_10);
+                    BossBar bossBar = Bukkit.createBossBar("残り時間 " + i +" 秒", BarColor.BLUE, BarStyle.SEGMENTED_10);
                     bossBar.setVisible(true);
                     sender.sendMessage("カウント: " + i);
                     i--;
