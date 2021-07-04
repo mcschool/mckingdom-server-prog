@@ -13,6 +13,14 @@ public class BuildScheduler implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd,String label,String[] args){
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Scoreboard board = manager.getMainScoreboard();
+        Objective obj = board.registerNewObjective("count", "dummy");
+        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+        obj.setDisplayName("時間");
+        board.resetScores("時間");
+        Score space = obj.getScore("");
+        space.setScore(2);
         if(args.length == 1){
             if(!StringUtils.isNumeric(args[0])){
                 sender.sendMessage("§ccountは数字で指定してください");
@@ -23,15 +31,8 @@ public class BuildScheduler implements CommandExecutor {
                 sender.sendMessage("§ccountは1以上を指定してください");
                 return true;
             }
-            ScoreboardManager manager = Bukkit.getScoreboardManager();
-            Scoreboard board = manager.getMainScoreboard();
-            Objective obj = board.registerNewObjective("count", "dummy");
-            obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-            obj.setDisplayName("時間");
-            Score space = obj.getScore("");
-            space.setScore(2);
+
             sender.sendMessage("§b" + count + "秒数えます...");
-            //board.resetScores("時間");
             BukkitRunnable task = new BukkitRunnable() {
                 int i = count;
                 @Override
