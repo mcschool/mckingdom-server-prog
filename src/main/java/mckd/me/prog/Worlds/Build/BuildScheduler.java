@@ -2,10 +2,12 @@ package mckd.me.prog.Worlds.Build;
 
 import mckd.me.prog.Prog;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.*;
 
 public class BuildScheduler implements CommandExecutor {
 
@@ -31,6 +33,15 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
+                    ScoreboardManager manager = Bukkit.getScoreboardManager();
+                    Scoreboard board = manager.getMainScoreboard();
+                    Objective obj = board.registerNewObjective("count", "dummy");
+                    obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+                    obj.setDisplayName("時間");
+                    Score space = obj.getScore("");
+                    space.setScore(1);
+                    Score timer = obj.getScore("残り" + i + "秒");
+                    timer.setScore(2);
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
