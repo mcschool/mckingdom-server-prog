@@ -31,7 +31,7 @@ public class BuildScheduler implements CommandExecutor {
             Score space = obj.getScore("");
             space.setScore(2);
             sender.sendMessage("§b" + count + "秒数えます...");
-            board.resetScores("時間");
+            //board.resetScores("時間");
             BukkitRunnable task = new BukkitRunnable() {
                 int i = count;
                 @Override
