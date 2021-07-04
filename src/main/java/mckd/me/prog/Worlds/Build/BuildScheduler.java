@@ -33,7 +33,7 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
-                    ScoreboardManager manager = Bukkit.getScoreboardManager();
+                    /*ScoreboardManager manager = Bukkit.getScoreboardManager();
                     Scoreboard board = manager.getMainScoreboard();
                     Objective obj = board.registerNewObjective("count", "dummy");
                     obj.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -41,7 +41,7 @@ public class BuildScheduler implements CommandExecutor {
                     Score space = obj.getScore("");
                     space.setScore(1);
                     Score timer = obj.getScore("残り" + i + "秒");
-                    timer.setScore(2);
+                    timer.setScore(2);*/
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
