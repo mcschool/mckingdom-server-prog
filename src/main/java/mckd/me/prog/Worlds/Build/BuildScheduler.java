@@ -16,16 +16,15 @@ import org.bukkit.scheduler.BukkitTask;
 public class BuildScheduler implements CommandExecutor {
 
     private BukkitTask task;
-    private BossBar bossBar;
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd,String label,String[] args){
-        Player player = null;
+        /*Player player = null;
         if(sender instanceof Player){
             player = (Player) sender;
         } else {
             return true;
-        }
+        }*/
         if(args.length == 1){
             if(!StringUtils.isNumeric(args[0])){
                 sender.sendMessage("§ccountは数字で指定してください");
@@ -40,6 +39,7 @@ public class BuildScheduler implements CommandExecutor {
 
             sender.sendMessage("§b" + count + "秒数えます...");
             BukkitRunnable task = new BukkitRunnable() {
+                Player player = (Player) Bukkit.getOnlinePlayers();
                 int i = count;
                 @Override
                 public void run() {
@@ -48,6 +48,9 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
+                    BossBar bossBar = Bukkit.createBossBar("残り " + i + "秒",BarColor.YELLOW,BarStyle.SEGMENTED_10);
+                    bossBar.setVisible(true);
+                    bossBar.addPlayer(player);
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
