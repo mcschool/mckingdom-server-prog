@@ -23,7 +23,15 @@ public class BuildScheduler implements CommandExecutor {
                 sender.sendMessage("§ccountは1以上を指定してください");
                 return true;
             }
+            ScoreboardManager manager = Bukkit.getScoreboardManager();
+            Scoreboard board = manager.getMainScoreboard();
+            Objective obj = board.registerNewObjective("count", "dummy");
+            obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+            obj.setDisplayName("時間");
+            Score space = obj.getScore("");
+            space.setScore(2);
             sender.sendMessage("§b" + count + "秒数えます...");
+            board.resetScores("時間");
             BukkitRunnable task = new BukkitRunnable() {
                 int i = count;
                 @Override
@@ -33,15 +41,8 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
-                    /*ScoreboardManager manager = Bukkit.getScoreboardManager();
-                    Scoreboard board = manager.getMainScoreboard();
-                    Objective obj = board.registerNewObjective("count", "dummy");
-                    obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-                    obj.setDisplayName("時間");
-                    Score space = obj.getScore("");
-                    space.setScore(1);
                     Score timer = obj.getScore("残り" + i + "秒");
-                    timer.setScore(2);*/
+                    timer.setScore(1);
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
