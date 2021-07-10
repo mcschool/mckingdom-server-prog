@@ -47,9 +47,10 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
-                    /*BossBar bossBar = Bukkit.createBossBar("残り " + i + "秒",BarColor.YELLOW,BarStyle.SEGMENTED_10);
+                    BossBar bossBar = Bukkit.createBossBar("残り " + i + "秒",BarColor.YELLOW,BarStyle.SEGMENTED_10);
                     bossBar.setVisible(true);
-                    bossBar.addPlayer(player);*/
+                    sender.sendMessage("test");
+                    //bossBar.addPlayer(player);
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
