@@ -36,10 +36,9 @@ public class BuildScheduler implements CommandExecutor {
                 return true;
             }
 
-
             sender.sendMessage("§b" + count + "秒数えます...");
             BukkitRunnable task = new BukkitRunnable() {
-                Player player = (Player) Bukkit.getOnlinePlayers();
+                //Player player = (Player) Bukkit.getOnlinePlayers();
                 int i = count;
                 @Override
                 public void run() {
@@ -48,9 +47,9 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
-                    BossBar bossBar = Bukkit.createBossBar("残り " + i + "秒",BarColor.YELLOW,BarStyle.SEGMENTED_10);
+                    /*BossBar bossBar = Bukkit.createBossBar("残り " + i + "秒",BarColor.YELLOW,BarStyle.SEGMENTED_10);
                     bossBar.setVisible(true);
-                    bossBar.addPlayer(player);
+                    bossBar.addPlayer(player);*/
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
