@@ -1,5 +1,6 @@
 package mckd.me.prog.Worlds.Build;
 
+import junit.framework.Test;
 import mckd.me.prog.Prog;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -16,6 +17,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.util.List;
 

@@ -2,11 +2,17 @@ package mckd.me.prog.Worlds.Build;
 
 import mckd.me.prog.Prog;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 
 public class BuildScheduler implements CommandExecutor {
@@ -15,12 +21,12 @@ public class BuildScheduler implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd,String label,String[] args){
-        /*Player player = null;
+        Player player = null;
         if(sender instanceof Player){
             player = (Player) sender;
         } else {
             return true;
-        }*/
+        }
 
 
         if(args.length == 1){
@@ -44,6 +50,12 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
+                    ScoreboardManager manager = Bukkit.getScoreboardManager();
+                    Scoreboard board = manager.getNewScoreboard();
+                    Objective objective = board.registerNewObjective("Count", "dummy");
+                    objective.setDisplayName("のこり時間");
+                    objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+                    ((Player) sender).setScoreboard(board);
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
