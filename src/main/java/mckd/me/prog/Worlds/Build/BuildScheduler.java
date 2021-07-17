@@ -59,14 +59,16 @@ public class BuildScheduler implements CommandExecutor {
                         Objective objective = board.registerNewObjective("Count", "dummy");
                         objective.setDisplayName("のこり時間");
                         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-                        ((Player) sender).setScoreboard(board);
+                        ((Player) p).setScoreboard(board);
                         Score timer = objective.getScore("");
                         timer.setScore(2);
                         Score count = objective.getScore("カウント: " + i);
                         count.setScore(1);
                         //sender.sendMessage("カウント: " + i);
-                        i--;
+
                     }
+
+                    i--;
                 }
 
             };
