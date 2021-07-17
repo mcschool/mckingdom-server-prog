@@ -3,6 +3,7 @@ package mckd.me.prog.Worlds.Build;
 import mckd.me.prog.Prog;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.*;
+
+import java.util.List;
 
 
 public class BuildScheduler implements CommandExecutor {
@@ -47,18 +50,23 @@ public class BuildScheduler implements CommandExecutor {
                         cancel();
                         return;
                     }
-                    ScoreboardManager manager = Bukkit.getScoreboardManager();
-                    Scoreboard board = manager.getNewScoreboard();
-                    Objective objective = board.registerNewObjective("Count", "dummy");
-                    objective.setDisplayName("のこり時間");
-                    objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-                    ((Player) sender).setScoreboard(board);
-                    Score timer = objective.getScore("");
-                    timer.setScore(2);
-                    Score count = objective.getScore("カウント: " + i);
-                    count.setScore(1);
-                    sender.sendMessage("カウント: " + i);
-                    i--;
+
+                    World world = ((Player) sender).getWorld();
+                    List<Player> players = world.getPlayers();
+                    for (Player p: players) {
+                        ScoreboardManager manager = Bukkit.getScoreboardManager();
+                        Scoreboard board = manager.getNewScoreboard();
+                        Objective objective = board.registerNewObjective("Count", "dummy");
+                        objective.setDisplayName("のこり時間");
+                        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+                        ((Player) sender).setScoreboard(board);
+                        Score timer = objective.getScore("");
+                        timer.setScore(2);
+                        Score count = objective.getScore("カウント: " + i);
+                        count.setScore(1);
+                        //sender.sendMessage("カウント: " + i);
+                        i--;
+                    }
                 }
 
             };
