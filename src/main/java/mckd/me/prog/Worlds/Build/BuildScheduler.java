@@ -9,10 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.*;
 
 
 public class BuildScheduler implements CommandExecutor {
@@ -56,6 +53,11 @@ public class BuildScheduler implements CommandExecutor {
                     objective.setDisplayName("のこり時間");
                     objective.setDisplaySlot(DisplaySlot.SIDEBAR);
                     ((Player) sender).setScoreboard(board);
+                    Score timer = objective.getScore("のこり時間");
+                    timer.setScore(3);
+                    Score timer1 = objective.getScore("");
+                    timer1.setScore(2);
+                    Score count = objective.getScore("カウント: " + i);
                     sender.sendMessage("カウント: " + i);
                     i--;
                 }
