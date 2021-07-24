@@ -144,6 +144,10 @@ public class BuildBattle implements Listener {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
+                if(location.getY() < 3 && location.getY() >= 2){
+                    player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
+                    e.setCancelled(true);
+                }
             }
 
         }
