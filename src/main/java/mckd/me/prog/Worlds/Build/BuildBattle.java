@@ -136,15 +136,16 @@ public class BuildBattle implements Listener {
         Location location = block.getLocation();
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             if (player.getGameMode() == GameMode.CREATIVE) {
-                if (location.getX() >= 75 && location.getX() < 76 || location.getX() >= 125 && location.getX() < 126) {
+                if (location.getX() >= 75 && location.getX() < 76 || location.getX() >= 125 && location.getX() < 126 || location.getX() < 26 && location.getX() >= 25 || location.getX() < 51 && location.getX() >= 50 || location.getX() < 101 && location.getX() >= 100) {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
-                if(location.getZ() >=0 && location.getZ() < 1 || location.getZ() >= -25 && location.getZ() < -24 || location.getZ() >= 25 && location.getZ() < 26){
+                if (location.getZ() >= 0 && location.getZ() < 1 || location.getZ() >= -25 && location.getZ() < -24 || location.getZ() >= 25 && location.getZ() < 26) {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
             }
+
         }
     }
 
