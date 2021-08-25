@@ -82,9 +82,9 @@ public class BuildBattle implements Listener {
         Player p = e.getPlayer();
         World w = p.getWorld();
         if(isPlaying == false){
-            e.setCancelled(true);
+            p.sendMessage("false3");
         } else if(isPlaying == true){
-            p.sendMessage("1a2b");
+            p.sendMessage("true3");
         } else {
             return;
         }
