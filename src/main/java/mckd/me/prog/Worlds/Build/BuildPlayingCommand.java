@@ -11,7 +11,7 @@ public class BuildPlayingCommand {
 
     public static boolean command(CommandSender sender, Command command, String label, String args[]) {
 
-        if(args.equals("true") || args.equals("false")){
+        if(args.equals("true")){
             sender.sendMessage("aa");
         } else{
             sender.sendMessage("trueもしくはfalseに変更してください");
