@@ -18,7 +18,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
 
 
-import java.sql.Time;
 import java.util.List;
 
 public class BuildBattle implements Listener {
@@ -151,7 +150,6 @@ public class BuildBattle implements Listener {
                 }
                 if(location.getY() < 3 && location.getY() >= 2){
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
-                    player.sendMessage("aa");
                     e.setCancelled(true);
                 }
             }
