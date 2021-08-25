@@ -18,8 +18,10 @@ public class BuildPlayingCommand {
                 sender.sendMessage("§ctrueもしくはfalseを入れてください");
                 return true;
             }
+        } else {
+            sender.sendMessage("§c使い方: /playingBuild <true もしくは false>");
+            return true;
         }
-        sender.sendMessage("§c使い方: /playingBuild <true もしくは false>");
         return true;
     }
 }
