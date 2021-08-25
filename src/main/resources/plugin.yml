@@ -9,5 +9,5 @@ authors: [nankotsu029]
 commands:
   count:
     description: TimerCommand
-  isPlaying:
+  playingBuild:
     description: test
