@@ -65,9 +65,9 @@ public class BuildBattle implements Listener {
     }
 
     void checkPlaying(Player player){
-        if (isPlaying){
+        if (isPlaying == true){
             player.sendMessage(ChatColor.AQUA + "現在isPlayingはtrueです");
-        } else {
+        } else if (isPlaying == false) {
             player.sendMessage(ChatColor.AQUA + "現在isPlayingはfalseです");
         }
     }
@@ -118,6 +118,18 @@ public class BuildBattle implements Listener {
 
 
             }
+            if(line.equals("true")){
+                player.sendMessage("true4");
+                isPlaying = true;
+                player.sendMessage("true5");
+            }
+            if(line.equals("false")){
+                player.sendMessage("false4");
+                isPlaying = false;
+                player.sendMessage("false5");
+            }
+
+
             if (line.equals("a1")) {
                 player.sendMessage("aaa");
                 double x = 26;
