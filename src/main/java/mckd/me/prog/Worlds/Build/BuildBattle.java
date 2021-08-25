@@ -52,19 +52,19 @@ public class BuildBattle implements Listener {
     }
 
 
-    void changetrue(Player player){
+    public void changetrue(Player player){
         player.sendMessage("true1");
         isPlaying = true;
         player.sendMessage("true2");
     }
 
-    void changefalse(Player player){
+    public void changefalse(Player player){
         player.sendMessage("false1");
         isPlaying = false;
         player.sendMessage("false2");
     }
 
-    void checkPlaying(Player player){
+    public void checkPlaying(Player player){
         if (isPlaying == true){
             player.sendMessage(ChatColor.AQUA + "現在isPlayingはtrueです");
         } else if (isPlaying == false) {
