@@ -27,10 +27,8 @@ public class BuildBattle implements Listener {
     public String worldName = "Build";
     public Location changePlace;
     public Location KIBLOCK;
-    public Boolean isPlaying;
+    public boolean isPlaying = false;
     private BukkitTask task;
-    BuildPlayingCommand bpc = new BuildPlayingCommand();
-
 
     public BuildBattle(Prog plugin) {
         this.plugin = plugin;
@@ -67,12 +65,10 @@ public class BuildBattle implements Listener {
     }
 
     void checkPlaying(Player player){
-        if (isPlaying == true){
+        if (isPlaying){
             player.sendMessage(ChatColor.AQUA + "現在isPlayingはtrueです");
-        } else if (isPlaying == false){
-            player.sendMessage(ChatColor.AQUA + "現在isPlayingはfalseです");
         } else {
-            return;
+            player.sendMessage(ChatColor.AQUA + "現在isPlayingはfalseです");
         }
     }
 
@@ -81,12 +77,10 @@ public class BuildBattle implements Listener {
     public void BlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
         World w = p.getWorld();
-        if(isPlaying == false){
+        if(isPlaying){
             p.sendMessage("false3");
-        } else if(isPlaying == true){
+        } else{
             p.sendMessage("true3");
-        } else {
-            return;
         }
 
     }
