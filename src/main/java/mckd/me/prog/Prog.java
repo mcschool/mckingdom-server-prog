@@ -4,6 +4,7 @@ import mckd.me.prog.Worlds.*;
 import mckd.me.prog.Worlds.Build.BuildBattle;
 
 import mckd.me.prog.Worlds.Build.BuildCommand;
+import mckd.me.prog.Worlds.Build.BuildPlayingCommand;
 import mckd.me.prog.Worlds.Raid.Raid;
 
 import org.bukkit.command.Command;
@@ -38,7 +39,7 @@ public final class Prog extends JavaPlugin {
             BuildCommand.command(sender, command, label, args);
         }
         if (command.getName().equalsIgnoreCase("playingBuild")){
-            BuildBattle.BuildPlayingCommand.command(sender,command,label,args);
+            BuildPlayingCommand.command(sender,command,label,args);
         }
         return true;
     }
