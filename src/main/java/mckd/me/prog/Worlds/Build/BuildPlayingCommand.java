@@ -11,12 +11,15 @@ public class BuildPlayingCommand {
 
     public static boolean command(CommandSender sender, Command command, String label, String args[]) {
 
-        if(args.equals("true")){
-            sender.sendMessage("aa");
-        } else{
-            sender.sendMessage("trueもしくはfalseに変更してください");
-            return true;
+        if (args.length == 1) {
+            if (args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("false")) {
+                sender.sendMessage("aa");
+            } else {
+                sender.sendMessage("§ctrueもしくはfalseを入れてください");
+                return true;
+            }
         }
+        sender.sendMessage("§c使い方: /playingBuild <true もしくは false>");
         return true;
     }
 }
