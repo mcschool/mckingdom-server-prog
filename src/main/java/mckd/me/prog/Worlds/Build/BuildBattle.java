@@ -15,18 +15,18 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
+
+import java.sql.Time;
 import java.util.List;
 
 public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
-    public Location KIBLOCK;
+    public Location KIBLOCK ;
+    public Boolean isPlaying = false;
     private BukkitTask task;
     /*public int LimitTime = 600;
     int count = 60;*/
@@ -55,8 +55,13 @@ public class BuildBattle implements Listener {
 
     @EventHandler
     public void BlockBreak(BlockBreakEvent e) {
-        Player player = e.getPlayer();
-        World world = player.getWorld();
+        Player p = e.getPlayer();
+        World w = p.getWorld();
+        if(isPlaying == false){
+            e.setCancelled(true);
+        } else {
+            return;
+        }
 
     }
 
@@ -173,4 +178,3 @@ public class BuildBattle implements Listener {
         }
     }
 }
-

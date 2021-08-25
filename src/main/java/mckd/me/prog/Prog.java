@@ -3,9 +3,11 @@ package mckd.me.prog;
 import mckd.me.prog.Worlds.*;
 import mckd.me.prog.Worlds.Build.BuildBattle;
 
-import mckd.me.prog.Worlds.Build.BuildScheduler;
+import mckd.me.prog.Worlds.Build.BuildCommand;
 import mckd.me.prog.Worlds.Raid.Raid;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -27,9 +29,15 @@ public final class Prog extends JavaPlugin {
         new BuildBattle(this);
         new TPvp(this);
         main = this;
-        getCommand("count").setExecutor(new BuildScheduler());
 
 
+    }
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("count")) {
+            BuildCommand.command(sender, command, label, args);
+        }
+        return true;
     }
 
 

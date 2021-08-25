@@ -3,31 +3,18 @@ package mckd.me.prog.Worlds.Build;
 import mckd.me.prog.Prog;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.*;
 
 import java.util.List;
 
-
-public class BuildScheduler implements CommandExecutor {
-
-    private BukkitTask task;
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd,String label,String[] args){
-        Player player = null;
-        if(sender instanceof Player){
-            player = (Player) sender;
-        } else {
-            return true;
-        }
-
+public class BuildCommand{
+    public static boolean command(CommandSender sender, Command command, String label, String args[]){
 
         if(args.length == 1){
             if(!StringUtils.isNumeric(args[0])){
@@ -47,6 +34,7 @@ public class BuildScheduler implements CommandExecutor {
                 public void run() {
                     if(i == 0){
                         sender.sendMessage("§aカウントが終了しました");
+                        ((Player) sender).setGameMode(GameMode.SPECTATOR);
                         cancel();
                         return;
                     }
@@ -79,5 +67,7 @@ public class BuildScheduler implements CommandExecutor {
         sender.sendMessage("§c使い方: /count <count>");
         return true;
     }
+
+
 
 }
