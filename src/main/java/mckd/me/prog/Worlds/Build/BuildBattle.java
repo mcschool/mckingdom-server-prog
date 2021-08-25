@@ -27,7 +27,7 @@ public class BuildBattle implements Listener {
     public String worldName = "Build";
     public Location changePlace;
     public Location KIBLOCK;
-    public Boolean isPlaying = false;
+    public Boolean isPlaying;
     private BukkitTask task;
     BuildPlayingCommand bpc = new BuildPlayingCommand();
 
