@@ -12,15 +12,20 @@ public class BuildPlayingCommand {
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("true")) {
+                Player player = (Player) sender;
                 BuildBattle buildBattle = new BuildBattle(Prog.getPlugin());
-                buildBattle.changetrue();
+                buildBattle.changetrue(player);
+                return true;
             } else if (args[0].equalsIgnoreCase("false")) {
+                Player player = (Player) sender;
                 BuildBattle buildBattle = new BuildBattle(Prog.getPlugin());
-                buildBattle.changefalse();
+                buildBattle.changefalse(player);
+                return true;
             } else if (args[0].equalsIgnoreCase("check")) {
                 Player player = (Player) sender;
                 BuildBattle buildBattle = new BuildBattle(Prog.getPlugin());
                 buildBattle.checkPlaying(player);
+                return true;
             } else {
                 sender.sendMessage("§ctrueもしくはfalseを入れてください");
                 return true;

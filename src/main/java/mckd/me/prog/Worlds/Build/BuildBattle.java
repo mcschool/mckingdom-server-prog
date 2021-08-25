@@ -54,12 +54,16 @@ public class BuildBattle implements Listener {
     }
 
 
-    void changetrue(){
+    void changetrue(Player player){
+        player.sendMessage("true1");
         isPlaying = true;
+        player.sendMessage("true2");
     }
 
-    void changefalse(){
+    void changefalse(Player player){
+        player.sendMessage("false1");
         isPlaying = false;
+        player.sendMessage("false2");
     }
 
     void checkPlaying(Player player){
@@ -73,17 +77,19 @@ public class BuildBattle implements Listener {
     }
 
 
-    /*@EventHandler
+    @EventHandler
     public void BlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
         World w = p.getWorld();
         if(isPlaying == false){
             e.setCancelled(true);
+        } else if(isPlaying == true){
+            p.sendMessage("1a2b");
         } else {
             return;
         }
 
-    }*/
+    }
 
 
 
