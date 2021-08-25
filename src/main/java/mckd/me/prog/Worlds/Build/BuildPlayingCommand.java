@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 public class BuildPlayingCommand {
 
 
+
     public static boolean command(CommandSender sender, Command command, String label, String args[]) {
 
         if (args.length == 1) {
@@ -15,6 +16,7 @@ public class BuildPlayingCommand {
                 Player player = (Player) sender;
                 BuildBattle buildBattle = new BuildBattle(Prog.getPlugin());
                 buildBattle.changetrue(player);
+                buildBattle.isPlaying = true;
                 return true;
             } else if (args[0].equalsIgnoreCase("false")) {
                 Player player = (Player) sender;

@@ -21,12 +21,14 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 
+
+
 public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
     public Location KIBLOCK;
-    public static boolean isPlaying = false;
+    public boolean isPlaying = false;
     private BukkitTask task;
 
     public BuildBattle(Prog plugin) {
@@ -53,7 +55,7 @@ public class BuildBattle implements Listener {
 
     public void changetrue(Player player){
         player.sendMessage("true1");
-        isPlaying = true;
+        //isPlaying = true;
         player.sendMessage("true2");
     }
 
