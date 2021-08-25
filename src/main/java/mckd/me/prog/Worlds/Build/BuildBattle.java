@@ -26,7 +26,7 @@ public class BuildBattle implements Listener {
     public String worldName = "Build";
     public Location changePlace;
     public Location KIBLOCK;
-    boolean isPlaying = false;
+    public static boolean isPlaying = false;
     private BukkitTask task;
 
     public BuildBattle(Prog plugin) {
