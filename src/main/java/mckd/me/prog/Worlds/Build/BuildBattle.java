@@ -6,6 +6,8 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,19 +26,19 @@ public class BuildBattle implements Listener {
     private Prog plugin;
     public String worldName = "Build";
     public Location changePlace;
-    public Location KIBLOCK ;
+    public Location KIBLOCK;
     public Boolean isPlaying = false;
     private BukkitTask task;
-    /*public int LimitTime = 600;
-    int count = 60;*/
+    BuildPlayingCommand bpc = new BuildPlayingCommand();
 
 
     public BuildBattle(Prog plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.changePlace = new Location(Bukkit.getWorld(this.worldName), -20, 10, 538);
-        this.KIBLOCK = new Location(Bukkit.getWorld(this.worldName),26,4,24);
+        this.KIBLOCK = new Location(Bukkit.getWorld(this.worldName), 26, 4, 24);
     }
+
     @EventHandler
     public void changeWorld(PlayerChangedWorldEvent e) {
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
@@ -52,7 +54,12 @@ public class BuildBattle implements Listener {
     }
 
 
-    @EventHandler
+    void isPlayingtrue(Player player){
+        player.getInventory().clear();
+    }
+
+
+    /*@EventHandler
     public void BlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
         World w = p.getWorld();
@@ -62,7 +69,7 @@ public class BuildBattle implements Listener {
             return;
         }
 
-    }
+    }*/
 
 
 
@@ -81,7 +88,7 @@ public class BuildBattle implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && b.getType() == Material.SIGN_POST) {
             if (line.equals("Start")) {
                 player.sendMessage("test");
-        //BukkitTask task = new BuildScheduler(this.plugin, LimitTime).runTaskTimer(this.plugin,0,20);
+                //BukkitTask task = new BuildScheduler(this.plugin, LimitTime).runTaskTimer(this.plugin,0,20);
 
                 double x = 0;
                 double y = 5;
@@ -89,7 +96,7 @@ public class BuildBattle implements Listener {
                 List<Player> players = world.getPlayers();
                 for (Player p : players) {
                     p.setGameMode(GameMode.CREATIVE);
-                    Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 62, y,z);
+                    Location loc = new Location(Bukkit.getWorld(this.worldName), x = x + 62, y, z);
                     p.teleport(loc);
 
 
@@ -97,30 +104,30 @@ public class BuildBattle implements Listener {
 
 
             }
-            if(line.equals("a1")){
+            if (line.equals("a1")) {
                 player.sendMessage("aaa");
                 double x = 26;
                 double y = 3;
                 double z = 24;
-                for(int i = 0; i <= 24; i++){
+                for (int i = 0; i <= 24; i++) {
                     world.getBlockAt(new Location(
                             Bukkit.getWorld(this.worldName), x + i, y, z)).setType(Material.WOOD);
-                    for(int j = 0; j <= 24; j++) {
+                    for (int j = 0; j <= 24; j++) {
                         world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x + i, y, z - j)).setType(Material.WOOD);
                     }
                 }
 
 
             }
-            if(line.equals("b1")){
+            if (line.equals("b1")) {
                 player.sendMessage("aaa");
                 double x = 26;
                 double y = 3;
                 double z = 24;
-                for(int i = 0; i <= 24; i++){
+                for (int i = 0; i <= 24; i++) {
                     world.getBlockAt(new Location(
                             Bukkit.getWorld(this.worldName), x + i, y, z)).setType(Material.GRASS);
-                    for(int j = 0; j <= 24; j++) {
+                    for (int j = 0; j <= 24; j++) {
                         world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x + i, y, z - j)).setType(Material.GRASS);
                     }
                 }
@@ -148,7 +155,7 @@ public class BuildBattle implements Listener {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
-                if(location.getY() < 3 && location.getY() >= 2){
+                if (location.getY() < 3 && location.getY() >= 2) {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");
                     e.setCancelled(true);
                 }
@@ -176,4 +183,5 @@ public class BuildBattle implements Listener {
             }
         }
     }
+
 }

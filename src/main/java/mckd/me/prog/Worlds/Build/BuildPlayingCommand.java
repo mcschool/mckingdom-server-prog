@@ -1,12 +1,11 @@
 package mckd.me.prog.Worlds.Build;
 
+import mckd.me.prog.Prog;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class BuildPlayingCommand {
-
-
-    public Boolean isPlaying = false;
 
 
     public static boolean command(CommandSender sender, Command command, String label, String args[]) {
@@ -15,6 +14,9 @@ public class BuildPlayingCommand {
             sender.sendMessage("1");
             if (args[0].equalsIgnoreCase("true")) {
                 sender.sendMessage("true1");
+                Player player = (Player)sender;
+                BuildBattle buildBattle = new BuildBattle(Prog.getPlugin());
+                buildBattle.isPlayingtrue(player);
             }
             if (args[0].equalsIgnoreCase("false")){
                 sender.sendMessage("false1");
