@@ -14,7 +14,7 @@ public class sendTitleCommand {
             World world = ((Player) sender).getWorld();
             List<Player> players = world.getPlayers();
             for(Player p: players){
-                p.sendTitle(Color.ORANGE + "" + args[0],"",0,40,0);
+                p.sendTitle(Color.ORANGE +"** " + args[0] + " **","",0,40,0);
             }
             return true;
         }
