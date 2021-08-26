@@ -1,5 +1,6 @@
-package mckd.me.prog.Worlds;
+package mckd.me.prog.Worlds.Commands;
 
+import org.bukkit.Color;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,7 +14,7 @@ public class sendTitleCommand {
             World world = ((Player) sender).getWorld();
             List<Player> players = world.getPlayers();
             for(Player p: players){
-                p.sendTitle(args[0],"",0,40,0);
+                p.sendTitle(Color.ORANGE + args[0],"",0,40,0);
             }
             return true;
         }

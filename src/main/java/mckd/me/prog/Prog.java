@@ -5,6 +5,7 @@ import mckd.me.prog.Worlds.Build.BuildBattle;
 
 import mckd.me.prog.Worlds.Build.BuildCommand;
 import mckd.me.prog.Worlds.Build.BuildPlayingCommand;
+import mckd.me.prog.Worlds.Commands.sendTitleCommand;
 import mckd.me.prog.Worlds.Raid.Raid;
 
 import org.bukkit.command.Command;
