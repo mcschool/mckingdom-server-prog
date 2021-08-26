@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Prog extends JavaPlugin {
 
     private static Prog main;
+    private BuildBattle buildBattle;
 
     @Override
     public void onEnable() {
@@ -27,9 +28,8 @@ public final class Prog extends JavaPlugin {
         //new AnvilWorld(this);
         new FallColorWorld(this);
         new Raid(this);
-        new BuildBattle(this);
+        buildBattle =  new BuildBattle(this);
         new TPvp(this);
-        main = this;
 
 
     }
@@ -39,7 +39,7 @@ public final class Prog extends JavaPlugin {
             BuildCommand.command(sender, command, label, args);
         }
         if (command.getName().equalsIgnoreCase("playingBuild")){
-            BuildPlayingCommand.command(sender,command,label,args);
+            BuildPlayingCommand.command(sender,command,label,args,buildBattle);
         }
         return true;
     }
@@ -51,9 +51,7 @@ public final class Prog extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
-    public static Prog getPlugin() {
-        return main;
-    }
+
 
 }
 
