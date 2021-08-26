@@ -41,6 +41,9 @@ public final class Prog extends JavaPlugin {
         if (command.getName().equalsIgnoreCase("playingBuild")){
             BuildPlayingCommand.command(sender,command,label,args,buildBattle);
         }
+        if (command.getName().equalsIgnoreCase("sendTitle")){
+            sendTitleCommand.command(sender,command,label,args);
+        }
         return true;
     }
 

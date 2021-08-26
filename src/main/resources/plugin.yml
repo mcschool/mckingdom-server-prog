@@ -11,3 +11,5 @@ commands:
     description: TimerCommand
   playingBuild:
     description: test
+  sendTitle:
+    description: test
