@@ -12,8 +12,8 @@ public class sendTitleCommand {
         if(args.length == 1){
             World world = ((Player) sender).getWorld();
             List<Player> players = world.getPlayers();
-            for(Player player: players){
-                ((Player) sender).sendTitle(args[0],"",0,40,0);
+            for(Player p: players){
+                p.sendTitle(args[0],"",0,40,0);
             }
             return true;
         }

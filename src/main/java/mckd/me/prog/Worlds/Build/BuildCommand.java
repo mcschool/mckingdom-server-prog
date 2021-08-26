@@ -36,8 +36,8 @@ public class BuildCommand{
                         World world = ((Player) sender).getWorld();
                         List<Player> players = world.getPlayers();
                         for (Player p: players) {
-                            sender.sendMessage("§aカウントが終了しました");
-                            ((Player) sender).setGameMode(GameMode.SPECTATOR);
+                            p.sendMessage("§aカウントが終了しました");
+                            p.setGameMode(GameMode.SPECTATOR);
                         }
                         cancel();
                         return;
