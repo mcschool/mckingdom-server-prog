@@ -36,7 +36,7 @@ public final class Prog extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("count")) {
-            BuildCommand.command(sender, command, label, args);
+            BuildCommand.command(sender, command, label, args,buildBattle,this);
         }
         if (command.getName().equalsIgnoreCase("playingBuild")){
             BuildPlayingCommand.command(sender,command,label,args,buildBattle);

@@ -14,7 +14,7 @@ import org.bukkit.scoreboard.*;
 import java.util.List;
 
 public class BuildCommand{
-    public static boolean command(CommandSender sender, Command command, String label, String args[]){
+    public static boolean command(CommandSender sender, Command command, String label, String args[],BuildBattle buildBattle,Prog plguin){
 
         if(args.length == 1){
             if(!StringUtils.isNumeric(args[0])){
@@ -61,7 +61,7 @@ public class BuildCommand{
 
             };
 
-            task.runTaskTimer(Prog.getPlugin(),0L,20L);
+            task.runTaskTimer(plguin,0L,20L);
             return true;
         }
         sender.sendMessage("§c使い方: /count <count>");
