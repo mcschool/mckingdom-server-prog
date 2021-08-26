@@ -53,38 +53,6 @@ public class BuildBattle implements Listener {
     }
 
 
-    public void changetrue(Player player){
-        player.sendMessage("true1");
-        //isPlaying = true;
-        player.sendMessage("true2");
-    }
-
-    public void changefalse(Player player){
-        player.sendMessage("false1");
-        isPlaying = false;
-        player.sendMessage("false2");
-    }
-
-    public void checkPlaying(Player player){
-        if (isPlaying){
-            player.sendMessage(ChatColor.AQUA + "現在isPlayingはtrueです");
-        } else {
-            player.sendMessage(ChatColor.AQUA + "現在isPlayingはfalseです");
-        }
-    }
-
-
-    @EventHandler
-    public void BlockBreak(BlockBreakEvent e) {
-        Player p = e.getPlayer();
-        World w = p.getWorld();
-        if(isPlaying){
-            p.sendMessage("false3");
-        } else{
-            p.sendMessage("true3");
-        }
-
-    }
 
 
 
@@ -173,6 +141,10 @@ public class BuildBattle implements Listener {
         Block block = e.getBlock();
         Location location = block.getLocation();
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
+            if(!isPlaying){
+                e.setCancelled(true);
+                return;
+            }
             if (player.getGameMode() == GameMode.CREATIVE) {
                 if (location.getX() >= 75 && location.getX() < 76 || location.getX() >= 125 && location.getX() < 126 || location.getX() < 26 && location.getX() >= 25 || location.getX() < 51 && location.getX() >= 50 || location.getX() < 101 && location.getX() >= 100) {
                     player.sendMessage(ChatColor.RED + "おい、減点するぞ！！");

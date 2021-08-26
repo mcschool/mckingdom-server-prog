@@ -1,6 +1,7 @@
 package mckd.me.prog.Worlds.Build;
 
 import mckd.me.prog.Prog;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,16 +16,19 @@ public class BuildPlayingCommand {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("true")) {
                 Player player = (Player) sender;
-                buildBattle.changetrue(player);
                 buildBattle.isPlaying = true;
                 return true;
             } else if (args[0].equalsIgnoreCase("false")) {
                 Player player = (Player) sender;
-                buildBattle.changefalse(player);
+                buildBattle.isPlaying = false;
                 return true;
             } else if (args[0].equalsIgnoreCase("check")) {
                 Player player = (Player) sender;
-                buildBattle.checkPlaying(player);
+                if (buildBattle.isPlaying){
+                    player.sendMessage(ChatColor.AQUA + "現在isPlayingはtrueです");
+                } else {
+                    player.sendMessage(ChatColor.AQUA + "現在isPlayingはfalseです");
+                }
                 return true;
             } else {
                 sender.sendMessage("§ctrueもしくはfalseを入れてください");
