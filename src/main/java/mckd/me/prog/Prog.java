@@ -5,9 +5,11 @@ import mckd.me.prog.Worlds.Build.BuildBattle;
 
 import mckd.me.prog.Worlds.Build.BuildCommand;
 import mckd.me.prog.Worlds.Build.BuildPlayingCommand;
+import mckd.me.prog.Worlds.Commands.GamemodeCommand;
 import mckd.me.prog.Worlds.Commands.sendTitleCommand;
 import mckd.me.prog.Worlds.Raid.Raid;
 
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,6 +46,9 @@ public final class Prog extends JavaPlugin {
         }
         if (command.getName().equalsIgnoreCase("sendTitle")){
             sendTitleCommand.command(sender,command,label,args);
+        }
+        if(command.getName().equalsIgnoreCase("allGamemode")){
+            GamemodeCommand.command(sender,command,label,args);
         }
         return true;
     }
