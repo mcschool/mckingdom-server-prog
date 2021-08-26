@@ -33,8 +33,12 @@ public class BuildCommand{
                 @Override
                 public void run() {
                     if(i == 0){
-                        sender.sendMessage("§aカウントが終了しました");
-                        ((Player) sender).setGameMode(GameMode.SPECTATOR);
+                        World world = ((Player) sender).getWorld();
+                        List<Player> players = world.getPlayers();
+                        for (Player p: players) {
+                            sender.sendMessage("§aカウントが終了しました");
+                            ((Player) sender).setGameMode(GameMode.SPECTATOR);
+                        }
                         cancel();
                         return;
                     }
