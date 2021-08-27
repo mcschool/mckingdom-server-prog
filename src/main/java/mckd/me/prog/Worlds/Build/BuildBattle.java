@@ -89,14 +89,10 @@ public class BuildBattle implements Listener {
 
             }
             if(line.equals("true")){
-                player.sendMessage("true4");
                 isPlaying = true;
-                player.sendMessage("true5");
             }
             if(line.equals("false")){
-                player.sendMessage("false4");
                 isPlaying = false;
-                player.sendMessage("false5");
             }
 
 
