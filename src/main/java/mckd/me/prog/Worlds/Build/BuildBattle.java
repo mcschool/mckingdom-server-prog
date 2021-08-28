@@ -145,7 +145,7 @@ public class BuildBattle implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        Player player = e.getPlayer();
+        Player player = e.getPlayer ();
         World world = player.getWorld();
         Block block = e.getBlock();
         Location location = block.getLocation();
@@ -173,7 +173,7 @@ public class BuildBattle implements Listener {
         Location location = player.getLocation();
         if (e.getPlayer().getWorld().getName().equals(this.worldName)) {
             if (player.getGameMode() == GameMode.CREATIVE) {
-                if (location.getY() > 70) {
+                if (location.getY() > 18) {
                     double x = location.getX();
                     double y = 5;
                     double z = location.getZ();
