@@ -36,7 +36,6 @@ public class BuildBattle implements Listener {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.changePlace = new Location(Bukkit.getWorld(this.worldName), -20, 10, 538);
-        this.KIBLOCK = new Location(Bukkit.getWorld(this.worldName), 26, 4, 24);
     }
 
     @EventHandler
@@ -111,21 +110,7 @@ public class BuildBattle implements Listener {
 
 
             }
-            if (line.equals("b1")) {
-                player.sendMessage("aaa");
-                double x = 26;
-                double y = 3;
-                double z = 24;
-                for (int i = 0; i <= 24; i++) {
-                    world.getBlockAt(new Location(
-                            Bukkit.getWorld(this.worldName), x + i, y, z)).setType(Material.GRASS);
-                    for (int j = 0; j <= 24; j++) {
-                        world.getBlockAt(new Location(Bukkit.getWorld(this.worldName), x + i, y, z - j)).setType(Material.GRASS);
-                    }
-                }
 
-
-            }
 
         }
     }
